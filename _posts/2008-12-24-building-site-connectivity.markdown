@@ -23,4 +23,8 @@ For example, you can see
 Change the username from dlsspy to yours for results that make more sense to
 you.
 
-I hope someone finds this useful.
+As it's just a simple chunk of HTML, I've created
+[a gist](http://gist.github.com/39613) to house it for now.  If you'd like to
+change this for the better, do it there and let me know about it.
+
+I hope someone (else) finds this useful.
