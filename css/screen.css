@@ -195,6 +195,10 @@ ul.posts {
     margin-bottom: 1em;
   }
 
+#elsewhere {
+	width: 200px;
+}
+
 #github-badge {
 	width: 200px;
 	float: right;
