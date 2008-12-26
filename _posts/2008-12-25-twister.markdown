@@ -1,0 +1,51 @@
+---
+layout: post
+title: Twister
+---
+
+# Twister
+
+<div>
+	<img alt="twister" style="float: right; margin-left: 10px"
+		src="http://upload.wikimedia.org/wikipedia/en/thumb/0/09/1966_Twister_Cover.jpg/275px-1966_Twister_Cover.jpg"/>
+</div>
+
+So, on Christmas, my kids decided they wanted to play twister.  They wanted me
+to spin the thingy and call out moves for them.  That got *really* boring after
+about five minutes.
+
+I wrote a really simple python script to start calling the moves for me since
+the spinny thing was getting annoying, and would sometimes end up pointing
+between two colors or otherwise be too difficult to call.
+
+The first version of the script looked like this:
+
+<script type="text/javascript" src="http://gist.github.com/40015.js">
+// Stupid HTML doesn't allow self-closed script tags, but markdown wants to
+// make them.
+</script>
+<noscript>
+	<div>
+		<a href="http://gist.github.com/40015">gist at github</a>
+	</div>
+</noscript>
+
+That was fine, but I still had to run it and call it out.  Then I remembered
+that someone made a [talking cat](http://www.gnufoo.org/macosx/) for OS X.  All
+I needed to do was run the output of this thing through that, and there'd be
+speech and then I could go about my business and let the computer call moves
+for them.
+
+I thought that was kind of cool, but wanted something a little...more.  I ended
+up writing a full [OS X desktop version](http://github.com/dustin/twister)
+complete with images, icons, a preference pane, etc...
+
+The kids finished playing (using the prototype) long before I finished writing
+the app.  It was fun for all of us, though.  :)
+
+If anyone wants to play a two-player version of twister, though, you can grab
+a copy.
+
+## Download
+
+[Version 1.0](http://public.west.spy.net/app/Twister_1.0.zip)
