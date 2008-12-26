@@ -1,0 +1,41 @@
+---
+layout: post
+title: pfetch
+---
+
+# About pfetch
+
+<div>
+	<img alt="octopus" src="/images/octopus.png"
+		style="float: right; margin-left: 10px"/>
+</div>
+
+For a long time now, I've had various cron jobs running to fetch various web
+resources with which I'd build out parts of my own site, or supply myself with
+custom RSS feeds after a pass through xsltproc.
+
+This mostly worked OK, but there were a few things wrong with it:
+
+1. I had to be careful to avoid putting stuff in place upon fetch failure.
+2. Fetch failures would send me email unless I put effort into avoiding that.
+3. Network timeouts would cause cron jobs to start piling up.
+4. I've actually had cron get sick of running my jobs and just stop altogether.
+5. Various jobs that ran at various frequencies would be in various scripts and hard to keep up with.
+6. Running through cron means all jobs start at the exact same moment in time, thus are more likely to cause strain on web servers (if everybody does it).
+7. Conditional gets require cross-invocation state to be stored (though I wrote [a tool][1] for this).
+8. Sequential processing meant the whole thing took longer.
+
+After a while, the problems added to enough of an annoyance that I decided to
+do something about it, so a couple months ago I started
+[pfetch](http://github.com/dustin/pfetch).
+
+pfetch is a simple [twisted][2] app that does scheduled parallel http requests
+and optionally runs scripts after successful execution.
+
+Given a list of URLs each with a destination, frequency, and optional (with
+arguments) to run after each successful (200) response, each URL will begin a
+fetch cycle starting at a random offset from the start time and loop on the
+defined interval.
+
+[1]:http://github.com/dustin/snippets/tree/master/python/net/http/fetch.py
+[2]:http://twistedmatrix.com/
