@@ -19,6 +19,16 @@ img {
   border: 0;
 }
 
+img.floatright {
+  float: right;
+  margin-left: 10px;
+}
+
+img.floatleft {
+  float: left;
+  margin-right: 10px;
+}
+
 body {
   background-color: white;
   font: 13.34px helvetica, arial, clean, sans-serif;
