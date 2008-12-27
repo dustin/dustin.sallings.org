@@ -51,4 +51,4 @@ a copy.
 
 ## Download
 
-[Version 1.0](http://public.west.spy.net/app/Twister_1.0.zip)
+[Version 1.1](http://public.west.spy.net/app/Twister_1.1.zip)
