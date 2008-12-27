@@ -6,8 +6,7 @@ title: pfetch
 # About pfetch
 
 <div>
-	<img alt="octopus" src="/images/octopus.png"
-		style="float: right; margin-left: 10px"/>
+	<img alt="octopus" src="/images/octopus.png" class="floatright"/>
 </div>
 
 For a long time now, I've had various cron jobs running to fetch various web

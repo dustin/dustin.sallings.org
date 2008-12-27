@@ -6,7 +6,7 @@ title: Twister
 # Twister
 
 <div>
-	<img alt="twister" style="float: right; margin-left: 10px"
+	<img alt="twister" class="floatright"
 		src="http://upload.wikimedia.org/wikipedia/en/thumb/0/09/1966_Twister_Cover.jpg/275px-1966_Twister_Cover.jpg"/>
 </div>
 

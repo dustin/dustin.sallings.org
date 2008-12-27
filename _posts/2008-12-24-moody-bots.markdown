@@ -28,14 +28,14 @@ moods.  User moods in a [PEP](http://xmpp.org/extensions/xep-0163.html)
 transport provides exactly the kind of thing I'm looking for.
 
 <div><img src="http://img.skitch.com/20081225-g8nbh7s3np2amubspgkas2ab1f.png"
-style="float: right; margin-left: 10px" alt="twitterspy angry"/></div>
+class="floatright" alt="twitterspy angry"/></div>
 
 Twitterspy keeps track of how many of its searches are successful, and how many
 fail.  When many searches are successful, it's in a good mood, when few are,
 it's in a bad mood.
 
 <div><img src="http://ralphm.net/images/mood/knology/excited.gif"
-style="float: left; margin-right: 10px" alt="excited!"/></div>
+class="floatleft" alt="excited!"/></div>
 
 I had my kid look through the XEP to come up with some rules for how to select
 a mood based on how successful recent searches are.  I've applied many of her
