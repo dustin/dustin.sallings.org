@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Using Github Sync to Track Your Projects
 ---
 
