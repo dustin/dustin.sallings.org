@@ -16,7 +16,7 @@ very happy to just sit back and happily do whatever you ask of it
 (even if you ask it to do something stupid).
 
 Recently, I was working on a project, and wanted to rebase a branch
-that had drifted quite a bit away agaist the master branch.  `rebase`
+that had drifted quite a bit away from the master branch.  `rebase`
 itself wasn't getting me anywhere due to various conflicts from some
 partial merges and manual merges.
 
