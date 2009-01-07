@@ -5,6 +5,9 @@ layout: post
 
 # Git Reroot - When Rebase is Too Gentle
 
+<div>
+  <img src="/images/transplant.jpg" alt="transplant" class="floatright"/>
+</div>
 The fun thing about git is that it'll do whatever you tell it.
 
 Many newcomers look at is as this really complicated beast that is
