@@ -5,8 +5,8 @@ layout: post
 
 # Git Timecard
 
-I really like [git's punch card][punchcard] feature.  It's a nice way
-to quickly see when a project is worked on.
+I really like [github's punch card][punchcard] feature.  It's a nice
+way to quickly see when a project is worked on.
 
 However, it's very limited.  You can only see everyone's work on the
 master branch.  I have *lots* of other ways I want to look at my
