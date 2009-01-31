@@ -1,0 +1,163 @@
+---
+layout: post
+title: Buildbot
+---
+
+# Buildbot
+
+I've used a few different continous integration systems, but
+[buildbot][buildbot] has been my favorite for quite a while.  It's got a
+really nice architecture, a great codebase, and all the tools I need.
+
+<div>
+  <img class="floatright" alt="buildwatch" src="/images/buildbot.png"/>
+</div>
+
+Most of these things seem to assume that if it builds anywhere, you've
+done your job.  buildbot assumes there may be a relatively large
+number of build workers and an even larger number of configurations.
+
+For example, I'm building out a buildbot configuration for a project
+I'm working on now for some portable software that seems to be most
+popular on Linux, possibly followed by OS X.  However, depending on
+the distribution, toolchain, architecture, and compile-time options,
+some things just don't work correctly.  I also use it on FreeBSD, but
+having added a slave for FreeBSD, I found a small compiler error.
+
+## TBYB
+
+Most CI systems are all about telling you when you've committed code
+that breaks the build for other people.  Isn't it rather late by that
+point?
+
+buildbot has a `try` command that allows you run a complete build
+across whichever nodes you want (or all) *before* making your code
+available to anyone else.
+
+One of the guys I'm working with on this project does most of his work
+in Solaris.  He wrote some code, tested his code, and sent me a
+patch.  I committed his patch to my local git repo, but before pushing
+it, ran `buildbot try` to make sure nothing weird happened.  There
+were two different problems that caused build and/or test failures on
+every OS that wasn't Solaris.
+
+I was able to fix up his changes so that they worked everywhere, and
+they never actually made it into a public tree in their broken form.
+
+## The Code
+
+buildbot's [codebase][code] has some very robust plumbing, and it seems
+to support just about anything you might want to do (which other
+systems allow you subscribe to the tail of the current step's log in
+realtime without having access to the slave?).
+
+I've had to make some changes to get some features working as I
+expect, or fixing bug in edge cases, though.
+
+I've been doing some work lately with the `git` support in `try`.
+Rather than repeating myself, you can see what I've done in my portion
+of the changelog and imagine how much better your project would be if
+every potential change could be tested across all your supported
+platforms before you publish.
+
+<pre style="font-size: smaller">
+commit dfb18e6c177d490da9dcab29e431eff22cfedfec
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Wed Jan 28 20:26:00 2009 -0800
+
+    Allow users to specify the remote git branch.
+
+    This allows for a case where someone has a repository that tracks
+    someone else's repository, has arbitrary local branches, but wants to
+    run tries with the delta from the reference repository (i.e. the one
+    the master knows about) to the local changes.
+
+    Without this, it's likely the reference repository will not have the
+    necessary objects to pull down a base revision to be able to apply
+    patches for the try to succeed.
+
+    This also ensures that the current client's view of the reference
+    repository is honored.  That is, if the reference repository has moved
+    forward, the trier's current tip of the remote is used to compute the
+    delta, and that's sent along as the baserev.
+
+commit 38a9c7fc719b44e2cdfa47884182da7128b369d2
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Wed Jan 28 16:30:08 2009 -0800
+
+    Added --dry-run (-n) support to buildbot try.
+
+    Need to be able to try try when I just want to know what it's even
+    going to consider doing.
+
+commit f43143835cba3ca5963e07874da17c1416a031c2
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Wed Jan 28 08:34:04 2009 -0800
+
+    Refactored try buildName validation for reuse.
+
+commit a88238cae5000c3481877aa354e3c76fc45770b8
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Wed Jan 28 08:25:52 2009 -0800
+
+    Don't require a list of builders for buildbot try.
+
+    This maintains the current restrictions around builder lists that
+    prevent one from trying a build that isn't in the list, but allows the
+    user to delegate the selection to the server by not listing the
+    builders at all.
+
+    I want my users to always try their builds on every build
+    configuration, but I don't want to be sending out buildbot options all
+    the time.
+commit 99240ada38677a143971fe390beb714c3017c20b
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Sun Jan 25 10:47:57 2009 -0800
+
+    git_buildbot should show the author, not the committer
+
+    When I'm looking at my waterfall, I'd like to see the names of the
+    people who wrote code, not just mine because I happened to have
+    cherry-picked or am'd a bunch of changes.
+
+commit 2c6865d83e967ca135acd3810e08af2dfab727b3
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Wed Jan 21 20:23:35 2009 -0800
+
+    Look at the remote tracking branch in git for buildbot try.
+
+    This allows us to try committed, but not pushed code.
+
+commit a079d84d4056dbf5ab3489cb7f2f8f0e20d91b87
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Thu Jan 22 09:59:59 2009 -0800
+
+    Try to reclobber on retry.
+
+    On a failed git update in clobber mode, I was getting the following
+    error on the second try:
+
+    exceptions.OSError: [Errno 17] File exists: '/path/to/build'
+
+    It seems that the clobber only occurs once, and any error that happens
+    during the checkout should redo the clobber.
+
+commit 6c36579a63b58bc986ec56e0272362038be08112
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Wed Nov 19 04:56:38 2008 +0800
+
+    Get rid of git- commands in git_buildbot.
+
+    Signed-off-by: Dustin J. Mitchell &lt;dustin@zmanda.com>
+
+commit ac70a83fa05c2b1b31dd9411ffc28876fb9e9f20
+Author: Dustin Sallings &lt;dustin@spy.net>
+Date:   Sat Apr 19 08:40:20 2008 +0800
+
+    Send merge changes from git.
+
+    Signed-off-by: Dustin J. Mitchell &lt;dustin@zmanda.com>
+</pre>
+
+[buildbot]: http://buildbot.net/
+[code]: http://github.com/djmitche/buildbot
