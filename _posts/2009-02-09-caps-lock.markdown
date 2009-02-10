@@ -1,0 +1,43 @@
+---
+layout: post
+title: Making Use of Caps Lock
+---
+
+# Making Use of Caps Lock
+
+<div>
+  <img src="/images/capslock-pref.png" alt="caps lock" class="floatright"/>
+</div>
+
+If you're like me (and who isn't), the caps lock key is an annoying
+waste of plastic.  Its only value seems to be to type things to offend
+people.  Luckily, most operating systems allow you to map it to
+control, or another useful key.
+
+As a fairly new emacs user (and a long-term shell user), having a
+control key near where my fingers already makes many things far more
+accessible to me.  Highly recommended.
+
+But there's another thing that the caps lock provides that quickly
+moves from annoyance to useful feature:
+
+<div>
+  <img src="/images/capslock-key.jpg" alt="caps lock" class="floatleft"/>
+</div>
+
+Just about every keyboard ever made has a caps lock indicator.  Such a
+wonderful thing when used correctly.
+
+Amit Singh over at google had a blog post about
+[manipulating keyboard LEDs][leds] which inspired me to add this feature
+to my [buildwatch][buildwatch] app pretty much immediately.
+
+Due to a fairly dumb bug I fixed today, it hasn't been working (and I
+wasn't paying attention to it anyway), but now, when anyone does a
+build against my build farm and the build breaks, my keyboard light
+will come on.
+
+Sort of makes me want to write some bad code.
+
+[leds]:http://googlemac.blogspot.com/2008/04/manipulating-keyboard-leds-through.html
+[buildwatch]: http://code.google.com/p/buildwatch/
