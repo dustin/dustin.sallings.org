@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Dustin Sallings</title>
+ <link rel="hub" href="http://http://pubsubhubbub.appspot.com/" />
+ <link href="http://dustin.github.com/atom.xml" rel="self"/>
+ <link href="http://dustin.github.com/"/>
+ <updated>2009-07-11T23:50:33-07:00</updated>
+ <id>http://dustin.github.com/</id>
+ <author>
+   <name>Dustin Sallings</name>
+   <email>dustin@spy.net</email>
+ </author>
+
+ 
+ <entry>
+   <title>Project Skyscraper</title>
+   <link href="http://dustin.github.com/2009/07/11/skyscraper.html"/>
+   <updated>2009-07-11T00:00:00-07:00</updated>
+   <id>http://dustin.github.com/2009/07/11/skyscraper</id>
+   <content type="html">&lt;h1 id='project_skyscraper'&gt;Project Skyscraper&lt;/h1&gt;
+
+&lt;p&gt;It occurred to me that there&amp;#8217;s a lot of value in building xmpp services &amp;#8211; much like web services, but using existing connections and xmpp instead of http.&lt;/p&gt;
+
+&lt;p&gt;In collaboration with &lt;a href='http://github.com/ga2arch'&gt;ga2arch&lt;/a&gt;, I launched an xmpp service called skyscraper.im. This has actually been running for a while now, but I&amp;#8217;ve been too caught up in writing code to write anything about code.&lt;/p&gt;
+
+&lt;h2 id='translateskyscraperim'&gt;translate.skyscraper.im&lt;/h2&gt;
+&lt;div&gt;
+  &lt;img class='floatright' src='/images/skyscraper.png' alt='skyscraper' /&gt;
+&lt;/div&gt;
+&lt;p&gt;The first part of this service is an xmpp &lt;a href='http://xmpp.org/extensions/xep-0050.html'&gt;adhoc&lt;/a&gt; interface to google translate. It actually does support IM, but that&amp;#8217;s incidental, the real value is in the adhoc interface.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;#8217;re unfamiliar with xmpp adhoc, you can think of it much like CGI, but using xmpp as a transport. You take a bunch of simple key/multi-value pairs and send them to a resource somewhere, and it sends you something back. The nice thing about xmpp, though, is that the mechanism for determining what things exist and what parameters they take are very programmatically accessible.&lt;/p&gt;
+
+&lt;p&gt;You can discover available commands through &lt;code&gt;translate.skyscraper.im&lt;/code&gt; as shown in &lt;a href='http://www.vimeo.com/5558475'&gt;this video&lt;/a&gt;, but I&amp;#8217;ll just tell you what it&amp;#8217;ll tell you:&lt;/p&gt;
+
+&lt;h3 id='the_input'&gt;The Input&lt;/h3&gt;
+
+&lt;p&gt;There is one field called &lt;code&gt;in&lt;/code&gt; which is the input language in the form of a two-character language code. You may have only one of these (it is of type &lt;code&gt;list-single&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;There is one field called &lt;code&gt;out&lt;/code&gt; which is the output language and is also in the form of a two-character language code. You can have as many of these as you like.&lt;/p&gt;
+
+&lt;p&gt;Finally there&amp;#8217;s a field called &lt;code&gt;text&lt;/code&gt; which is the stuff you want to translate. You may only have one of these.&lt;/p&gt;
+
+&lt;h3 id='the_output'&gt;The Output&lt;/h3&gt;
+
+&lt;p&gt;The response is a form much like the one you sent it, the keys are language codes and the values are the text translated in that language.&lt;/p&gt;
+
+&lt;p&gt;Note that you will not receive more language translations than you asked for, but you may receive fewer in the case where the upstream translation service can&amp;#8217;t perform such a translation.&lt;/p&gt;
+
+&lt;p&gt;The obvious benefit here over doing it yourself is that you get full translations all at the same time without having to do any kind of coordination as things are completing (i.e., I do that for you).&lt;/p&gt;
+
+&lt;h2 id='conferenceskyscraperim'&gt;conference.skyscraper.im&lt;/h2&gt;
+&lt;div&gt;
+  &lt;img class='floatright' src='/images/skyscraper-chat.png' alt='skyscraper chat' /&gt;
+&lt;/div&gt;
+&lt;p&gt;A fun thing built atop the translate component is the skyscraper muc &amp;#8211; an xmpp multi-user chat with automatic translation.&lt;/p&gt;
+
+&lt;p&gt;What this means is that you can have several people enter a room with no room in common, all speaking and reading their native language.&lt;/p&gt;
+
+&lt;p&gt;Of course, the dream is limited by the translation service, but it &lt;em&gt;does&lt;/em&gt; work within the reasonable limits.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;#8217;d like to try it out, find a friend who speaks another language and both join a chat room at &lt;code&gt;conference.skyscraper.im&lt;/code&gt;. Start by each of you telling it your respective languages (e.g. &lt;code&gt;/lang en&lt;/code&gt;) and then talk.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;ve spent very little time on this, so I imagine it falls apart in all kinds of places, but it was &lt;em&gt;really&lt;/em&gt; easy to get going with the translate service from above, and as it&amp;#8217;s an xmpp server component, it does all this with just one file descriptor and the necessary state to keep up with who&amp;#8217;s in what room and what translations are outstanding.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>My Github Anniversary (Sort Of)</title>
+   <link href="http://dustin.github.com/2009/03/01/github-anniversary.html"/>
+   <updated>2009-03-01T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2009/03/01/github-anniversary</id>
+   <content type="html">&lt;h1 id='my_github_anniversary_sort_of'&gt;My Github Anniversary (Sort Of)&lt;/h1&gt;
+&lt;div&gt;
+  &lt;img class='floatright' src='http://img.skitch.com/20090301-jqf9yrkfniqf2ysaa88ebshwqe.png' alt='[anniversary]' /&gt;
+&lt;/div&gt;
+&lt;p&gt;I joined &lt;a href='http://github.com/'&gt;github&lt;/a&gt; about a year ago today. Kind of. It was actually February 29th, but there isn&amp;#8217;t one of those this year, so I&amp;#8217;m going to have to wait a few more years before I can properly have an anniversary.&lt;/p&gt;
+
+&lt;p&gt;Between the time I joined and the time I typed this line, I&amp;#8217;ve generated 206 pages of activity (&lt;a href='http://github.com/dustin?page=174'&gt;174 pages public&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;By the end of my first day, I had migrated two &lt;a href='http://github.com/dustin/java-memcached-client'&gt;java&lt;/a&gt; &lt;a href='http://github.com/dustin/photo'&gt;projects&lt;/a&gt; over from mercurial, converted a &lt;a href='http://github.com/dustin/ruby-freebase'&gt;ruby project&lt;/a&gt; from subversion, had that repo forked, watched another &lt;a href='http://github.com/mojombo/god'&gt;ruby project&lt;/a&gt;, started a &lt;a href='http://github.com/dustin/buildwatch'&gt;new objective c project&lt;/a&gt;, wrote some new code for some of my projects and pushed it and invited a &lt;a href='http://github.com/chriseppstein'&gt;couple&lt;/a&gt; of &lt;a href='http://github.com/verbal'&gt;friends&lt;/a&gt; (both of whom now share my leap-year-only start date) and added them to a couple of my projects.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://github.com/chriseppstein'&gt;Chris&lt;/a&gt; became somewhat a github evangelist and made some really &lt;a href='http://github.com/chriseppstein/compass'&gt;cool&lt;/a&gt; &lt;a href='http://github.com/chriseppstein/freebase'&gt;stuff&lt;/a&gt; stuff there (some if it&amp;#8217;s cooler than most people can comprehend). &lt;a href='http://github.com/verbal'&gt;Ian&lt;/a&gt; throws awesome parties (I&amp;#8217;ll eventually make him give me code).&lt;/p&gt;
+
+&lt;p&gt;At the point where I started using github, I&amp;#8217;d probably been a (somewhat casual) git user for about two weeks. git is great, but the documentation and tutorials were more about laying out an infinitely complex decision tree &amp;#8211; that is, git itself is easy to do anything with, but you can do a lot with it, so it comes across as unnecessarily complex.&lt;/p&gt;
+
+&lt;p&gt;Github has been really good about making really common paths really easy so that you naturally fall into workflows that minimize the work required to contribute to open source projects down to the point where you can clone a repo, branch, edit some stuff, and notify the maintainer of a project in just a few clicks on the web site.&lt;/p&gt;
+
+&lt;p&gt;Overall, it&amp;#8217;s been a pretty &lt;a href='http://calendaraboutnothing.com/~dustin'&gt;good year&lt;/a&gt;. Just three more until my real anniversary.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Making Use of Caps Lock</title>
+   <link href="http://dustin.github.com/2009/02/09/caps-lock.html"/>
+   <updated>2009-02-09T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2009/02/09/caps-lock</id>
+   <content type="html">&lt;h1 id='making_use_of_caps_lock'&gt;Making Use of Caps Lock&lt;/h1&gt;
+&lt;div&gt;
+  &lt;img class='floatright' src='/images/capslock-pref.png' alt='caps lock' /&gt;
+&lt;/div&gt;
+&lt;p&gt;If you&amp;#8217;re like me (and who isn&amp;#8217;t), the caps lock key is an annoying waste of plastic. Its only value seems to be to type things to offend people. Luckily, most operating systems allow you to map it to control, or another useful key.&lt;/p&gt;
+
+&lt;p&gt;As a fairly new emacs user (and a long-term shell user), having a control key near where my fingers already makes many things far more accessible to me. Highly recommended.&lt;/p&gt;
+
+&lt;p&gt;But there&amp;#8217;s another thing that the caps lock provides that quickly moves from annoyance to useful feature:&lt;/p&gt;
+&lt;div&gt;
+  &lt;img class='floatleft' src='/images/capslock-key.jpg' alt='caps lock' /&gt;
+&lt;/div&gt;
+&lt;p&gt;Just about every keyboard ever made has a caps lock indicator. Such a wonderful thing when used correctly.&lt;/p&gt;
+
+&lt;p&gt;Amit Singh over at google had a blog post about &lt;a href='http://googlemac.blogspot.com/2008/04/manipulating-keyboard-leds-through.html'&gt;manipulating keyboard LEDs&lt;/a&gt; which inspired me to add this feature to my &lt;a href='http://code.google.com/p/buildwatch/'&gt;buildwatch&lt;/a&gt; app pretty much immediately.&lt;/p&gt;
+
+&lt;p&gt;Due to a fairly dumb bug I fixed today, it hasn&amp;#8217;t been working (and I wasn&amp;#8217;t paying attention to it anyway), but now, when anyone does a build against my build farm and the build breaks, my keyboard light will come on.&lt;/p&gt;
+
+&lt;p&gt;Sort of makes me want to write some bad code.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Buildbot</title>
+   <link href="http://dustin.github.com/2009/01/30/buildbot.html"/>
+   <updated>2009-01-30T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2009/01/30/buildbot</id>
+   <content type="html">&lt;h1 id='buildbot'&gt;Buildbot&lt;/h1&gt;
+
+&lt;p&gt;I&amp;#8217;ve used a few different continous integration systems, but &lt;a href='http://buildbot.net/'&gt;buildbot&lt;/a&gt; has been my favorite for quite a while. It&amp;#8217;s got a really nice architecture, a great codebase, and all the tools I need.&lt;/p&gt;
+&lt;div&gt;
+  &lt;img class='floatright' src='/images/buildbot.png' alt='buildwatch' /&gt;
+&lt;/div&gt;
+&lt;p&gt;Most of these things seem to assume that if it builds anywhere, you&amp;#8217;ve done your job. buildbot assumes there may be a relatively large number of build workers and an even larger number of configurations.&lt;/p&gt;
+
+&lt;p&gt;For example, I&amp;#8217;m building out a buildbot configuration for a project I&amp;#8217;m working on now for some portable software that seems to be most popular on Linux, possibly followed by OS X. However, depending on the distribution, toolchain, architecture, and compile-time options, some things just don&amp;#8217;t work correctly. I also use it on FreeBSD, but having added a slave for FreeBSD, I found a small compiler error.&lt;/p&gt;
+
+&lt;h2 id='tbyb'&gt;TBYB&lt;/h2&gt;
+
+&lt;p&gt;Most CI systems are all about telling you when you&amp;#8217;ve committed code that breaks the build for other people. Isn&amp;#8217;t it rather late by that point?&lt;/p&gt;
+
+&lt;p&gt;buildbot has a &lt;code&gt;try&lt;/code&gt; command that allows you run a complete build across whichever nodes you want (or all) &lt;em&gt;before&lt;/em&gt; making your code available to anyone else.&lt;/p&gt;
+
+&lt;p&gt;One of the guys I&amp;#8217;m working with on this project does most of his work in Solaris. He wrote some code, tested his code, and sent me a patch. I committed his patch to my local git repo, but before pushing it, ran &lt;code&gt;buildbot try&lt;/code&gt; to make sure nothing weird happened. There were two different problems that caused build and/or test failures on every OS that wasn&amp;#8217;t Solaris.&lt;/p&gt;
+
+&lt;p&gt;I was able to fix up his changes so that they worked everywhere, and they never actually made it into a public tree in their broken form.&lt;/p&gt;
+
+&lt;h2 id='the_code'&gt;The Code&lt;/h2&gt;
+
+&lt;p&gt;buildbot&amp;#8217;s &lt;a href='http://github.com/djmitche/buildbot'&gt;codebase&lt;/a&gt; has some very robust plumbing, and it seems to support just about anything you might want to do (which other systems allow you subscribe to the tail of the current step&amp;#8217;s log in realtime without having access to the slave?).&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;ve had to make some changes to get some features working as I expect, or fixing bug in edge cases, though.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;ve been doing some work lately with the &lt;code&gt;git&lt;/code&gt; support in &lt;code&gt;try&lt;/code&gt;. Rather than repeating myself, you can see what I&amp;#8217;ve done in my portion of the changelog and imagine how much better your project would be if every potential change could be tested across all your supported platforms before you publish.&lt;/p&gt;
+&lt;pre style='font-size: smaller'&gt;
+commit dfb18e6c177d490da9dcab29e431eff22cfedfec
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Wed Jan 28 20:26:00 2009 -0800
+
+    Allow users to specify the remote git branch.
+
+    This allows for a case where someone has a repository that tracks
+    someone else's repository, has arbitrary local branches, but wants to
+    run tries with the delta from the reference repository (i.e. the one
+    the master knows about) to the local changes.
+
+    Without this, it's likely the reference repository will not have the
+    necessary objects to pull down a base revision to be able to apply
+    patches for the try to succeed.
+
+    This also ensures that the current client's view of the reference
+    repository is honored.  That is, if the reference repository has moved
+    forward, the trier's current tip of the remote is used to compute the
+    delta, and that's sent along as the baserev.
+
+commit 38a9c7fc719b44e2cdfa47884182da7128b369d2
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Wed Jan 28 16:30:08 2009 -0800
+
+    Added --dry-run (-n) support to buildbot try.
+
+    Need to be able to try try when I just want to know what it's even
+    going to consider doing.
+
+commit f43143835cba3ca5963e07874da17c1416a031c2
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Wed Jan 28 08:34:04 2009 -0800
+
+    Refactored try buildName validation for reuse.
+
+commit a88238cae5000c3481877aa354e3c76fc45770b8
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Wed Jan 28 08:25:52 2009 -0800
+
+    Don't require a list of builders for buildbot try.
+
+    This maintains the current restrictions around builder lists that
+    prevent one from trying a build that isn't in the list, but allows the
+    user to delegate the selection to the server by not listing the
+    builders at all.
+
+    I want my users to always try their builds on every build
+    configuration, but I don't want to be sending out buildbot options all
+    the time.
+commit 99240ada38677a143971fe390beb714c3017c20b
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Sun Jan 25 10:47:57 2009 -0800
+
+    git_buildbot should show the author, not the committer
+
+    When I'm looking at my waterfall, I'd like to see the names of the
+    people who wrote code, not just mine because I happened to have
+    cherry-picked or am'd a bunch of changes.
+
+commit 2c6865d83e967ca135acd3810e08af2dfab727b3
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Wed Jan 21 20:23:35 2009 -0800
+
+    Look at the remote tracking branch in git for buildbot try.
+
+    This allows us to try committed, but not pushed code.
+
+commit a079d84d4056dbf5ab3489cb7f2f8f0e20d91b87
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Thu Jan 22 09:59:59 2009 -0800
+
+    Try to reclobber on retry.
+
+    On a failed git update in clobber mode, I was getting the following
+    error on the second try:
+
+    exceptions.OSError: [Errno 17] File exists: '/path/to/build'
+
+    It seems that the clobber only occurs once, and any error that happens
+    during the checkout should redo the clobber.
+
+commit 6c36579a63b58bc986ec56e0272362038be08112
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Wed Nov 19 04:56:38 2008 +0800
+
+    Get rid of git- commands in git_buildbot.
+
+    Signed-off-by: Dustin J. Mitchell &amp;lt;dustin@zmanda.com&gt;
+
+commit ac70a83fa05c2b1b31dd9411ffc28876fb9e9f20
+Author: Dustin Sallings &amp;lt;dustin@spy.net&gt;
+Date:   Sat Apr 19 08:40:20 2008 +0800
+
+    Send merge changes from git.
+
+    Signed-off-by: Dustin J. Mitchell &amp;lt;dustin@zmanda.com&gt;
+&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Publishing Changelogs</title>
+   <link href="http://dustin.github.com/2009/01/17/changelog.html"/>
+   <updated>2009-01-17T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2009/01/17/changelog</id>
+   <content type="html">&lt;h1 id='publishing_changelogs'&gt;Publishing Changelogs&lt;/h1&gt;
+
+&lt;p&gt;A user filed a bug against my &lt;a href='http://code.google.com/p/spymemcached/'&gt;memcached client&lt;/a&gt; because he couldn&amp;#8217;t find the changelog and wanted to know what went into the new version.&lt;/p&gt;
+
+&lt;p&gt;I have a decent structure around releases, especially with this project. I tag it and write a good summary of changes in the tag including an abbreviated shortlog output, then I send the same out to the mailing list.&lt;/p&gt;
+
+&lt;p&gt;Somehow, I expected anyone not on the mailing list to just dig through my tags to find out what&amp;#8217;s changed. I suppose that&amp;#8217;s asking quite a bit.&lt;/p&gt;
+
+&lt;p&gt;Since I&amp;#8217;ve been keeping good information in my tags since moving over to git (which actually has proper tag objects), I&amp;#8217;ve found it quite easy to automate this process. My new &lt;a href='http://github.com/dustin/bindir/blob/master/git-htmlchangelog'&gt;git htmlchangelog&lt;/a&gt; takes a list of tags and generates a reasonable changelog automatically from this.&lt;/p&gt;
+
+&lt;p&gt;For example, the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git htmlchangelog `git tag | egrep -v pre\|rc` &amp;gt; changelog.html&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;created &lt;a href='http://dustin.github.com/java-memcached-client/changelog.html'&gt;the changelog&lt;/a&gt; for my memcached client.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Visualizing Git Contributors</title>
+   <link href="http://dustin.github.com/2009/01/16/visualizing-contributors.html"/>
+   <updated>2009-01-16T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2009/01/16/visualizing-contributors</id>
+   <content type="html">&lt;p&gt;I was looking for something quick to do today, so I started drawing &lt;a href='http://github.com/dustin/bindir/blob/master/git-contributors'&gt;pie charts&lt;/a&gt; showing who commits to various projects.&lt;/p&gt;
+
+&lt;p&gt;Pie charts are particularly terrible for communicating something useful to people, but they kind of look nice, so whatever.&lt;/p&gt;
+
+&lt;p&gt;Here are some examples:&lt;/p&gt;
+
+&lt;h2 id='linux'&gt;Linux&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=p&amp;amp;chs=600x300&amp;amp;chd=s:CBBBBB2&amp;amp;chl=Linus|Al|David|Adrian|Ralf|Jeff|Other' alt='Linux' /&gt;&lt;/p&gt;
+
+&lt;h2 id='git'&gt;Git&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=p&amp;amp;chs=600x300&amp;amp;chd=s:WFECBBa&amp;amp;chl=Junio|Shawn|Linus|Johannes|Eric|Jakub|Other' alt='Git' /&gt;&lt;/p&gt;
+
+&lt;h2 id='memcached'&gt;Memcached&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=p&amp;amp;chs=600x300&amp;amp;chd=s:THGGEEP&amp;amp;chl=Brad|dormando|Paul|Dustin|Trond|Toru|Other' alt='Memcached' /&gt;&lt;/p&gt;
+
+&lt;h2 id='emacs'&gt;Emacs&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=p&amp;amp;chs=600x300&amp;amp;chd=s:OEEDDDe&amp;amp;chl=Richard|Gerd|Eli|Stefan|Kenichi|Glenn|Other' alt='Emacs' /&gt;&lt;/p&gt;
+
+&lt;h2 id='rails'&gt;Rails&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=p&amp;amp;chs=600x300&amp;amp;chd=s:VPDDCCO&amp;amp;chl=David|Jeremy|Michael|Rick|Jamis|Joshua|Other' alt='Rails' /&gt;&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Git Timecard</title>
+   <link href="http://dustin.github.com/2009/01/11/timecard.html"/>
+   <updated>2009-01-11T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2009/01/11/timecard</id>
+   <content type="html">&lt;h1 id='git_timecard'&gt;Git Timecard&lt;/h1&gt;
+
+&lt;p&gt;I really like &lt;a href='http://github.com/blog/159-one-more-thing'&gt;github&amp;#8217;s punch card&lt;/a&gt; feature. It&amp;#8217;s a nice way to quickly see when a project is worked on.&lt;/p&gt;
+
+&lt;p&gt;However, it&amp;#8217;s very limited. You can only see everyone&amp;#8217;s work on the master branch. I have &lt;em&gt;lots&lt;/em&gt; of other ways I want to look at my repos (including some that aren&amp;#8217;t on github).&lt;/p&gt;
+
+&lt;p&gt;So I wrote &lt;a href='http://github.com/dustin/bindir/tree/master/git-timecard'&gt;my own&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here are the neat kinds of things I can do now:&lt;/p&gt;
+
+&lt;h2 id='punch_card_of_my_work_repo'&gt;Punch Card of my Work Repo&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;~/work-project/ % git timecard&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=s&amp;amp;chs=800x300&amp;amp;chd=e:CkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639b,IAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAn.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.................................................,BoAeAAAAAAAAAAAtDQDtGuE4IWMhIlJ-GfMECyGuH4L1L1KNFGGRAPAeAAAeBZCGLmeYgs1GjeiyijnavTbmMEHqIHG9IHGuELB3APAAAAAPAtCjGfcwdrpCZ-fTrXzP8SozSUFzGRCyI0H4CGB3AeAeAeB3AeCGEpYlkLjegdgsv.59..okTBJ-JvHMMhJvD8DfB3AAAAAAAADfHqabX4rIiFkLpRze28drVVQsLXI0J-JREpCUAAAAAPAAAACyGRVkchrXh2jPtc4kw7WCGfDBBoCGCjDtAPBKAAAAAAAAAABoBKD8GCHqGRIHGRGCIHDBGRELBoAeDQCjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&amp;amp;chxt=x,y&amp;amp;chxl=0:||0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23||1:||Sun|Mon|Tue|Wed|Thu|Fri|Sat|&amp;amp;chm=o,333333,1,1.0,25,0&amp;amp;chds=-1,24,-1,7,0,20' alt='work' /&gt;&lt;/p&gt;
+
+&lt;h2 id='alternate_branch'&gt;Alternate Branch&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;~/memcached % git timecard rewritten-bin&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=s&amp;amp;chs=800x300&amp;amp;chd=e:CkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639b,IAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAn.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.................................................,AAMzIiERAAMzERAAERAAAAAAIiIiREREu7MzERmZMz..iI..qqVVMzIiREERAAERMzZmREERMzZmd3VVREzMMzqqIiMziIu7VVVVMzIiIiERAAERERMzd3VVVVIiREREIiREVVVVREMziIMzMzREMzREERIiAAAAAAIiERmZVVmZAAREVVIiIiREIiIiIiIiVVd3ERERIiERAAERIiIiVVAAIiREIiMzMzERMzAAVVMzAAZmERMzIiIiERAAERAAAAREVVVVMzd3MzMzIiAAREERMzERERAAERAAMzAAERAAAAAAAAAAERAAMzIiERIiIiIiREERIiERMzIiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&amp;amp;chxt=x,y&amp;amp;chxl=0:||0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23||1:||Sun|Mon|Tue|Wed|Thu|Fri|Sat|&amp;amp;chm=o,333333,1,1.0,25,0&amp;amp;chds=-1,24,-1,7,0,20' alt='rewritten-bin' /&gt;&lt;/p&gt;
+
+&lt;h2 id='one_users_work'&gt;One User&amp;#8217;s Work&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;~/memcached % git timecard --author=dustin&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=s&amp;amp;chs=800x300&amp;amp;chd=e:CkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639b,IAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAn.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.................................................,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAttAAAAAAAAAAAAbbJJAAAAAAAAAAAAAAAAJJJJAAAAAAAAAAAAAAAAkkAAAAAAAAAAAAAAAAAAAAAAAAAAAA..AAAAAAAAAAAAAAJJSSAAAAJJAAJJAAAAAAAAAAAAAAAAAAAAJJSSSSAAAAAAAAAAAAAAJJAAAAJJAAAAAAAAAAAAAAJJAAAAAAAAAAAAAAAAAAAAAAAAAAAASSAAAAAAAAAAAAAAAAAASSAAJJAAAAAAAAAAAAbbAAAAJJAAAAJJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&amp;amp;chxt=x,y&amp;amp;chxl=0:||0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23||1:||Sun|Mon|Tue|Wed|Thu|Fri|Sat|&amp;amp;chm=o,333333,1,1.0,25,0&amp;amp;chds=-1,24,-1,7,0,20' alt='dustins timecard' /&gt;&lt;/p&gt;
+
+&lt;h2 id='last_weeks_work'&gt;Last Week&amp;#8217;s Work&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;~/twitterspy % git timecard &amp;#39;@{1 week ago}&amp;#39;..&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src='http://chart.apis.google.com/chart?cht=s&amp;amp;chs=800x300&amp;amp;chd=e:CkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639bCkFIHrKPMzPXR7UeXCZmcKeuhRj1mZo9rhuEwozM1w4U639b,IAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAIAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAYAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAgAn.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.n.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.................................................,AAAAAAAAAAAAAAAAAAAAQAAAAAAAv.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA..AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAv.v.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&amp;amp;chxt=x,y&amp;amp;chxl=0:||0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23||1:||Sun|Mon|Tue|Wed|Thu|Fri|Sat|&amp;amp;chm=o,333333,1,1.0,25,0&amp;amp;chds=-1,24,-1,7,0,20' alt='recent twitterspy work' /&gt;&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Git Reroot - When Rebase is Too Gentle</title>
+   <link href="http://dustin.github.com/2009/01/06/git-reroot.html"/>
+   <updated>2009-01-06T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2009/01/06/git-reroot</id>
+   <content type="html">&lt;h1 id='git_reroot__when_rebase_is_too_gentle'&gt;Git Reroot - When Rebase is Too Gentle&lt;/h1&gt;
+&lt;div&gt;
+  &lt;img class='floatright' src='/images/transplant.jpg' alt='transplant' /&gt;
+&lt;/div&gt;
+&lt;p&gt;The fun thing about git is that it&amp;#8217;ll do whatever you tell it.&lt;/p&gt;
+
+&lt;p&gt;Many newcomers look at is as this really complicated beast that is impossible to understand, but the less resistant users find that it&amp;#8217;s very happy to just sit back and happily do whatever you ask of it (even if you ask it to do something stupid).&lt;/p&gt;
+
+&lt;p&gt;Recently, I was working on a project, and wanted to rebase a branch that had drifted quite a bit away from the master branch. &lt;code&gt;rebase&lt;/code&gt; itself wasn&amp;#8217;t getting me anywhere due to various conflicts from some partial merges and manual merges.&lt;/p&gt;
+
+&lt;p&gt;As an attempt towards a solution, I created &lt;a href='http://gitorious.org/projects/bindir/repos/mainline/blobs/master/git-reroot'&gt;git reroot&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id='what_does_it_do'&gt;What Does it Do?&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;git reroot&lt;/code&gt; is very similar to &lt;code&gt;rebase&lt;/code&gt; conceptually, with one subtle detail &amp;#8211; &lt;code&gt;rebase&lt;/code&gt; works by rewinding to a merge point and replaying deltas (while dropping duplicates). &lt;code&gt;reroot&lt;/code&gt; works by taking a range of commits and placing the commits at the end of the current &lt;code&gt;HEAD&lt;/code&gt; by exact tree state.&lt;/p&gt;
+
+&lt;p&gt;The distinction is subtle, but important. git does not record changes, it snapshots tree states with some additional metadata. Commit deltas may be computed between any arbitrary trees, so the representations you often see are these deltas.&lt;/p&gt;
+
+&lt;h2 id='when_should_i_use_it'&gt;When Should I Use It?&lt;/h2&gt;
+
+&lt;p&gt;Quite likely never. It was not appropriate for the project for which I created it.&lt;/p&gt;
+
+&lt;p&gt;However, if&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;you find yourself with a branch that has diverged too far,&lt;/li&gt;
+
+&lt;li&gt;you consider the result of this branch to be the desired state, and&lt;/li&gt;
+
+&lt;li&gt;it&amp;#8217;s OK to think of the commits as snapshots of work instead of changes to previous state,&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;then you may find &lt;code&gt;reroot&lt;/code&gt; helpful.&lt;/p&gt;
+
+&lt;h2 id='how_do_i_use_it'&gt;How Do I Use It?&lt;/h2&gt;
+
+&lt;p&gt;The invocation recipes are different from that of &lt;code&gt;rebase&lt;/code&gt; because it&amp;#8217;s more of a &amp;#8220;do what I want&amp;#8221; kind of tool.&lt;/p&gt;
+
+&lt;p&gt;In a really simple case, let&amp;#8217;s say you have a branch &lt;code&gt;new-development&lt;/code&gt; that diverged from &lt;code&gt;master&lt;/code&gt; a while back. Some work has been done on master, but you really just want &lt;code&gt;new-development&lt;/code&gt; to be master. For whatever reason, you don&amp;#8217;t want to do a merge to get it there, and rebase fails you due to conflicts you really don&amp;#8217;t care about.&lt;/p&gt;
+
+&lt;p&gt;You would invoke &lt;code&gt;reroot&lt;/code&gt; as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git reroot master..new-development&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see some output that&amp;#8217;s showing you progress, and then a line that looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;The newly created history is available as 2015200[...]&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command is &lt;em&gt;completely non-destrutive&lt;/em&gt;, and will not affect &lt;em&gt;any&lt;/em&gt; ref, so it&amp;#8217;s safe to do whenever and wherever you like.&lt;/p&gt;
+
+&lt;p&gt;This output is telling you that the new tree is available, but not linked. You may use log (&lt;code&gt;git log 2015200&lt;/code&gt;) to examine it, and when you&amp;#8217;re ready to overwrite the current ref:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git reset --hard 2015200&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you look through the deltas (&lt;code&gt;git log -p&lt;/code&gt;), you may see some changes that are much larger than you&amp;#8217;d expect (especially towards the beginning, or any merge points), but at any given commit, the source tree is guaranteed to be in the exact state it was in when the author committed it.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Git Archaeology</title>
+   <link href="http://dustin.github.com/2008/12/31/archaeology.html"/>
+   <updated>2008-12-31T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/31/archaeology</id>
+   <content type="html">&lt;h1 id='git_archaeology'&gt;Git Archaeology&lt;/h1&gt;
+&lt;div&gt;
+  &lt;img class='floatright' src='/images/indiana_jones_small.jpg' alt='indy' /&gt;
+&lt;/div&gt;
+&lt;p&gt;I just spent a while reconstructing the history of my code &lt;a href='http://github.com/dustin/snippets' title='snippets'&gt;junk drawer&lt;/a&gt;. It&amp;#8217;s on its fourth revision control system now (&lt;a href='http://www.nongnu.org/cvs/' title='concurrent version system'&gt;cvs&lt;/a&gt; &amp;#8594; &lt;a href='http://www.gnu.org/software/gnu-arch/' title='gnu arch'&gt;tla&lt;/a&gt; &amp;#8594; &lt;a href='http://www.selenic.com/mercurial/' title='mercurial'&gt;mercurial&lt;/a&gt; &amp;#8594; &lt;a href='http://git-scm.com/' title='git'&gt;git&lt;/a&gt;) and has been through a lot of different tree states.&lt;/p&gt;
+
+&lt;p&gt;CVS really only versions files, but allows you to arrange things into a hierarchy, so I had a natural hierarchy and reflected it in a similar way in CVS.&lt;/p&gt;
+
+&lt;p&gt;Gnu arch favored smaller repositories, so when I did the conversion from CVS, I broke the snippets down into several different &amp;#8220;branches&amp;#8221; and versioned each language independently. I had one container branch that had a build config that would recreate the tree. This codebase lived through three different archives (repositories) and some of the individual snippets had a couple versions within that.&lt;/p&gt;
+
+&lt;p&gt;Once I started using mercurial more, I needed my snippets with me, but mercurial didn&amp;#8217;t have a similar mechanism for managing a collection of repositories (even today, the &lt;a href='http://www.selenic.com/mercurial/wiki/index.cgi/ForestExtension' title='forest'&gt;forest extension&lt;/a&gt; is not distributed with mercurial). I had attempted to use &lt;a href='http://darcs.net/' title='darcs'&gt;darcs&lt;/a&gt; to reconstruct a single tree with full history but the trees renamed, but darcs wouldn&amp;#8217;t ever complete with a subset of what needed to be converted. I ended up just snapshotting what was in gnu arch and dropping it into a single mercurial repository.&lt;/p&gt;
+
+&lt;p&gt;Having moved into git, I finally have the tools to actually put the history back together correctly. By &amp;#8220;correctly&amp;#8221;, I mean I wanted a single repository with all of the changes in it ordered chronologically (the order in which junk was placed in the drawer) without lots of weird merges that didn&amp;#8217;t actually happen. I &lt;em&gt;also&lt;/em&gt; needed to dig up all of the history prior to the snapshot I took for mercurial and get it all in place.&lt;/p&gt;
+
+&lt;h2 id='bringing_up_snippets'&gt;Bringing up Snippets&lt;/h2&gt;
+
+&lt;p&gt;Just to add to the complexity story, keep the following in mind:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;After tla, code was committed into mercurial from a snapshot.&lt;/li&gt;
+
+&lt;li&gt;That snapshot was (cleanly) converted to git, and more code was committed there.&lt;/li&gt;
+
+&lt;li&gt;One failed archaeological excursion had a few commits as well.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I started by going to the latest gnu arch versions of each snippet set and converting them to git repositories (by way of mercurial &amp;#8211; but that&amp;#8217;s a different story).&lt;/p&gt;
+
+&lt;h2 id='setting_up_the_repo'&gt;Setting up the Repo&lt;/h2&gt;
+
+&lt;p&gt;I created a repo with a single empty commit in it as the eventual root of all of the other repos.&lt;/p&gt;
+
+&lt;p&gt;Once each repository was converted to individual git repositories, I brought added them as remotes to the conversion repository. Each branch needs to be considered related in order to facilitate the eventual merge, so I created grafts that placed the root of each branch atop my empty commit using the following script:&lt;/p&gt;
+&lt;div&gt;
+  &lt;pre&gt;
+    &lt;code class='sh'&gt;#!/bin/sh
+
+empty=6c417dd379ccdb46de57e7a3860379633c270c9e
+
+for b in &amp;quot;$@&amp;quot;
+do
+	oldest=`git rev-list --reverse $b | head -1`
+	echo &amp;quot;Grafting $b&amp;quot;
+	echo &amp;quot;$oldest $empty&amp;quot; &amp;gt;&amp;gt; .git/info/grafts
+done&lt;/code&gt;
+  &lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This was run for every remote repo and then each branch was run through &lt;code&gt;git filter-branch&lt;/code&gt; to place the changes atop the empty branch in a real history.&lt;/p&gt;
+
+&lt;h3 id='rewriting_tree_structures'&gt;Rewriting Tree Structures&lt;/h3&gt;
+
+&lt;p&gt;These weren&amp;#8217;t quite ready to merge just yet. Before I could even consider an actual merge, I needed to modify the tree structures (e.g. take all of the stuff at the toplevel of the &lt;code&gt;eiffel&lt;/code&gt; directory and move it under an &lt;code&gt;eiffel/&lt;/code&gt; directory). The previous excursion had done this using a recipe I&amp;#8217;d found on the internet somewhere which &lt;em&gt;worked&lt;/em&gt;, but did the wrong thing with my version of sed. Using gsed cleaned this up.&lt;/p&gt;
+
+&lt;p&gt;For each remote branch, I&amp;#8217;d run the following filter:&lt;/p&gt;
+&lt;div&gt;
+  &lt;pre&gt;
+    &lt;code class='sh'&gt;#!/bin/sh
+
+git filter-branch -f --index-filter \
+        'git ls-files -s | gsed &amp;quot;s-\t-&amp;amp;eiffel/-&amp;quot; |
+                GIT_INDEX_FILE=$GIT_INDEX_FILE.new \
+                        git update-index --index-info &amp;amp;&amp;amp;
+         mv $GIT_INDEX_FILE.new $GIT_INDEX_FILE' $1/master&lt;/code&gt;
+  &lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Out of pure laziness, I would edit this script for every invocation and then run it for a single remote.&lt;/p&gt;
+
+&lt;h3 id='doing_the_merge'&gt;Doing the Merge&lt;/h3&gt;
+&lt;div&gt;
+  &lt;img class='floatleft' src='http://img.skitch.com/20090101-6s52spepjx7qgjaj3yuscuasa.png' alt='merge' /&gt;
+&lt;/div&gt;
+&lt;p&gt;The merge was really rather exciting. The image to the left shows a 24-way octopus merge.&lt;/p&gt;
+
+&lt;p&gt;That is, after grafting the empty changeset to the bottom of every branch, they now had common ancestry, making a merge possible. Since each branch got its paths rewritten all throughout history, there was no chance of conflict.&lt;/p&gt;
+
+&lt;p&gt;So enter the octopus.&lt;/p&gt;
+&lt;br clear='both' /&gt;
+&lt;h3 id='performing_a_linear_rewrite'&gt;Performing a Linear Rewrite&lt;/h3&gt;
+
+&lt;p&gt;As cool as it was to do a massive octopus merge, I wanted linear history.&lt;/p&gt;
+
+&lt;p&gt;It would be possible to produce a graft file to place each change atop a single parent, but that seemed quite hard.&lt;/p&gt;
+
+&lt;p&gt;The strategy I employed was to dump the entire history using &lt;code&gt;git format-patch&lt;/code&gt; and then write &lt;a href='http://github.com/dustin/snippets/tree/master/python/misc/rewrite-patches.py'&gt;a script&lt;/a&gt; to rename all of the patches to be in chronological order so I could use &lt;code&gt;git am&lt;/code&gt; to reconstruct the tree.&lt;/p&gt;
+
+&lt;p&gt;So I created a new branch from &amp;#8220;empty&amp;#8221;, and ran &lt;code&gt;git am&lt;/code&gt; for a while. A nice bonus is that &lt;code&gt;git apply&lt;/code&gt; strips off trailing whitespace for me, so the changes were slightly cleaned on the way in (I could&amp;#8217;ve disabled that, but I rather liked it).&lt;/p&gt;
+
+&lt;h3 id='removing_emptiness'&gt;Removing Emptiness&lt;/h3&gt;
+
+&lt;p&gt;I no longer needed the &amp;#8220;empty&amp;#8221; changeset after &lt;code&gt;git am&lt;/code&gt; was complete, so I had to get rid of that. The root node is generally a bit difficult to touch, but I sort of guessed that I could add a graft of a hash without a parent and it&amp;#8217;d make that change the new root.&lt;/p&gt;
+
+&lt;p&gt;So another trip through &lt;code&gt;git filter-branch&lt;/code&gt; and I&amp;#8217;ve now got a pretty decent set of history up throgh the snapshot that was taken for the mercurial conversion.&lt;/p&gt;
+
+&lt;h3 id='catching_up_to_the_present'&gt;Catching up to the Present&lt;/h3&gt;
+
+&lt;p&gt;So now that I&amp;#8217;ve got everything up to the snapshot, what do I do?&lt;/p&gt;
+
+&lt;p&gt;I had a lot of options here &amp;#8211; cherry-picking, grafting, format-patch. I think I went with format-patch arbitrarily. Basically, I did a &lt;code&gt;git format-patch&lt;/code&gt; of the full history from the latest git repo and applied those changes to the newly created one.&lt;/p&gt;
+
+&lt;h3 id='verification'&gt;Verification&lt;/h3&gt;
+
+&lt;p&gt;So now that everything has been all hacked up and history is rewritten and changests grafted, etc&amp;#8230; how do I have any idea whether it&amp;#8217;s even close to where it was before?&lt;/p&gt;
+
+&lt;p&gt;This is where git&amp;#8217;s content tracking stuff really saves the day. With the git repo I&amp;#8217;ve been using as a remote, I can do a simple diff across the trees from the latest branches (and various other states). The only differences I saw were some new scripts/etc&amp;#8230; had been added.&lt;/p&gt;
+
+&lt;p&gt;All&amp;#8217;s well. I certainly learned a lot.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Using Git Alternates</title>
+   <link href="http://dustin.github.com/2008/12/30/git-alternates.html"/>
+   <updated>2008-12-30T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/30/git-alternates</id>
+   <content type="html">&lt;h1 id='using_git_alternates'&gt;Using Git Alternates&lt;/h1&gt;
+
+&lt;p&gt;Now that you&amp;#8217;re happily using &lt;a href='/2008/12/29/github-sync.html'&gt;github sync&lt;/a&gt; to pull down all your repos into local bare trees, you may want to free up a bit of disk space from duplicate objects (about 120MB for me).&lt;/p&gt;
+
+&lt;p&gt;git has a way for multiple repos to share object space by way of alternates. You can read more about alternates in the &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/gitrepository-layout.html'&gt;repository layout documentation&lt;/a&gt;, but essentially it&amp;#8217;s a text file that contains the location of another &lt;code&gt;objects&lt;/code&gt; directory from which objects may be fetched when needed.&lt;/p&gt;
+
+&lt;h2 id='example'&gt;Example:&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;#8217;s say you&amp;#8217;re me and have checked out my photo album. You&amp;#8217;d end up with a .git directory that looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dhcp-39:/tmp/photo 599% du -sh .git
+ 18M	.git&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By setting up an alternate using my &lt;a href='http://gitorious.org/projects/bindir/repos/mainline/blobs/master/git-alternate'&gt;git alternate&lt;/a&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dhcp-39:/tmp/photo 600% git alternate ~/prog/github/photo.git
+.git/objects -&amp;gt; /Users/dustin/prog/github/photo.git/objects&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can then gc and free up gangs of disk:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dhcp-39:/tmp/photo 601% git gc 
+Nothing new to pack.
+Removing duplicate objects: 100% (256/256), done.
+dhcp-39:/tmp/photo 602% du -sh .git
+144K	.git&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From 18MB to 144KB, and everything pretty much works as it did before.&lt;/p&gt;
+
+&lt;p&gt;You don&amp;#8217;t need my &lt;a href='http://gitorious.org/projects/bindir/repos/mainline/blobs/master/git-alternate'&gt;git alternate&lt;/a&gt; command, for that, of course, but it makes it a bit easier when you&amp;#8217;ve got a lot of them to do.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Using Github Sync to Track Your Projects</title>
+   <link href="http://dustin.github.com/2008/12/29/github-sync.html"/>
+   <updated>2008-12-29T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/29/github-sync</id>
+   <content type="html">&lt;h1 id='using_github_sync_to_track_your_projects'&gt;Using Github Sync to Track Your Projects&lt;/h1&gt;
+&lt;div&gt;
+  &lt;img class='floatright' src='/images/octocat-sync-small.png' alt='octocat syncing' /&gt;
+&lt;/div&gt;
+&lt;p&gt;When &lt;a href='http://github.com/'&gt;github&lt;/a&gt; announced their &lt;a href='http://github.com/guides/the-github-api'&gt;API&lt;/a&gt;, I very quickly threw together a &lt;a href='http://github.com/dustin/py-github'&gt;python implementation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I didn&amp;#8217;t end up doing very much with the project as a whole, but I did write one tool in here that I end up using quite a bit: &lt;code&gt;githubsync.py&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;githubsync.py&lt;/code&gt; takes a github username and a directory and make sure I&amp;#8217;ve got a local copy of every public repo that user has on github.&lt;/p&gt;
+
+&lt;p&gt;Grab the repo and try it out:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone git://github.com/dustin/py-github.git
+cd py-github
+./src/githubsync.py dustin /tmp/dustinatgithub&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once that finishes, you will have all of my current public repos in &lt;code&gt;/tmp/dustinatgithub&lt;/code&gt; and if you run it periodically, you&amp;#8217;ll see new repos I add appear while the existing ones are being updated.&lt;/p&gt;
+
+&lt;p&gt;But what about private repos, or even repos that aren&amp;#8217;t on github?&lt;/p&gt;
+
+&lt;p&gt;The file &lt;code&gt;~/.github-private&lt;/code&gt; is read as a tab-delimited list of repos and their sources and those will also be synchronized. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cool-stuff	  git@github.com:dustin/cool-stuff.git&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With that in place, the &lt;code&gt;cool-stuff&lt;/code&gt; repo will be created and synchronized along with all of the stuff found through the API.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Wasted Time Developing for iPhone</title>
+   <link href="http://dustin.github.com/2008/12/26/wasted-time-on-iphone.html"/>
+   <updated>2008-12-26T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/26/wasted-time-on-iphone</id>
+   <content type="html">&lt;div&gt;
+	&lt;img class='floatright' src='http://img.skitch.com/20081227-qukmwpnbu6u9qnruimsqnrdj2y.jpg' alt='wasted time' /&gt;
+&lt;/div&gt;
+&lt;p&gt;OK, everybody&amp;#8217;s written about this, but I just wasted a bunch of time making an iPhone app.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;#8217;t actually feel too bad about it because it was a &lt;a href='http://github.com/dustin/twister-iphone'&gt;pretty stupid&lt;/a&gt; iPhone app, anyway, but I&amp;#8217;m not going to finish it because my first attempt to run it outside of the simulator was going to cost me a hundred bucks.&lt;/p&gt;
+
+&lt;p&gt;The application is an iPhone port of my &lt;a href='http://dustin.github.com/2008/12/25/twister.html'&gt;twister&lt;/a&gt; app, but with worse graphics and sound (though the sound is at least &lt;em&gt;potentially&lt;/em&gt; better). It&amp;#8217;s functional enough to play a few games, but not fully polished.&lt;/p&gt;
+
+&lt;p&gt;I was hoping I could stick it on my daughter&amp;#8217;s iPhone so she could play, but doesn&amp;#8217;t seem to be the case.&lt;/p&gt;
+
+&lt;p&gt;If anyone wants to do something with it, it&amp;#8217;s over on &lt;a href='http://github.com/dustin/twister-iphone'&gt;github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Of course, I&amp;#8217;d love to find out I was wrong and I can actually run my own program on my own phone without paying more&amp;#8230;&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>pfetch</title>
+   <link href="http://dustin.github.com/2008/12/26/pfetch.html"/>
+   <updated>2008-12-26T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/26/pfetch</id>
+   <content type="html">&lt;h1 id='about_pfetch'&gt;About pfetch&lt;/h1&gt;
+&lt;div&gt;
+	&lt;img class='floatright' src='/images/octopus.png' alt='octopus' /&gt;
+&lt;/div&gt;
+&lt;p&gt;For a long time now, I&amp;#8217;ve had various cron jobs running to fetch various web resources with which I&amp;#8217;d build out parts of my own site, or supply myself with custom RSS feeds after a pass through xsltproc.&lt;/p&gt;
+
+&lt;p&gt;This mostly worked OK, but there were a few things wrong with it:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;I had to be careful to avoid putting stuff in place upon fetch failure.&lt;/li&gt;
+
+&lt;li&gt;Fetch failures would send me email unless I put effort into avoiding that.&lt;/li&gt;
+
+&lt;li&gt;Network timeouts would cause cron jobs to start piling up.&lt;/li&gt;
+
+&lt;li&gt;I&amp;#8217;ve actually had cron get sick of running my jobs and just stop altogether.&lt;/li&gt;
+
+&lt;li&gt;Various jobs that ran at various frequencies would be in various scripts and hard to keep up with.&lt;/li&gt;
+
+&lt;li&gt;Running through cron means all jobs start at the exact same moment in time, thus are more likely to cause strain on web servers (if everybody does it).&lt;/li&gt;
+
+&lt;li&gt;Conditional gets require cross-invocation state to be stored (though I wrote &lt;a href='http://github.com/dustin/snippets/tree/master/python/net/http/fetch.py'&gt;a tool&lt;/a&gt; for this).&lt;/li&gt;
+
+&lt;li&gt;Sequential processing meant the whole thing took longer.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;After a while, the problems added to enough of an annoyance that I decided to do something about it, so a couple months ago I started &lt;a href='http://github.com/dustin/pfetch'&gt;pfetch&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;pfetch is a simple &lt;a href='http://twistedmatrix.com/'&gt;twisted&lt;/a&gt; app that does scheduled parallel http requests and optionally runs scripts after successful execution.&lt;/p&gt;
+
+&lt;p&gt;Given a list of URLs each with a destination, frequency, and optional (with arguments) to run after each successful (200) response, each URL will begin a fetch cycle starting at a random offset from the start time and loop on the defined interval.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Twister</title>
+   <link href="http://dustin.github.com/2008/12/25/twister.html"/>
+   <updated>2008-12-25T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/25/twister</id>
+   <content type="html">&lt;h1 id='twister'&gt;Twister&lt;/h1&gt;
+&lt;div&gt;
+	&lt;img class='floatright' src='http://upload.wikimedia.org/wikipedia/en/thumb/0/09/1966_Twister_Cover.jpg/275px-1966_Twister_Cover.jpg' alt='twister' /&gt;
+&lt;/div&gt;
+&lt;p&gt;So, on Christmas, my kids decided they wanted to play twister. They wanted me to spin the thingy and call out moves for them. That got &lt;em&gt;really&lt;/em&gt; boring after about five minutes.&lt;/p&gt;
+
+&lt;p&gt;I wrote a really simple python script to start calling the moves for me since the spinny thing was getting annoying, and would sometimes end up pointing between two colors or otherwise be too difficult to call.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href='http://gist.github.com/40015'&gt;first version&lt;/a&gt; of the script looked like this:&lt;/p&gt;
+&lt;div&gt;
+  &lt;pre&gt;
+    &lt;code class='python'&gt;#!/usr/bin/env python
+
+import random
+
+if __name__ == '__main__':
+    colors=('red', 'green', 'yellow', 'blue')
+    limbs=('left foot', 'right foot', 'left hand', 'right hand')
+
+    print random.choice(limbs), random.choice(colors)&lt;/code&gt;
+  &lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;That was fine, but I still had to run it and call it out. Then I remembered that someone made a &lt;a href='http://www.gnufoo.org/macosx/'&gt;talking cat&lt;/a&gt; for OS X. All I needed to do was run the output of this thing through that, and there&amp;#8217;d be speech and then I could go about my business and let the computer call moves for them.&lt;/p&gt;
+
+&lt;p&gt;I thought that was kind of cool, but wanted something a little&amp;#8230;more. I ended up writing a full &lt;a href='http://github.com/dustin/twister'&gt;OS X desktop version&lt;/a&gt; complete with images, icons, a preference pane, etc&amp;#8230;&lt;/p&gt;
+
+&lt;p&gt;The kids finished playing (using the prototype) long before I finished writing the app. It was fun for all of us, though. :)&lt;/p&gt;
+
+&lt;p&gt;If anyone wants to play a two-player version of twister, though, you can grab a copy.&lt;/p&gt;
+
+&lt;h2 id='download'&gt;Download&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href='http://public.west.spy.net/app/Twister_1.1.zip'&gt;Version 1.1&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Moody Bots</title>
+   <link href="http://dustin.github.com/2008/12/24/moody-bots.html"/>
+   <updated>2008-12-24T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/24/moody-bots</id>
+   <content type="html">&lt;h1 id='moody_bots'&gt;Moody Bots&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href='/twitterspy/'&gt;Twitterspy&lt;/a&gt; is a rather brute-force way to achieve xmpp functionality for twitter. It makes very heavy use of twitter search to provide track-like functionality to end users.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;ve noticed in watching the logs that I often will get more errors in attempting searches than successes. This was at least the feel I got from looking at the logs. I wanted a way to communicate this to look at this information via xmpp.&lt;/p&gt;
+
+&lt;p&gt;Initially, it seemed like status would be a good way to do this. Currently, the status is used to show stats on how many users and queries the bot knows about. This is already a little weird, and I wouldn&amp;#8217;t want to try to shove too much stuff into it.&lt;/p&gt;
+
+&lt;p&gt;Next, I thought about using the vcard for it. The bio is a fine way to describe such things. That wasn&amp;#8217;t quite right, either. The bio is a better general description of the bot, and not so much status.&lt;/p&gt;
+
+&lt;p&gt;Then I discovered &lt;a href='http://xmpp.org/extensions/xep-0107.html'&gt;XEP-0107&lt;/a&gt; &amp;#8211; user moods. User moods in a &lt;a href='http://xmpp.org/extensions/xep-0163.html'&gt;PEP&lt;/a&gt; transport provides exactly the kind of thing I&amp;#8217;m looking for.&lt;/p&gt;
+&lt;div&gt;&lt;img class='floatright' src='http://img.skitch.com/20081225-g8nbh7s3np2amubspgkas2ab1f.png' alt='twitterspy angry' /&gt;&lt;/div&gt;
+&lt;p&gt;Twitterspy keeps track of how many of its searches are successful, and how many fail. When many searches are successful, it&amp;#8217;s in a good mood, when few are, it&amp;#8217;s in a bad mood.&lt;/p&gt;
+&lt;div&gt;&lt;img class='floatleft' src='http://ralphm.net/images/mood/knology/excited.gif' alt='excited!' /&gt;&lt;/div&gt;
+&lt;p&gt;I had my kid look through the XEP to come up with some rules for how to select a mood based on how successful recent searches are. I&amp;#8217;ve applied many of her changes, but some still require me to keep a bit more state than I do currently. It&amp;#8217;s kind of an exciting thing, though few people will ever actually see it.&lt;/p&gt;
+
+&lt;p&gt;The pubsub mechanism will hopefully show itself to be useful, though. I&amp;#8217;m hoping to do something cool like have a web status showing moods and all. &lt;a href='http://ralphm.net/'&gt;Ralph Meijer&amp;#8217;s&lt;/a&gt; &lt;a href='http://ralphm.net/moods'&gt;moods page&lt;/a&gt; is quite inspirational here &amp;#8211; as long as I&amp;#8217;m capturing the data.&lt;/p&gt;
+
+&lt;p&gt;For the rest of you out there: Bring your XMPP services to life. Show their moods.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Building Your Site Connectivity</title>
+   <link href="http://dustin.github.com/2008/12/24/building-site-connectivity.html"/>
+   <updated>2008-12-24T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/24/building-site-connectivity</id>
+   <content type="html">&lt;h1 id='building_your_site_connectivity'&gt;Building Your Site Connectivity&lt;/h1&gt;
+
+&lt;p&gt;When I started building this jekyll site, I thought it&amp;#8217;d be nice to link to all the other places I leave junk around the internet. Rather than manually building a list, I took a bit of time to write something to do it for me using the &lt;a href='http://code.google.com/apis/socialgraph/'&gt;google social graph API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I made a simple &lt;a href='http://public.west.spy.net/autolinks.html'&gt;web form&lt;/a&gt; to do this that generates HTML source so it can be further hand-edited if needed, but more importantly, so that I can actually paste the results into my github page and have it actually count for site connectivity.&lt;/p&gt;
+
+&lt;p&gt;If you don&amp;#8217;t maintain a list of links on your own page, you may find it helpful to link to your &lt;a href='http://friendfeed.com/'&gt;friendfeed&lt;/a&gt; account.&lt;/p&gt;
+
+&lt;p&gt;For example, you can see &lt;a href='http://public.west.spy.net/autolinks.html?u=http://friendfeed.com/dlsspy'&gt;how friendfeed links me&lt;/a&gt;. Change the username from dlsspy to yours for results that make more sense to you.&lt;/p&gt;
+
+&lt;p&gt;As it&amp;#8217;s just a simple chunk of HTML, I&amp;#8217;ve created &lt;a href='http://gist.github.com/39613'&gt;a gist&lt;/a&gt; to house it for now. If you&amp;#8217;d like to change this for the better, do it there and let me know about it.&lt;/p&gt;
+
+&lt;p&gt;I hope someone (else) finds this useful.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Trying out Jekyll</title>
+   <link href="http://dustin.github.com/2008/12/23/trying-jekyll.html"/>
+   <updated>2008-12-23T00:00:00-08:00</updated>
+   <id>http://dustin.github.com/2008/12/23/trying-jekyll</id>
+   <content type="html">&lt;h1 id='trying_out_jekyll'&gt;Trying out Jekyll&lt;/h1&gt;
+
+&lt;p&gt;Since &lt;a href='http://github.com/mojombo/jekyll'&gt;Jekyll&lt;/a&gt; seems to be all the craze, I figured I&amp;#8217;d give it a shot and see if it solved any problems for me.&lt;/p&gt;
+
+&lt;p&gt;So far, I like it.&lt;/p&gt;</content>
+ </entry>
+ 
+
+</feed>
