@@ -32,8 +32,9 @@ sends you something back.  The nice thing about xmpp, though, is that
 the mechanism for determining what things exist and what parameters
 they take are very programmatically accessible.
 
-You can discover available commands through `translate.skyscraper.im`,
-but, I'll just tell you what it'll tell you:
+You can discover available commands through `translate.skyscraper.im`
+as shown in [this video][vimeo-adhoc], but I'll just tell you what
+it'll tell you:
 
 ### The Input
 
@@ -91,4 +92,4 @@ keep up with who's in what room and what translations are outstanding.
 
 [ga2arch]: http://github.com/ga2arch
 [adhoc]: http://xmpp.org/extensions/xep-0050.html
-
+[vimeo-adhoc]: http://www.vimeo.com/5558475
