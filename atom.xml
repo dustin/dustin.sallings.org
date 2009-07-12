@@ -5,7 +5,7 @@
  <link rel="hub" href="http://http://pubsubhubbub.appspot.com/" />
  <link href="http://dustin.github.com/atom.xml" rel="self"/>
  <link href="http://dustin.github.com/"/>
- <updated>2009-07-11T23:50:33-07:00</updated>
+ <updated>2009-07-12T00:25:35-07:00</updated>
  <id>http://dustin.github.com/</id>
  <author>
    <name>Dustin Sallings</name>
@@ -38,7 +38,7 @@
 
 &lt;p&gt;There is one field called &lt;code&gt;in&lt;/code&gt; which is the input language in the form of a two-character language code. You may have only one of these (it is of type &lt;code&gt;list-single&lt;/code&gt;).&lt;/p&gt;
 
-&lt;p&gt;There is one field called &lt;code&gt;out&lt;/code&gt; which is the output language and is also in the form of a two-character language code. You can have as many of these as you like.&lt;/p&gt;
+&lt;p&gt;There is one field called &lt;code&gt;out&lt;/code&gt; which is the output language and is also in the form of a two-character language code. You can have as many of these as you like (it is of type &lt;code&gt;list-multi&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;Finally there&amp;#8217;s a field called &lt;code&gt;text&lt;/code&gt; which is the stuff you want to translate. You may only have one of these.&lt;/p&gt;
 

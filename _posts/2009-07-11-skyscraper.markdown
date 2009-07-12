@@ -44,7 +44,7 @@ is of type `list-single`).
 
 There is one field called `out` which is the output language and is
 also in the form of a two-character language code.  You can have as
-many of these as you like.
+many of these as you like (it is of type `list-multi`).
 
 Finally there's a field called `text` which is the stuff you want to
 translate.  You may only have one of these.
