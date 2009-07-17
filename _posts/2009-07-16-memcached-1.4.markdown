@@ -1,0 +1,136 @@
+---
+layout: post
+title: Memcached 1.4.0
+---
+
+# Memcached 1.4.0
+
+<div>
+  <img class="floatright" src="/images/cream-med.png"
+    alt="c.r.e.a.m" />
+</div>
+
+I'm a bit late to the blogging party here, but we finally released
+memcached 1.4.0.  Check out [the release notes][relnotes] for more
+details.
+
+The release notes cover quite a lot of the interesting stuff, but they
+don't properly reflect the time and effort that went into making this
+all happen.
+
+There are a lot of bug fixes, as one might expect after some time.  A
+lot of testing has shown that performance is better pretty much all
+around, but very few people have ever seen memcached be a performance
+bottleneck in their applications, so that's not too exciting.
+
+The biggest part of this release, however, is something I've been
+working on for about two years: [the binary protocol][binprot].
+
+## The Binary Protocol
+
+So what's the big deal about the binary protocol?
+
+The most obvious thing for protocol implementors is that it's now
+*really* easy to parse the protocol.  After reading a fixed-size
+header, a low-level packet processor can figure out where to dispatch
+the input and split it into all of its major components (key, value,
+opaque, cas, extras, etc...).
+
+That's great for the (small) number of developers who write servers
+and clients, but what about random people out there who just want to
+use memcached?  Semantic enhancements in the new protocol allow us to
+build some really cool stuff.
+
+The first example of such a thing is Trond's
+[replication][replication] functionality for [libmemcached][libmc].
+We now have a clean fire-and-mostly-forget protocol semantics that
+allows for improvements like efficient client-side replication.  It
+also makes it safe to make bulk-loaders (even with CAS).
+
+## Go Try It
+
+We've run tons of tests, others have run tests, there've been various
+deployments large and small, but if you're running something older,
+it's your turn.
+
+We work hard to make sure that the development versions work on all
+platforms we can find anyone to care about.  Each change is built and
+tested on all supported platforms before the change is accepted into
+our master branch.
+
+Do note that 1.4.0 has some build issues on OpenBSD, but someone
+graciously donated a builder to our buildbot farm so they're all
+cleared up for 1.4.1 (which is planned for later this month).
+
+In the meantime, there are several ways to pick it up:
+
+### Packages
+
+Package systems are slow to pick up... anything it seems.  If your
+system's package manager is shipping memcached 1.4.0, please let me
+know.
+
+In the meantime...
+
+### Use the Source
+
+You can download [the source distribution][src] from the google code
+[download site][downloads].
+
+Building and installing is quite simple:
+
+    ./configure
+    sudo make install
+
+Then just run `/usr/local/bin/memcached` whichever way suits your
+fancy.  Personally, I like upstart on Linux, launchd on OS X, smf on
+Solaris, etc...
+
+### Deploying on Amazon EC2/AWS?
+
+I've put together some Amazon AMIs that are production ready and
+ridiculously simple to get going.
+
+Each AMI allocates all but 512MB of RAM on the system to memcached and
+just starts up happy and running.  These images are based on Ubuntu
+9.04 and have an upstart config for the actual daemon execution so if
+we somehow have some kind of crashing bug, they'll automatically and
+instantly restart.
+
+Depending on your needs, you can select one of the following:
+
+#### US
+
+I've assembled a 32-bit AMI (`ami-39c52450`) for small instances, and
+a 64-bit AMI (`ami-1fc52476`) for large instances.  They show up as
+the following:
+
+* ami-39c52450 - northscale/community-memcached-1.4.0-i386.manifest.xml
+* ami-1fc52476 - northscale/community-memcached-1.4.0-x86_64.manifest.xml
+
+For example, using the ec2 command-line tools can start an extra large
+64-bit instance with the following invocation:
+
+    ec2-run-instances ami-1fc52476 --instance-type m1.xlarge
+
+After this instance comes up, you'll find memcached 1.4.0 listening on
+port 11211 with about 15GB of RAM at your disposal.
+
+No maintenance should be necessary, but `ec2-run-instance`'s `-k`
+parameter for supplying a root ssh key is still honored in case you
+want to still look around.
+
+#### EU
+
+There are European versions of the same images as `ami-818ba3f5`
+for 32-bit and `ami-838ba3f7` for 64-bit.
+
+* ami-818ba3f5 - northscale-eu/community-memcached-1.4.0-i386.manifest.xml
+* ami-838ba3f7 - northscale-eu/community-memcached-1.4.0-x86_64.manifest.xml
+
+[relnotes]: http://code.google.com/p/memcached/wiki/ReleaseNotes140
+[binprot]: http://cloud.github.com/downloads/memcached/memcached/protocol-binary.txt
+[replication]: http://blogs.sun.com/trond/date/20090625
+[libmc]: http://launchpad.net/libmemcached
+[src]: http://memcached.googlecode.com/files/memcached-1.4.0.tar.gz
+[downloads]: http://code.google.com/p/memcached/downloads/list
