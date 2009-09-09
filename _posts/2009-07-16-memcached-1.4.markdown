@@ -126,7 +126,7 @@ There are European versions of the same images as `ami-818ba3f5`
 for 32-bit and `ami-838ba3f7` for 64-bit.
 
 * ami-818ba3f5 - northscale-eu/community-memcached-1.4.0-i386.manifest.xml
-* ami-838ba3f7 - northscale-eu/community-memcached-1.4.0-x86_64.manifest.xml
+* ami-838ba3f7 - northscale-eu/community-memcached-1.4.0-x86\_64.manifest.xml
 
 [relnotes]: http://code.google.com/p/memcached/wiki/ReleaseNotes140
 [binprot]: http://cloud.github.com/downloads/memcached/memcached/protocol-binary.txt
