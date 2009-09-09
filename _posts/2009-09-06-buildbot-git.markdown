@@ -49,4 +49,4 @@ absolutely flawlessly.
 [growl]: http://growl.info/
 [buildwatch]: http://code.google.com/p/buildwatch/
 [down]: http://ozmm.org/posts/when_github_goes_down.html
-[change]: http://github.com/dustin/buildbot/commit/ddedd578836f7c254c5407e082731e19aba1bbc4
+[change]: http://github.com/dustin/buildbot/commit/fabad2476cebc077d58c9293ce389d465648b019
