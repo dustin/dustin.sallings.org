@@ -106,7 +106,7 @@ a 64-bit AMI (`ami-1fc52476`) for large instances.  They show up as
 the following:
 
 * ami-39c52450 - northscale/community-memcached-1.4.0-i386.manifest.xml
-* ami-1fc52476 - northscale/community-memcached-1.4.0-x86_64.manifest.xml
+* ami-1fc52476 - northscale/community-memcached-1.4.0-x86\_64.manifest.xml
 
 For example, using the ec2 command-line tools can start an extra large
 64-bit instance with the following invocation:
