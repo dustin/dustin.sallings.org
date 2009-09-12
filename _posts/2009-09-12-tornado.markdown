@@ -45,7 +45,7 @@ others, that's a lot of catching up to do.  Some user already began
 adding [kqueue support][kqueuesupport], but it's more of an example of
 the kinds of things that you don't get for free.
 
-At the high end, there are just an incredible selection of protocol
+At the high end, there is an incredible selection of protocol
 implementations from twisted you just can't use.  If you're building a
 web site on an asynchronous framework, you don't ever want to block to
 get further data.  So whatever your networking framework, you need it
@@ -53,8 +53,9 @@ to have a sane way of asychronously communicating to all of your
 dependencies.
 
 They wrote an http client, though there are things I do with the
-twisted http client such as [parse infinite xml streams][httpex] from
-http responses.
+twisted http client that I don't see a way to do with the tornado
+client such as [parse infinite xml streams][httpex] from http
+responses.
 
 ## The Solution
 
