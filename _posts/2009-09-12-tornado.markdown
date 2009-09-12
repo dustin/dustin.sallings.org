@@ -1,0 +1,91 @@
+---
+layout: post
+title: Tornado on Twisted
+---
+
+<div>
+  <a href="http://www.nataliedee.com/index.php?date=050906"><img
+  class="floatright" alt="Twisted Tornados" src="/images/snake-tornado.png"/></a>
+</div>
+
+So what's this about [tornado][tornado]?
+
+The [friendfeed][friendfeed] guys created an awesome web site with
+what was obviously from the outside quite awesome technology.  A
+couple days ago, they the [the technology][tornadoblog] behind the site.
+
+## The Problems
+
+Tornado really is two different things:
+
+1. A great framework for building web sites.
+2. A low-level networking toolkit.
+
+Most of us who use [twisted][twisted] were quite surprised to find out
+that rather than using twisted's awesome networking core, they
+reimplemented a bunch of it.  Moreover, they kind of had really vague
+negative things to say about twisted.  It's not clear what problem
+they had with it, but as stated the logic kind of fails:
+
+1. Twisted doesn't have a good web framework.
+2. No major web sites run on twisted.
+3. So... we're going to build something completely from scratch.
+
+Now, I certainly build stuff from scratch unnecessarily all the time,
+and I also don't want to seem unthankful for the free gift brought to
+us from our friendfeed friends, but in its current state, it's a
+technological island.
+
+On one hand, you have low-level missing pieces.  From the bottom,
+you've got multiplexing implementations.  twisted has been around a
+while, so it supports native multiplexors including those for select,
+poll, epoll, kqueue, CoreFoundation, wxPython, win32, gtk, glib, qt,
+and probably more.  While some of them are less interesting than
+others, that's a lot of catching up to do.  Some user already began
+adding [kqueue support][kqueuesupport], but it's more of an example of
+the kinds of things that you don't get for free.
+
+At the high end, there are just an incredible selection of protocol
+implementations from twisted you just can't use.  If you're building a
+web site on an asynchronous framework, you don't ever want to block to
+get further data.  So whatever your networking framework, you need it
+to have a sane way of asychronously communicating to all of your
+dependencies.
+
+They wrote an http client, though there are things I do with the
+twisted http client such as [parse infinite xml streams][httpex] from
+http responses.
+
+## The Solution
+
+So instead of just generally being frustrated, I thought I'd see what
+it'd take to rip out the stuff that was reimplemented and use just
+core twisted.
+
+The original tornado code doesn't have much in the way of tests, so
+it's currently in the "appears to work" state, but this is what got me
+there:
+
+![Diffstat](/images/tornado-diffstat.png)
+
+That is, with an offset of -1,297 lines of code, it can be observed to
+work for the cases I tried, although I'm sure there are still lines
+that need to be deleted before everything works.
+
+The good news is that this means that you get all the richness of
+twisted and the good parts of tornado combined.
+
+Everybody wins.
+
+So go grab [the code][thecode] and see if it works in your app, or
+send me some patches for parts you were able to explore a bit more
+deeply.
+
+[tornado]: http://www.tornadoweb.org/
+[kqueuesupport]: http://github.com/rphillips/tornado/commit/41aa49a8dcfe4f5fa91dfe1da9e05797d3397d25
+[httpex]: http://github.com/dustin/twitty-twister/blob/master/lib/twitter.py#L331
+[friendfeed]: http://friendfeed.com/
+[twisted]: http://twistedmatrix.com/
+[tornadoblog]: http://bret.appspot.com/entry/tornado-web-server?dsq=16318104
+[thecode]: http://github.com/dustin/tornado
+
