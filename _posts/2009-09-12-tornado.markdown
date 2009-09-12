@@ -86,6 +86,6 @@ deeply.
 [httpex]: http://github.com/dustin/twitty-twister/blob/master/lib/twitter.py#L331
 [friendfeed]: http://friendfeed.com/
 [twisted]: http://twistedmatrix.com/
-[tornadoblog]: http://bret.appspot.com/entry/tornado-web-server?dsq=16318104
+[tornadoblog]: http://bret.appspot.com/entry/tornado-web-server
 [thecode]: http://github.com/dustin/tornado
 
