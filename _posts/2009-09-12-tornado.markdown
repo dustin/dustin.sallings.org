@@ -11,8 +11,9 @@ title: Tornado on Twisted
 So what's this about [tornado][tornado]?
 
 The [friendfeed][friendfeed] guys created an awesome web site with
-what was obviously from the outside quite awesome technology.  A
-couple days ago, they the [the technology][tornadoblog] behind the site.
+what was obviously (from the outside) quite awesome technology.  A
+couple days ago, they released the [the technology][tornadoblog]
+behind the site.
 
 ## The Problems
 
