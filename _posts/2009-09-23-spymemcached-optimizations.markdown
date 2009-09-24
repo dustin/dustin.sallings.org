@@ -3,8 +3,8 @@ layout: post
 title: spymemcached Optimizations
 ---
 
-I got around to pushing out a new RC of spymemcached today.  It's been
-a while, but I'm glad I got around to it.
+I got around to pushing out a new RC of [spymemcached][spymemcached]
+today.  It's been a while, but I'm glad I got around to it.
 
 The [announcement][announcement] has the release notes (also in the
 tag), but there is a particular optimization I've been thinking about
@@ -65,11 +65,12 @@ struggling with what such an API might look like, I finally decided
 that the right thing to do is not change the API at all.
 
 Instead, I do something similar to [multiget escalation][escalation]
--- an optimization that's been part of spymemcached for a long time
-now.  If many threads are pushing sets in (or even a single-thread
-since the typical use-case of set is async), the packetization of
-these commands escalates a sequence of similar commands into a single
-sparse operation working on all of the items together.
+-- an optimization that's been part of [spymemcached]spymemcached] for
+a long time now.  If many threads are pushing sets in (or even a
+single-thread since the typical use-case of set is async), the
+packetization of these commands escalates a sequence of similar
+commands into a single sparse operation working on all of the items
+together.
 
 While YMMV, my cache loader test ran consistently twice as fast.
 
@@ -83,7 +84,8 @@ infers their success.
 
 ## What You Need to Do
 
-If you're using spymemcached, upgrade and you get the optimizations.
+If you're using [spymemcached][spymemcached], upgrade and you get the
+optimizations.
 
 If you're a client author, see how much better things are for your
 users as you make broader use of quiet operations of the binary
@@ -92,3 +94,4 @@ protocol.
 [announcement]: http://groups.google.com/group/spymemcached/browse_thread/thread/9d93e5658e813c29
 [protocol]: http://code.google.com/p/memcached/wiki/MemcacheBinaryProtocol
 [escalation]: http://code.google.com/p/spymemcached/wiki/Optimizations
+[spymemcached]: http://code.google.com/p/spymemcached/
