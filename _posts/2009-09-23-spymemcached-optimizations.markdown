@@ -65,7 +65,7 @@ struggling with what such an API might look like, I finally decided
 that the right thing to do is not change the API at all.
 
 Instead, I do something similar to [multiget escalation][escalation]
--- an optimization that's been part of [spymemcached]spymemcached] for
+-- an optimization that's been part of [spymemcached][spymemcached] for
 a long time now.  If many threads are pushing sets in (or even a
 single-thread since the typical use-case of set is async), the
 packetization of these commands escalates a sequence of similar
