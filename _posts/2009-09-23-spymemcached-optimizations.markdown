@@ -18,7 +18,7 @@ But first, I'll frame it with a bit of memcached protocol fundamentals.
   <img class="floatleft" alt="Ask, don't tell." src="/images/memcached-sparse-get.png"/>
 </div>
 
-Back when were initially designing the binary protocol, we were
+Back when we were initially designing the binary protocol, we were
 considering how we'd handle the multi-gets.  We went through several
 proposals until we realized that the actual essense of multi-get model
 was really just a class of operation that allowed us to infer some of
