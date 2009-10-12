@@ -55,7 +55,7 @@ the values are filled in (which means they *must* match for this
 function body to be invoked), and some are bindings which will receive
 the value.
 
-In the code below (extracted from [mc_connection.erl][mc-connection]),
+In the code below (extracted from [mc\_connection.erl][mc-connection]),
 you'll see that the first 8 bits must exactly be the defined
 `REQ_MAGIC` constant, and then the next 8 bits are stored in `OpCode`,
 and so on.
