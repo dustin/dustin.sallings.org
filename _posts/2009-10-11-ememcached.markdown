@@ -78,11 +78,11 @@ process_message(Socket, StorageServer,
                       CAS:64>>}) ->
 
     % After the header is extras, key, and then body
-    Extra = read_data(Socket, ExtraLen, extra),
-    Key = read_data(Socket, KeyLen, key),
+    Extra = read_data(Socket, ExtraLen),
+    Key = read_data(Socket, KeyLen),
     % Note that the length of the body from the header includes
     % the lengths of the key and extras.
-    Body = read_data(Socket, BodyLen - (KeyLen + ExtraLen), body),
+    Body = read_data(Socket, BodyLen - (KeyLen + ExtraLen)),
 
     % Dispatch the read data to a gen_server process.
     Res = gen_server:call(StorageServer,
