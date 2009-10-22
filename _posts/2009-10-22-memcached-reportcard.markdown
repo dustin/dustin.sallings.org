@@ -43,7 +43,8 @@ We've been taking bugs very seriously.
 Crash bugs are resolved *very* quickly, but bugs in general are
 resolved within our release cycle.
 
-Please let us know if you're having issues or can't figure something
+Please let us know via [our mailing list][list] or our [bug
+tracker][bugs] if you're having issues or can't figure something
 out. We fix things very quickly, but **we can't fix what we don't hear
 about**. Remember that goes for the [wiki docs][wiki], too.
 
