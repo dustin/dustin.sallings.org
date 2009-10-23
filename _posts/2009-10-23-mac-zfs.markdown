@@ -1,0 +1,51 @@
+---
+layout: post
+title: ZFS for MacOS X
+---
+
+# ZFS for MacOS X
+
+<div>
+  <img src="/images/zfs.png" alt="ZFS ROX" class="floatright"/>
+</div>
+So I'm a pretty heavy [ZFS][zfs] user.  I've got a FreeBSD box with a ZFS
+root that all my important stuff is on, and a mac mini with ZFS that
+all my movies are on.
+
+Around Snow Leopard, Apple seemed to have not only dropped support for
+it, but the download from [macosforge][mforge] seemed to not work,
+either.
+
+I've been hoping someone would come around and fix this, but nothing's
+happened.
+
+Then today, I read this:
+
+    The ZFS project has been discontinued. The mailing list and
+    repository will also be removed shortly.
+
+That made me very sad, so I decided to do something about it.
+
+## Github Project
+
+I set up a [mac-zfs][mczfs] project on github and started hacking.  It
+didn't take long and I was able to get to my zpool that has all of my
+music.  (for the record, Bad Religion was my ZFS test case)
+
+## Downloads
+
+<div>
+  <a href="http://cloud.github.com/downloads/dustin/mac-zfs/ZFS.pkg.zip">
+    <img src="/images/pkg.png" alt="Install Me" class="floatright"/>
+  </a>
+</div>
+I wanted to make it a bit easier to get going, so I created an
+[installer].
+
+You still need to kind of know what you're doing to make use of it.
+But I'm hoping we can work together to make it easy for everybody.
+
+[zfs]: http://en.wikipedia.org/wiki/ZFS
+[mforge]: http://macosforge.org/
+[mczfs]: http://github.com/dustin/mac-zfs
+[installer]: http://cloud.github.com/downloads/dustin/mac-zfs/ZFS.pkg.zip
