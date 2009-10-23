@@ -35,7 +35,7 @@ music.  (for the record, Bad Religion was my ZFS test case)
 ## Downloads
 
 <div>
-  <a href="http://cloud.github.com/downloads/dustin/mac-zfs/ZFS.pkg.zip">
+  <a href="http://cloud.github.com/downloads/dustin/mac-zfs/ZFS-119-rc3.pkg.zip">
     <img src="/images/pkg.png" alt="Install Me" class="floatright"/>
   </a>
 </div>
