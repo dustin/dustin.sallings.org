@@ -45,7 +45,16 @@ I wanted to make it a bit easier to get going, so I created an
 You still need to kind of know what you're doing to make use of it.
 But I'm hoping we can work together to make it easy for everybody.
 
+## Update:
+
+We've got a [google code][gcode] page up for bug tracking and
+what-not and a [mailing list][list] for general discussion.
+
+Come join us.
+
 [zfs]: http://en.wikipedia.org/wiki/ZFS
 [mforge]: http://macosforge.org/
 [mczfs]: http://github.com/dustin/mac-zfs
 [installer]: http://cloud.github.com/downloads/dustin/mac-zfs/ZFS-119-SnowLeopard.pkg
+[gcode]: http://code.google.com/p/maczfs/
+[list]: http://groups.google.com/group/zfs-macos
