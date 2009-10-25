@@ -35,7 +35,7 @@ music.  (for the record, Bad Religion was my ZFS test case)
 ## Downloads
 
 <div>
-  <a href="http://cloud.github.com/downloads/dustin/mac-zfs/ZFS-119-rc3.pkg.zip">
+  <a href="http://cloud.github.com/downloads/dustin/mac-zfs/ZFS-119-SnowLeopard.pkg">
     <img src="/images/pkg.png" alt="Install Me" class="floatright"/>
   </a>
 </div>
@@ -48,4 +48,4 @@ But I'm hoping we can work together to make it easy for everybody.
 [zfs]: http://en.wikipedia.org/wiki/ZFS
 [mforge]: http://macosforge.org/
 [mczfs]: http://github.com/dustin/mac-zfs
-[installer]: http://cloud.github.com/downloads/dustin/mac-zfs/ZFS-119-rc3.pkg.zip
+[installer]: http://cloud.github.com/downloads/dustin/mac-zfs/ZFS-119-SnowLeopard.pkg
