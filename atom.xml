@@ -5,7 +5,7 @@ layout: nil
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Dustin Sallings</title>
- <link rel="hub" href="http://http://pubsubhubbub.appspot.com/" />
+ <link rel="hub" href="http://pubsubhubbub.appspot.com/" />
  <link href="http://dustin.github.com/atom.xml" rel="self"/>
  <link href="http://dustin.github.com/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
