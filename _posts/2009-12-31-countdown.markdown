@@ -48,7 +48,29 @@ to strike midnight.
 
 Then it blinks erratically.
 
-It's crap, but as it says in the comment in the python script, worse is better.
+It's crap, but as it says in the comment in the python script, worse
+is better.
+
+## Update (2010)
+
+<div>
+  <img alt="arted" class="floatright" src="/images/countdown-arted-small.jpg"/>
+</div>
+I made a few changes to it before we got to use it (actually, I was
+playing with it until about 15 minutes before midnight :/ ).  Figured
+I'd update this post with the details.
+
+Summary of changes since the video:
+
+1. It got a new face (thanks, kids).
+2. I manually specified the angles instead of computing them to feel
+more organic (and matched what the kids did).
+3. Control side pushed sync commands through every fifteen seconds
+during the last ten minutes.
+4. I added some countdown vocals on the computer side to start us
+going at `t - 10s`.
+
+It was a great success.  It's now dismantled.
 
 [rbb]: http://www.moderndevice.com/products/bbb-kit
 [arduino]: http://www.arduino.cc/
