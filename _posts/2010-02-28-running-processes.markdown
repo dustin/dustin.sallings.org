@@ -275,8 +275,8 @@ One service I have running, for example, is sample\_devices from my
 This needs to run as a user who can access `/dev/tty01` (I don't run
 stuff as root unless absolutely required) and has a bit of init.
 
-For this to work, I just have to create `/services/sample_devices`
-which looks like this:
+For this to work, I just have to create a `run` file in
+`/services/sample_devices` which looks like this:
 
 {% highlight sh %}
 #!/bin/sh
