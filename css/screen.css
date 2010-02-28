@@ -215,3 +215,7 @@ ul.posts {
 	clear: right;
 	margin-right: 1em;
 }
+
+ul li ul {
+    margin-left: 1em;
+}
