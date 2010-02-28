@@ -22,7 +22,7 @@ top of so many really awful "ps via cron" kind of things people hack
 together or process counts via [nagios][nagios] or whatever.
 
 This post describes alternatives I've found to help relieve my
-suffering, but has ended up exceedlingly long.  I'll provide quick
+suffering, but has ended up exceedingly long.  I'll provide quick
 links to specific sections:
 
 # TOC
@@ -227,7 +227,7 @@ changes to take effect.
 
 On any vanilla Linux system (that is, systems that don't use a modern
 init as well as other systems with similar init mechanisms), you can
-do something similar to the above with `/etc/inittab`, although it ahs
+do something similar to the above with `/etc/inittab`, although it has
 no implicit argument, so you can directly invoke sshd.
 
 For example, the following works on my RedHat 5.4 box:
