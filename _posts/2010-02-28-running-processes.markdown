@@ -27,16 +27,24 @@ links to specific sections:
 
 # TOC
 
-* [How Wrong Can You Get?](#howwrong)
-* [What's Wrong with monit/god/nagios/etc...](#whatswrong)
-* [So What's the Right Way?](#rightway)
-    *    [OSX](#osx)
-    *    [Solaris](#solaris)
-    *    [Ubuntu](#ubuntu)
-    *    [FreeBSD](#freebsd)
-    *    [Generic Linux](#genericlinux)
-    *    [Third Party Tools](#thirdparty)
-    *    *    [daemontools](#daemontools)
+<ul>
+  <li><a href="#howwrong">How Wrong Can You Get?</a></li>
+  <li><a href="#whatswrong">What's Wrong with monit/god/nagios/etc...</a></li>
+  <li><a href="#rightway">So What's the Right Way?</a>
+    <ul>
+      <li><a href="#osx">OSX</a></li>
+      <li><a href="#solaris">Solaris</a></li>
+      <li><a href="#ubuntu">Ubuntu</a></li>
+      <li><a href="#freebsd">FreeBSD</a></li>
+      <li><a href="#genericlinux">Generic Linux</a></li>
+      <li><a href="#thirdparty">Third Party Tools</a>
+        <ul>
+          <li><a href="#daemontools">daemontools</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
 <a name="howwrong">&nbsp;</a>
 ## How Wrong Can You Get?
