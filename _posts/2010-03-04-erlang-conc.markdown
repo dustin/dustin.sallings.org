@@ -52,7 +52,7 @@ This is significant when it comes to implementing code to process cons
 lists, because this is how you can model traversal operations such as
 `map`, `foldl`, `length`, etc... in your head.  Each splits the list
 into the first element and the rest of the elements, performs an
-operation on the first elemnt and then recurses over the rest.
+operation on the first element and then recurses over the rest.
 
 Length, for example, may be implemented as follows:
 
@@ -131,8 +131,8 @@ to B (though we do something a bit more optimal in implementation to
 avoid unnecessary concatenation cells).
 
 `mapreduce` isn't quite the same thing as a `lists:mapfoldl`, so don't
-quite be confused.  You can imagine a simple implementation of a cons
-`mapreduce` looking like this:
+let that confuse you.  You can imagine a simple implementation of a
+cons `mapreduce` looking like this:
 
 {% highlight erlang %}
 mapreduce(MapFun, ReduceFun, Initial, List) ->
