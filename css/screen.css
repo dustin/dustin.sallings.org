@@ -29,6 +29,12 @@ img.floatleft {
   margin-right: 10px;
 }
 
+img.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 body {
   background-color: white;
   font: 13.34px helvetica, arial, clean, sans-serif;
