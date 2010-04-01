@@ -175,9 +175,9 @@ I would of course like my software to be easy to consume for people
 who do choose maven.  I've put effort into making this so, and that
 effort has been slowly thwarted over time.
 
-I'm putting effort into making this work as easily as possible for
-everyone, but if you find my software being built through maven, it's
-because of some hard work of others.
+I intend to continue my efforts to make this work as easily as
+possible for everyone, but if you find my software being built through
+maven, it's because of some hard work of others.
 
 [maven]: http://maven.apache.org/
 [buildfile]: http://github.com/dustin/java-memcached-client/blob/master/buildfile
