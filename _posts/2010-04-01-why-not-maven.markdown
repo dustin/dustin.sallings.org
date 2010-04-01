@@ -48,9 +48,9 @@ to do the conversion, but in an ongoing way.
 </div>
 
 I've asked many of the people who have wanted me to run my builds with
-maven if they'd do the conversion for me.  I had one request that I
-didn't think was unreasonable:  It shouldn't increase my work and it
-shouldn't reduce the features in my software.
+maven if they'd do the conversion for me.  I had two small requests
+that I didn't think were unreasonable: It shouldn't increase my work
+and it shouldn't reduce the features in my software.
 
 Nobody has delivered this to me, and I can't see a way to do it myself.
 
