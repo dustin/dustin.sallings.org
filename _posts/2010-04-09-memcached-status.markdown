@@ -87,3 +87,4 @@ work we've been doing.
 [busket]: http://github.com/northscale/bucket_engine
 [bof]: http://en.oreilly.com/mysql2010/public/schedule/detail/14627
 [matt]: http://blog.northscale.com/northscale-blog/author/matt-ingenthron
+[wiki]: http://code.google.com/p/memcached/wiki/NewStart
