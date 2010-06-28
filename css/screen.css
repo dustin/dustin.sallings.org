@@ -225,3 +225,22 @@ ul.posts {
 ul li ul {
     margin-left: 1em;
 }
+
+dl {
+    padding: 0;
+  }
+
+  dl dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+  }
+  dl dt:after {
+    content: ":";
+  }
+  dl dd {
+    margin: 0 0 0 110px;
+    padding: 0 0 0.5em 0;
+  }
