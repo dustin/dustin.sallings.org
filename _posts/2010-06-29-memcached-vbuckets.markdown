@@ -150,7 +150,7 @@ given server:
 
   <dt>Replica</dt>
   <dd>
-    No client requests are handled for this vbucket, but it an
+    No client requests are handled for this vbucket, but it can
     receive replication commands.
   </dd>
 
