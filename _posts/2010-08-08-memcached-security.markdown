@@ -35,6 +35,12 @@ If you're running a web server, allow connections to port `443`.  If
 you also want non-ssl connections, allow port `80`.  If that's the
 only service you're providing, then your firewalling is now complete!
 
+I'd like to note that [Amazon EC2][EC2] does this *by default*, yet
+enough firewalls are misconfigured that they felt the need to send out
+a form mail to many of their users to let them know that they "have at
+least one security group that allows the whole internet to have access
+to the port most commonly used by memcached (11211)".
+
 ## Check Your Bindings
 
 If your application only runs on one server (with the app and
@@ -110,3 +116,4 @@ leaked important information.
 [sasl]: http://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer
 [saslhowto]: http://code.google.com/p/memcached/wiki/SASLHowto
 [nmap]: http://nmap.org/
+[ec2]: http://aws.amazon.com/ec2/
