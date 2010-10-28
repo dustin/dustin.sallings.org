@@ -124,10 +124,9 @@ memcached engines all the way to actually executing tests across a
 remote protocol.
 
 I won't describe the entire thing here since it's documented in the
-[source][breakdaner] (currently just a few files in a gist -- need to
-upgrade this to a proper project real soon).  I will however, close
-the loop by showing you some example code that it generated that
-demonstrated the error we failed to find in the first place:
+[source][breakdancer].  I will however, close the loop by showing you
+some example code that it generated that demonstrated the error we
+failed to find in the first place:
 
 {% highlight c %}
 static enum test_result test_add_add_delay_add(ENGINE_HANDLE *h,
