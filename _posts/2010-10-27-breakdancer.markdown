@@ -23,7 +23,7 @@ between what I'm describing here and, for example, [quick
 check][quickcheck] is that I want something very simple to express
 actions that expect their environment to be in a particular state and
 will leave the environment in another state.  Then I want to hit every
-possible arrangement of these actions to ensure they don't interfer
+possible arrangement of these actions to ensure they don't interfere
 with each other in unexpected ways.
 
 <div>
@@ -97,9 +97,9 @@ class StoreEffect(Effect):
 
 ### Action
 
-An `Action` brings an `Effect` and one or more `Condition` classes as
-pre and post conditions.  For example, we'll look at two actions, an
-`Add` action and a `Set` action:
+An `Action` brings together an `Effect` and one or more `Condition`
+classes as pre and post conditions.  For example, we'll look at two
+actions, an `Add` action and a `Set` action:
 
 {% highlight python %}
 class Set(Action):
@@ -112,13 +112,13 @@ class Add(Action):
     postconditions = [Exists()]
 {% endhighlight %}
 
-The interesting part of this is that Set and Add have different
+The interesting part of this is that `Set` and `Add` have different
 semantics, but are expressed as different compositions of the same
-conditions and effects.
+`Condition`s and `Effect`s.
 
 ### Driver
 
-Driver is kind of a larger part (seven defined methods!).  It does
+`Driver` is kind of a larger part (seven defined methods!).  It does
 enough that I can do anything from generate a C test suite for
 memcached engines all the way to actually executing tests across a
 remote protocol.
