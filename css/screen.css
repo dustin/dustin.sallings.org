@@ -215,6 +215,11 @@ ul.posts {
 	width: 340px;
 }
 
+#elsewhere img {
+    width: 16px;
+    height: 16px;
+}
+
 #github-badge {
 	width: 200px;
 	float: right;
