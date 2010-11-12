@@ -1,0 +1,87 @@
+---
+layout: post
+title: La Brea - Because Your Computer is Too Fast
+---
+
+# La Brea - Because Your Computer is Too Fast
+
+<div>
+  <img src="/images/labrea.jpg" alt="La Brea" class="floatright"/>
+</div>
+
+I've often thought that developers have machines that are entirely too
+fast.  In my case, I've got a relatively recent dual core machine with
+an SSD.  It's awesome.
+
+Except I find that some people running my software are running on
+machines that are doing disk IO with considerably less capable disks.
+When you're writing code like [membase][membase] where disk
+performance matters.  When I'm testing with an SSD and a customer is
+running with a 7200rpm disk (it happens), I can't see the kinds of
+situations they run into from my development machine.
+
+## How Do I Slow Down?
+
+There are several options out there.
+
+I played with [cpulimit][cpulimit] for a bit, but it was too coarse
+and really did awful things on my mac since it is basically strobing
+the process with `SIGSTOP` and `SIGCONT` on an interval.
+
+I experimented with a [ptrace][ptrace]-based solution to allow me to
+more granularly slow things down, but it both didn't help and it turns
+out that [ptrace is kind of broken on OS X][ptbroken] anyway, so it's
+neither a portable thing to do, or really all that useful.
+
+So I wrote a [library interposer][labrea].
+
+It was pretty cool to see it do stuff, but I didn't want to tell
+people to recompile the whole thing every time they wanted to change a
+delay or something.  I decided to toss in [lua][lua].
+
+## Example
+
+For example, what if you wanted a seek to take a full second 1% of the
+time (and for the fun of it, log that it did).  You can write the
+following and feed it to `labrea`:
+
+{% highlight lua %}
+function before_lseek(fd, offset, whence)
+   if math.random(1, 100) == 13 then
+      io.write(string.format("Slowing a seek on fd=%d to %d (%d)\n",
+                             fd, offset, whence))
+      usleep(1000000)
+   end
+end
+{% endhighlight %}
+
+Now I can remember what it was like to have a rotating disk in my
+laptop again.
+
+## Direction
+
+Right now, my immediate need is solved, but it's pretty easy to add
+functionality, so I'm thinking about making it be a full-on fault
+injection framework.  I looked at [fiu][fiu] briefly along my path and
+found that it was pretty interesting, but didn't work on MacOS and was
+still a bit too invasive for where I wanted to be (which includes
+doing random stuff to third-party apps).
+
+In addition to the `before_lseek` as above, I would imagine an
+`after_lseek` and perhaps even an `around_lseek` allowing for full
+[AOP][aop] on your deployed C programs.
+
+But for now, it just slows stuff down.
+
+([source here][labrea])
+
+[membase]: http://www.membase.org/
+[labrea]: https://github.com/dustin/labrea
+[breakdancer]: /2010/10/27/breakdancer.html
+[source]: http://github.com/dustin/labrea
+[cpulimit]: http://cpulimit.sourceforge.net/
+[fiu]: http://blitiri.com.ar/p/libfiu/
+[ptrace]: http://linux.die.net/man/2/ptrace
+[ptbroken]: http://uninformed.org/index.cgi?v=4&a=3&p=14
+[lua]: http://lua.org/
+[aop]: http://en.wikipedia.org/wiki/Aspect-oriented_programming
