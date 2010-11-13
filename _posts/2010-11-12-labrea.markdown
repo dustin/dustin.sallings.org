@@ -15,10 +15,10 @@ an SSD.  It's awesome.
 
 Except I find that some people running my software are running on
 machines that are doing disk IO with considerably less capable disks.
-When you're writing code like [membase][membase] where disk
-performance matters.  When I'm testing with an SSD and a customer is
-running with a 7200rpm disk (it happens), I can't see the kinds of
-situations they run into from my development machine.
+In [membase][membase], disk performance differences can be noticeable.
+When I'm testing with an SSD and a customer is running with a 7200rpm
+disk (it happens), I can't see the kinds of situations they run into
+from my development machine.
 
 ## How Do I Slow Down?
 
