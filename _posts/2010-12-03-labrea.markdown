@@ -27,7 +27,7 @@ computers and carry them around, or that I can't get a meaningful test
 with a fault injection framework.  This is clearly a failing on my
 part of communicating my vision.
 
-But we've already estabalished that didn't happen, so allow me to
+But we've already established that didn't happen, so allow me to
 introduce you to [La Brea][labrea].
 
 <object width="640" height="480"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=17460485&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=FF7700&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=17460485&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=FF7700&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="640" height="480"></embed></object>
