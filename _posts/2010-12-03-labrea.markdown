@@ -1,0 +1,38 @@
+---
+layout: post
+title: Presenting - La Brea
+---
+
+# (re)Presenting La Brea
+
+<div>
+  <img src="/images/labrea-bubble.jpg" alt="La Brea" class="floatright"/>
+</div>
+
+I realize it's a little lame to have two posts in a row on the same
+topic.  I've done a lot of work here and the first one wasn't very
+well understood, so let's just pretend like it never happened.
+
+I thought perhaps I can make up for it slightly by using a medium I'm
+not particularly accustomed to -- a video slideshow thingy.
+
+In my previous post, I described La Brea as a great development tool
+for when your computer is too fast.  There I demonstrated a use case
+where I injected some calls and made stuff go slowly.  I hand-waved
+out some "future" direction of the project and thought people would
+get it.
+
+I got a lot of feedback, mostly telling me I should buy more, older
+computers and carry them around, or that I can't get a meaningful test
+with a fault injection framework.  This is clearly a failing on my
+part of communicating my vision.
+
+But we've already estabalished that didn't happen, so allow me to
+introduce you to [La Brea][labrea].
+
+<iframe src="http://player.vimeo.com/video/17460485?title=0&amp;byline=0&amp;portrait=0&amp;color=FF7700" width="640" height="480" frameborder="0"></iframe>
+
+Feedback welcome.
+
+[labrea]: https://github.com/dustin/labrea
+
