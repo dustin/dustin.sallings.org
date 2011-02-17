@@ -49,8 +49,8 @@ use spaces to separate multiple items.  Example: `+a +b +c -b`
 represents `{a, c}`.  The sequence is, of course important.
 
 A set that has members coming and going frequently enough may need to
-be compacted.  For that, we rencode the set and use `cas` to ensure we
-can add it back without stepping on another client.
+be compacted.  For that, we reencode the set and use `cas` to ensure
+we can add it back without stepping on another client.
 
 ## Walk Me Through It
 
