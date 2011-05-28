@@ -136,10 +136,14 @@ concurrency and parallelism made it a lot easier to take the working
 software and make it run faster and efficiently use all the resources
 I could throw at it.
 
+Come find me at [Couchconf SF][conf] (or the subsequent hackathon) and
+help me come up with new tools that can help make your life easier.
+
 In the meantime, check out [the seriesly project page][project] to get
 the software, file bugs (including new ideas), contribute changes and
 all that.
 
+[conf]: /couchconf.html
 [tsdb]: http://en.wikipedia.org/wiki/Time_series_database
 [go]: http://golang.org/
 [ex]: https://gist.github.com/3683423
