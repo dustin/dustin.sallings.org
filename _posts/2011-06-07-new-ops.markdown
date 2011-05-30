@@ -1,0 +1,205 @@
+---
+title: New Operations in Membase
+layout: post
+---
+
+# New Operations in Membase
+
+We built a couple of new protocol operations for people building
+applications.  The general goal of adding an operation is to keep it
+orthogonal to other commands while enhancing the functionality in a
+way that lets you do things that couldn't be done before, or at least
+were common and difficult to do efficiently.
+
+Here is a description of the new commands and an idea of how they
+might be used.
+
+<div>
+  <img class="floatright" src="/images/synchronize.png" alt="synchronize!" />
+</div>
+
+## Sync
+
+The other new concept we introduced is a `sync` command for providing
+a barrier where you wait for an application's data to change state in
+specific ways such as having an item change from a known value or
+achieve a specified level of durability.
+
+Quick background on how this works in membase (for which we
+implemented `sync` to begin with):  Membase's engine has what is
+effectively an air-gap between the network interface and the disk.
+Operations are almost all processed from and to RAM and then
+asynchronously replicated and persisted.  Incoming items are available
+for request immediately upon return from your mutation command
+(i.e. the next request for a given key will return the item that was
+just set), but replication and persistence will be happening soon.
+
+The membase `sync` command is somewhat analagous to [fsync][fsync] or
+perhaps [msync][msync] in that you can first freely lob items at
+membase and verify that it's accepted them at the lowest level of
+availability.  When you have stored a set of critical items, you can
+then issue a `sync` command with the set of your critical keys and
+required durability level and the server will block until this level
+is achieved (or something happens that prevents us from doing so).
+
+There were discussions about different semantics (such as a
+fully-sync'd mode or a specific `set+sync` type command).  While a
+single `set+sync` command would be one fewer round trip than doing a
+separate `set` and `sync`, it makes little difference in practice
+since the typical effect of a `sync` command is a delay.  This,
+however, comes at the cost of making it very difficult to do any sort
+of practical batching or pipelining.  One can sync after every
+command, after a large batch, or on select items from within a large
+batch.
+
+### What can you Sync On?
+
+The specification permits a given set of keys to be monitored for one
+of the following state changes:
+
+1. Wait for Replication
+2. Wait for Persistence
+3. Wait for Replication *and* Persistence
+4. Wait for Replication *or* Persistence
+5. Wait for Mutation
+
+There's also space for a lightly discussed "any vs. all" flag for the
+keys where you can hand the server a set of keys and be informed as
+soon as any one of them changes to the desired state instead of
+waiting for all of them.
+
+### Example
+
+Given a giant sack of items, with a mix of important items (want
+stored) and really important items (must guarantee are stored before
+returning), let's do the right thing.
+
+{% highlight python %}
+def store_stuff(items):
+    """Store a collection of items.
+
+       Items will be stored asynchronously, then important items
+       will be synchronized on before returning."""
+    important = []
+    for i in items:
+        mc.set(i.key, i.exp, i.flags, i.value)
+        if i.important:
+            important.append(i)
+
+    mc.sync_replication_or_persistence(important)
+{% endhighlight %}
+
+(note that a python client supports these features, but not *exactly*
+with this API, but this should give you the basic idea)
+
+Similarly, one can rate limit inserts such that items don't go in
+faster than they can be written to disk.
+
+{% highlight python %}
+def store_stuff_slowly(items, sync_every=1000):
+    """Store a collection of items without building a large
+       replication backlog."""
+
+    for n, i in enumerate(items, 1):
+        mc.set(i.key, i.exp, i.flags, i.value)
+        if (n % sync_every) == 0:
+            mc.sync_replication(i)
+{% endhighlight %}
+
+Every `sync_every` item (default 1000) waits for synchronization to
+catch up.  Setting `sync_every` to one would cause us fully
+synchronize every item.
+
+## Touch
+
+We have heard from quite a few projects owners that they'd like the
+ability to have items with a sliding window of expiration.  For
+example, instead of having an item expire after five minutes of
+mutating (which is how you specify an object's time-to-live today),
+we'd like it to expire after five minutes of inactivity.
+
+If you're familiar with LRU caches (such as memcached), you should
+note that this is semantically quite different from LRU.  With an LRU,
+we effectively don't care about old data.  The use cases for `touch`
+require us to actively disable access to inactive data on a
+user-defined schedule.
+
+The `touch` command can be used to adjust expiration on an existing
+key without touching the value.  It uses the same type of expiration
+definition all mutation commands use, but doesn't actually touch the
+data.
+
+Similar to `touch` we added a `gat` (`get-and-touch`) command that
+returns the data and adjusts the expiration at the same time.  For
+most use cases, `gat` is probably more appropriate than `touch`, but
+it really depends on how you build your application.
+
+### Example Usage
+
+Usage of `touch` and `gat` are pretty straightfoward.  A really common
+pattern might be storing session data where we want "idle" data to be
+removed quickly, but active data to stick around as long as it's
+active.
+
+{% highlight python %}
+def get_session(session_id, max_session_age=300):
+    """Get a valid session object for the given session ID.
+
+       Sessions will only live for five minutes.
+       Unauthenticated will be thrown if the session
+       can not be loaded."""
+    s = mc.gat(session_id, max_session_age)
+    if not s:
+        throw Unauthenticated()
+    return s
+{% endhighlight %}
+
+This example showed a simple session loader that keeps the session
+alive and signals mission sessions to another part of the application
+stack that can deal with logins and stuff.
+
+# Availability
+
+We've been using this stuff, but we haven't yet achieved universal
+availability.
+
+## Servers
+
+[Membase 1.7][membase] provides this full `touch` and `gat`
+functionality and partial `sync` functionality.
+
+For `sync`, only waiting for replication is supported, and only a
+single replica.  The protocol allows for the tracking of up to 16
+replicas, but membase as a cluster uses transitive replication so it's
+not possible to track when the second replica is complete from the
+primary host (much less the sixteenth!).
+
+Similarly, we've written most of the code for syncing on persistence,
+but before our 2.0 storage strategies, we thing it could be more
+harmful than useful in most applications.  Even with our 2.0
+strategies, it's likely that it's not as appropriate as replication
+tracking for all but the absolutely most important data.
+
+Memcached 1.6(ish) has support for `touch` and `gat` in the default
+engine (which also ships in Membase).
+
+## Clients
+
+In addition to `mc_bin_client.py` (which is a sort of
+reference/playground client that ships with membase and we write many
+of the tools with), we've got support in two clients yet, but we're
+considering the feature "evolving" as we're trying to find the best
+way to do it.  Feedback is far more than welcome!
+
+### Java
+
+spymemcached 2.7 has support for `touch`, `gat`, and `sync`.
+
+### C Sharp
+
+The enyim C# client for memcached has support for `touch`, `gat`, and
+`sync` in a release that should hit the shelves quite soon.
+
+[fsync]: http://linux.die.net/man/2/fsync
+[msync]: http://linux.die.net/man/2/msync
+[membase]: http://www.couchbase.com/downloads
