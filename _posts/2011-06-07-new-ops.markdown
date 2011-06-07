@@ -202,4 +202,4 @@ The enyim C# client for memcached has support for `touch`, `gat`, and
 
 [fsync]: http://linux.die.net/man/2/fsync
 [msync]: http://linux.die.net/man/2/msync
-[membase]: http://www.couchbase.com/downloads
+[membase]: http://www.couchbase.org/products/membase/1-7-beta
