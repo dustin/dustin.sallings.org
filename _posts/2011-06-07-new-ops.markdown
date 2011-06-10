@@ -20,7 +20,7 @@ might be used.
 
 ## Sync
 
-The other new concept we introduced is a `sync` command for providing
+The first new concept we introduced is a `sync` command for providing
 a barrier where you wait for an application's data to change state in
 specific ways such as having an item change from a known value or
 achieve a specified level of durability.
