@@ -73,7 +73,7 @@ photos that appear via dropbox, uses [PIL][pil] to do some scaling and
 stuff and then sticks it in the local DB.
 
 The recipe for safely and reliably processing items from a
-[spool][spool] safely is relatively simple and well-known.  It is the
+[spool][spool] is relatively simple and well-known.  It is the
 way print and mail processing systems have worked for decades.  The
 wikipedia overview does a better job of explaining the concept, but
 I'll go over the code I wrote for mine since I find it easier to
