@@ -217,7 +217,7 @@ A co-worker asked me how long it takes for a message sent from one
 erlang process to be picked up in another process.  Without as much as
 picking up an editor, I blasted out [this commandline][emsgtime] and
 was able to say it's around 8µs ± a few nanoseconds for clock skew
-across cores and processes that are scheduled independntly on other
+across cores and processes that are scheduled independently on other
 threads regardless of my message having been sent.
 
 My [DTrace wiki page][erlangd] is a starting point for getting the
