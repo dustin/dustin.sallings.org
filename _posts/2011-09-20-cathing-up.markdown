@@ -70,7 +70,7 @@ automatically populates itself with data from these sources and will
 let me explore my many travels interactively thanks to
 [geocouch][geocouch] (my first time using it) and google maps.
 
-As you can see, my many travels are typically to tahoe and home.
+As you can see, my many travels are typically to Tahoe and home.
 
 ## code review
 
@@ -138,11 +138,12 @@ which we build replication, failover, ETL, etc... in membase.
 
 ## html5 page idle stuff
 
-HTML5 added a feature that allows you to detect when the renders your
-page hidden (most commonly by switching tabs).  This is really awesome
-for things like [my code review][review] and [reddit][rpics] apps
-since I can disable the realtime data stream to pages that aren't
-even being looked at (and enable it when someone looks again!)
+HTML5 added a feature that allows you to detect when the browser
+renders your page hidden (most commonly by switching tabs).  This is
+really awesome for things like [my code review][review] and
+[reddit][rpics] apps since I can disable the realtime data stream to
+pages that aren't even being looked at (and enable it when someone
+looks again!)
 
 ## web de-auth proxy
 
