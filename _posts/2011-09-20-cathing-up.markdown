@@ -126,7 +126,7 @@ a replicate of an upstream master DB that keeps All The Things)
 
 ## gomemcached update
 
-Someone failed a bug report against my [go memcached
+Someone filed a bug report against my [go memcached
 server][gomemcached] that involved little more than an update for a
 newer compiler, but that was fun to play with again.
 
