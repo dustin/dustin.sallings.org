@@ -70,7 +70,7 @@ automatically populates itself with data from these sources and will
 let me explore my many travels interactively thanks to
 [geocouch][geocouch] (my first time using it) and google maps.
 
-As you can see, my many travels are typically to tahoe and home.
+As you can see, my many travels are typically to Tahoe and home.
 
 ## code review
 
@@ -126,7 +126,7 @@ a replicate of an upstream master DB that keeps All The Things)
 
 ## gomemcached update
 
-Someone failed a bug report against my [go memcached
+Someone filed a bug report against my [go memcached
 server][gomemcached] that involved little more than an update for a
 newer compiler, but that was fun to play with again.
 
@@ -138,11 +138,12 @@ which we build replication, failover, ETL, etc... in membase.
 
 ## html5 page idle stuff
 
-HTML5 added a feature that allows you to detect when the renders your
-page hidden (most commonly by switching tabs).  This is really awesome
-for things like [my code review][review] and [reddit][rpics] apps
-since I can disable the realtime data stream to pages that aren't
-even being looked at (and enable it when someone looks again!)
+HTML5 added a feature that allows you to detect when the browser
+renders your page hidden (most commonly by switching tabs).  This is
+really awesome for things like [my code review][review] and
+[reddit][rpics] apps since I can disable the realtime data stream to
+pages that aren't even being looked at (and enable it when someone
+looks again!)
 
 ## web de-auth proxy
 
@@ -176,12 +177,15 @@ grabbing lots of data and long-polling and what-not.
 
 Part of our ongoing effort of performancing everything involves
 understanding everything.  I did a little bit of stuff with a [tiny
-module][erlanglive] showing me the current state of things, but that
-really didn't help understanding things moving forward.
+module][erlanglive] or [two][euserdefault] showing me the current state
+of things, but that really didn't help understanding things moving
+forward.
 
 My first pass at this was to understand the data produced by [Erlang's
 fprof][fprof] and organize it into a giant document we can pan and
-trace and see where things are unnecessarily hot and why.
+trace and see where things are unnecessarily hot and why.  I wrote [my
+fprof dot][fprofdot] thing to do that work.  It's not quite
+productionalized, but it's worked well for me.
 
 ## web pipe
 
@@ -214,7 +218,7 @@ A co-worker asked me how long it takes for a message sent from one
 erlang process to be picked up in another process.  Without as much as
 picking up an editor, I blasted out [this commandline][emsgtime] and
 was able to say it's around 8µs ± a few nanoseconds for clock skew
-across cores and processes that are scheduled independntly on other
+across cores and processes that are scheduled independently on other
 threads regardless of my message having been sent.
 
 My [DTrace wiki page][erlangd] is a starting point for getting the
@@ -405,6 +409,7 @@ awesome technologies, I could use some help)
 [volker]: http://vmx.cx/
 [deauthnode]: https://gist.github.com/bf62443ce52ae3e8604f
 [deauthgo]: https://gist.github.com/c510c603dabfdc13ce53
+[euserdefault]: https://gist.github.com/1096713
 [fprofdot]: https://gist.github.com/0cd51b5a97b0569bc250
 [fprof]: http://www.erlang.org/doc/man/fprof.html
 [erlangd]: https://github.com/dustin/otp/wiki/DTrace
