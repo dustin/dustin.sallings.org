@@ -6,18 +6,20 @@ title: Incremental Mapreduce for Analytics with R
 # Incremental Mapreduce for Analytics with R
 
 I've been wanting to describe some of my work with using R to help me
-understand data I'm collecting in Couchbase Server (the incremental
-Map Reduce Views are identical to Apache CouchDB views, so everything
-will also work with CouchDB) because I find it quite interesting,
-useful and easy.  However, it's been difficult for me to figure out a
-good starting point because I don't know who the audience would be.
-That is, finding the right set of assumptions to get going has been
-quite hard.
+understand data I'm collecting in Couchbase Server<sup>&dagger;</sup>
+because I find it quite interesting, useful and easy.  However, it's
+been difficult for me to figure out a good starting point because I
+don't know who the audience would be.  That is, finding the right set
+of assumptions to get going has been quite hard.
 
 Last week, however, I spoke to a really awesome guy in a media company
 who had a specific question: "How can my analyists report on all the
 wonderful data I'm storing in [Couchbase][couchbase]?"  I dug deeper.
 Who are these analysts?  What tools do they use?
+
+<p style="font-size: smaller"><sup>&dagger;</sup> the incremental Map
+Reduce Views are identical to Apache CouchDB views, so everything will
+also work with CouchDB</p>
 
 ## My Audience
 
