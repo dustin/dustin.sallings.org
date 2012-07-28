@@ -154,7 +154,7 @@ Looks really simple, but combined with the `_count` built-in reducer,
 this can do a lot of neat things when grouping.  With `group_level=1`,
 we get crime count by category.  Let's plot that and see what's
 popular.  Assuming we saved that in a design document called
-`categories` with the view name of `byday`, Here's what you tell R:
+`categories` with the view name of `byday`, here's what you tell R:
 
 {% highlight r %}
 # Get a dataframe containing the categories and their respective counts
