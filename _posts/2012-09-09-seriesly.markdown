@@ -59,7 +59,7 @@ grouped in 5 minute windows (`300` seconds).
 (The key in the result does not represent the actual key that will be
 emitted. I used a human-readable time representation for illustration
 purposes only. Had this been an actual query, the timestamps would've
-all been absolute and emitted as the number of seconds since UNIX
+all been absolute and emitted as the number of milliseconds since UNIX
 epoch.)
 
 ## Web Stuff
