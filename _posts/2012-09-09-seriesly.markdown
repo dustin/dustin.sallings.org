@@ -45,8 +45,9 @@ supplied at request time (which is useful for backfilling data).
 
 Querying captured data is about taking data from a specific time
 range, grouping it into specific time chunks (e.g. 5 minutes worth of
-data at a time) selecting keys from the data to query on and
-reductions to those keys.
+data at a time) selecting keys from the data (using
+[json-pointer][jsonpointer]) to query on and performing reductions
+over the values selected using those keys.
 
 The following diagram shows an example query and how the fields are
 selected and values are returned (conceptually).  For this query, I've
@@ -152,3 +153,4 @@ all that.
 [cubism]: http://square.github.com/cubism/
 [temps]: http://bleu.west.spy.net/~dustin/seriesly/
 [series]: http://bleu.west.spy.net/~dustin/seriesly/series.js
+[jsonpointer]: http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-03
