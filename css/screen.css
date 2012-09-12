@@ -203,6 +203,11 @@ ul.posts {
     background-color: #333;
   }
 
+  #post blockquote {
+    margin: 1em;
+    font-style: italic;
+  }
+
 #related {
   margin-top: 2em;
 }
