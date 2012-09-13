@@ -11,9 +11,9 @@ describes why the software exists and a bit about how to use it.
 
 Here I describe how it works.  As mentioned before, the bulk of the
 software was in a useful state in two weeks.  I attribute much of this
-success to [go][go].  [The code][code] itself contains the bulk of my
-knowledge, but I'll highlight some of the parts that helped the most
-in the coming paragraphs.
+success to [go][go].  [The code][code] itself contains the details of
+my knowledge, but I'll highlight some of the parts that helped the
+most in the coming paragraphs.
 
 The process described in the following paragraphs *generally* occurs
 in under a millisecond, in my installations.  On a sufficiently large,
