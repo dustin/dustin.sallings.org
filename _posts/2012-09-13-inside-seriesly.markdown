@@ -410,7 +410,7 @@ then passed through the above `select` loop 3,840 times (once each for
 Under load.  That's an absolute ceiling of 35µs cache round trip time,
 again, ignoring all other queries running at this time.
 
-[sblog]: /2009/09/09/seriesly.html
+[sblog]: /2012/09/09/seriesly.html
 [go]: http://golang.org/
 [code]: https://github.com/dustin/seriesly
 [qtheory]: http://en.wikipedia.org/wiki/Queueing_theory
