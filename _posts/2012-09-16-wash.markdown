@@ -177,6 +177,11 @@ write about one of the others, because it's pretty awesome).
 The [NotifyMyAndroid interface for go][nmago] alone has kept me from
 having to re-wash laundry that sat in the washer too long.
 
+[The source][source] to the sensor, reader firmware and go parts are
+all available, though I can't guarantee they're 100% ready to deploy
+for anyone who isn't me.  If anyone wants to try something similar,
+I'll gladly help, though.
+
 [ct]: http://www.amazon.com/013-030-Output-Non-invasive-Current-Transformer/dp/B005CTWE8A/
 [vibsens]: https://www.sparkfun.com/products/9196
 [killawatt]: http://www.p3international.com/products/special/p4400/p4400-ce.html
@@ -191,3 +196,4 @@ having to re-wash laundry that sat in the washer too long.
 [go]: http://golang.org/
 [nma]: https://www.notifymyandroid.com/
 [nmago]: https://github.com/dustin/nma.go
+[source]: https://github.com/dustin/washer
