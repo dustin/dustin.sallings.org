@@ -1,0 +1,98 @@
+---
+layout: post
+title: CBFS
+---
+
+# cbfs - a couchbase large object store
+
+<div>
+  <img src="/images/toys.jpg" alt="where do i get all these wonderful toys?"
+      title="Where Do I Get all these Wonderful Toys?"
+      class="floatright"/>
+</div>
+
+Thirteen days ago, [Marty Schoch][marty] and I created an empty
+directory called `cbfs` and started typing some [go][golang] code into
+it.  The idea was to create an answer to the frequent question, "how
+do I store large items in [Couchbase][couchbase]?"
+
+I think we're both pretty pleased with the results and would like to
+share what we've made a bit more broadly.
+
+[cbfs][cbfs] is essentially a read/write HTTP server with a minimal
+[RESTful API][cbfsprot] for getting a bit more meta information out of
+it and serving apps on couchbase.  We had a few goals and were able to
+demonstrate almost all of them within a week of birth.  Things like:
+
+* No single point of failure.
+* No single point of contention.
+* No limits to the size or volume of data that can be served.
+* No invalid states to reconcile.
+* Adding and removing nodes and other management tasks should be
+  as easy as possible.
+
+Also, we wanted to be able to bring back something along the spirit of
+[couchapps][couchapp] (but much easier!).
+
+We haven't written up enough on it yet, but I did do a demonstration
+to our team today in a google hangout.  You can see that quick intro
+in the first half of the following video.
+
+<iframe width="560" height="315"
+        src="http://www.youtube.com/embed/YLTXdrvYITA"
+        frameborder="0" allowfullscreen="1">
+</iframe>
+
+The [slides][slides] are available as well.  They are meant to be
+served from a cbfs instance doing the demo, but I made the demos also
+work when offline.
+
+Some neat stuff has been built around this since we started.
+
+Trond Norbye wrote a [FUSE interface][trondpost] so we could mount it
+locally.  I'm synchronizing our [Dropbox][dropbox] stuff into cbfs and
+watched Trond browse around in a terminal and interact with the files
+as if they were local.
+
+Marty's written a pretty awesome [admin console][admin].
+I've done some demos of other stuff built on the API as well
+(including the built-in cluster monitoring console and the commandline
+tool).
+
+<img src="/images/cbfs-admin-600.png" alt="cbfs admin"
+    class="centered"/>
+
+The [wiki page][wiki] was mostly written in the first four days, but
+describes what the idea was pretty well.  It's a lot more complete
+now, though the [issues list][issues] shows where we want to add more
+polish.
+
+<div>
+  <img src="/images/cbfs-small-monitor.png" alt="monitor view"
+      class="floatleft"/>
+</div>
+
+I'm running a cluster at home and in the office and serving content
+and apps out of it, so it's definitely self-hosting and stuff.
+
+Come join us, help finish tasks, think of new ones, find ways you
+think it could be better...
+
+But, as a reminder, this isn't two weeks old yet, so if you want
+something that's actually been in production with PBs of data, look at
+[mogilefs][mogilefs].  We wrote this because we wanted it to exist and
+wanted to have some answers for specific questions we'd been asked.
+
+[golang]: http://golang.org/
+[trondpost]: http://trondn.blogspot.com/2012/09/yanfs-yet-another-network-file-system.html
+[admin]: https://github.com/couchbaselabs/cbfs-admin
+[marty]: http://hexeditreality.com/
+[cbfs]: http://github.com/couchbaselabs/cbfs
+[cbfsprot]: https://github.com/couchbaselabs/cbfs/wiki/Protocol
+[wiki]: https://github.com/couchbaselabs/cbfs/wiki
+[issues]: https://github.com/couchbaselabs/cbfs/issues
+[couchbase]: http://www.couchbase.com/
+[slides]: http://labs.couchbase.com/cbfs/
+[mogilefs]: http://code.google.com/p/mogilefs/
+[couchapp]: http://couchapp.org/
+[dropbox]: http://db.tt/0bYIeqqB
