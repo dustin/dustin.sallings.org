@@ -193,7 +193,7 @@ I'll gladly help, though.
 [arduino]: http://www.arduino.cc/
 [rfm12b]: http://shop.moderndevice.com/products/rfm12b-radio
 [rs232go]: https://github.com/dustin/rs232.go
-[go]: http://golang.org/
+[golang]: http://golang.org/
 [nma]: https://www.notifymyandroid.com/
 [nmago]: https://github.com/dustin/nma.go
 [source]: https://github.com/dustin/washer
