@@ -1,0 +1,262 @@
+---
+layout: post
+title: CBFS DNS Service
+---
+
+<div>
+  <img src="/images/stupid.png" alt="stupid"
+      title="Warning: Stupid"
+      class="floatright"/>
+</div>
+
+# CBFS DNS Service
+
+**Warning**:  This is kind of a silly idea and not necessarily a
+recommendation for how you should do things.
+
+Also, this is not a replacement for [DNS-SD][dnssd] or [mDNS][mdns] or
+any such things.  But it's a fun toy I got working in a couple of
+hours, so I'm playing with it.
+
+## DNS for Humans
+
+If you're looking at this web page, you've probably interacted in some
+way with the [domain name system][dns].  It's pretty convenient as a
+human to ask for `dustin.github.com` and not think about what that
+means.
+
+There are tons of descriptions of this service out there, how it
+works, etc...  I'm not going to get into that as much as a small bit
+on relevant parts and how they're generally used.
+
+### A Records
+
+Many of the DNS queries that are tossed about are for `A`, or address
+records.  e.g., I ask my browser for `dustin.github.com` which does a
+magical DNS dance around looking for an `A` record for
+`dustin.github.com.` and get the following:
+
+    dustin.github.com.	41033	IN	A	204.232.175.78
+
+From that point on, the browser has an IP address it can talk to.
+Typically, this is put in place by the human who owns the IP address
+`204.232.175.78`.  This is most likely a wildcard for `*.github.com.`,
+but most importantly, the management direction is *usually* "thing I
+want to provide" -> "resource on which I can provide it."
+
+i.e. you want to provide pages, you configure up your machines for it
+and point the service at the machines.
+
+### NS Records
+
+Part of the above requires a lookup of an `NS` record to find out
+where to even ask for the `A` record.  The `NS` record is the way that
+a domain in DNS can delegate responsibility to another system.  In
+this case, someone who administers `com.` delegates to someone who
+adminsters `github.com.` (TLDs are a little more complicated, but this
+is roughly the idea)
+
+Most of that magic happens in the DNS server, but basically, assuming
+I know who serves `com.`, I ask who serves `github.com.` to ask where
+`dustin.github.com.` is.  Such an `NS` query returns the following:
+
+    ;; ANSWER SECTION:
+    github.com.		81150	IN	NS	ns4.p16.dynect.net.
+    github.com.		81150	IN	NS	ns3.p16.dynect.net.
+    github.com.		81150	IN	NS	ns1.p16.dynect.net.
+    github.com.		81150	IN	NS	ns2.p16.dynect.net.
+
+    ;; ADDITIONAL SECTION:
+    ns4.p16.dynect.net.	81150	IN	A	204.13.251.16
+    ns3.p16.dynect.net.	81150	IN	A	208.78.71.16
+    ns2.p16.dynect.net.	81150	IN	A	204.13.250.16
+    ns1.p16.dynect.net.	81150	IN	A	208.78.70.16
+
+This lists both the names of the nameservers that I asked about and
+was kind enough to also senda long their IP addresses so I don't have
+to make another trip to figure out where they are.
+
+### SRV Records
+
+`SRV` records are kind of neat.  They tell the address(es) of something,
+but also on which doors to knock.  They also provide concepts of
+"weight" and "priority."
+
+Jumping really quick into an example, let's say you want to IM
+someone.  You're logged into gmail and you want to talk to
+`example@jabber.org`.  Well, the first thing google's going to want to
+know is how to connect to this service.  Specifically, the XMPP
+service over TCP.  To find that out, it issues an `SRV` query against
+`_xmpp-server._tcp.jabber.org.` and gets this:
+
+    _xmpp-server._tcp.jabber.org. 900 IN	SRV	31 31 5269 fallback.jabber.org.
+    _xmpp-server._tcp.jabber.org. 900 IN	SRV	30 30 5269 hermes.jabber.org.
+    _xmpp-server._tcp.jabber.org. 900 IN	SRV	30 30 5269 hermes6.jabber.org.
+
+    [...and in the extras section]
+    hermes.jabber.org.	900	IN	A	208.68.163.221
+    hermes6.jabber.org.	900	IN	A	208.68.163.221
+    hermes6.jabber.org.	900	IN	AAAA	2605:da00:5222:5269::2:1
+    fallback.jabber.org.	900	IN	A	208.68.163.218
+
+There's an equally low priority for `hermes` and `hermes6`, so google
+will try one of those first.  `hermes6` has two IP addresses, so it
+may try all three of those addresses before trying `fallback.`
+
+These lookups are done magically not only by servers communicating in
+XMPP, but also clients that want to talk to XMPP.  Someone publishes
+the connection details and we're all good to go.
+
+## Now You Fully Understand Global DNS
+
+OK, if you came here not knowing much about DNS, you still don't, but
+that's OK.  My main point is that often when people who think about
+DNS think about DNS, they are thinking about what they want to publish
+and how things are going to find them.
+
+The exceptions here are in [DNS-SD][dnssd] and, to a degree,
+[mDNS][mdns].  You've probably interacted with both of these when you
+ask your computer to find a printer or someone tells you to look at
+something on his laptop (in my case, that's `dustinnmb.local.`).
+These magical discovery protocols are pretty awesome for ad-hoc
+services, and with properly administered DNS-SD, even globally
+advertised services.
+
+But I came here to talk about something I'm doing that's just a little
+bit different.  Probably not different enough to justify the hour or
+two I spent today trying to make it work, but interesting for me.
+
+## DNS for Self-Organizing Services
+
+[cbfs][cbfs] is a storage service that, if we get it all right, blurs
+the line between administered and magic.  The servers need a bit of
+configuration to know where to coordinate, but after that, clients can
+pretty much pick any one of them to work with.
+
+At home, I have a couple of nodes that are going to remain
+"permanent," but intend to have a few others coming and going as I
+experiment with things.
+
+The thing that's a little difficult is figuring out which node I
+should talk to when things go wrong.  And if I want to use a service
+name (as opposed to just always hitting the same host I know is
+running the service), what do I point it to?  And what do I do when
+that host goes down?  And even when everything's mostly stable, what's
+the best machine to talk to do the thing I want to do *right now*?
+
+Because of these questions, I had the absolutely ridiculous idea to
+make cbfs its own DNS server.
+
+\*sigh\*
+
+It's useful, though.  cbfs is actively monitoring the cluster, knows
+what nodes are in it, out of it, when nodes start to die, it can
+respond instantly, etc...  If I plug in a node, I want clients to find
+it instantly, and I use my web browser and curl as clients as lot, so
+I'd like it to work there, too.
+
+For this, I did two things:
+
+### SRV Records
+
+Firstly, you can make an `SRV` request as a "smart" client for
+`_cbfs._tcp.[domain].` to get the current list of nodes *and* a
+recommendation for which node to talk to at that point in time.
+
+Here's an example from my network at home (I'm abbreviating the
+queries name to `$q` just to keep the line short enough to read):
+
+    ;; ANSWER SECTION:
+    $q 5	IN	SRV	2 0 8484 dustinnmb.cbfs.west.spy.net.
+    $q 5	IN	SRV	3 5 8484 bigdell.cbfs.west.spy.net.
+    $q 5	IN	SRV	0 1 8484 z.cbfs.west.spy.net.
+    $q 5	IN	SRV	1 1 8484 menudo.cbfs.west.spy.net.
+
+    ;; AUTHORITY SECTION:
+    cbfs.west.spy.net.	3600	IN	NS	ns.west.spy.net.
+
+    ;; ADDITIONAL SECTION:
+    z.cbfs.west.spy.net.	60	IN	A	192.168.1.38
+    menudo.cbfs.west.spy.net. 60	IN	A	192.168.1.97
+    dustinnmb.cbfs.west.spy.net. 60	IN	A	192.168.1.113
+    bigdell.cbfs.west.spy.net. 60	IN	A	192.168.1.135
+    ns.west.spy.net.	3600	IN	A	192.168.1.40
+
+This begs a bit of explanation.
+
+Firstly, `ns.west.spy.net.` is my primary name server at home.  It's
+an off-the-shelf [bind][bind] instance running on OpenBSD (at least,
+some strange embedded OS I based off of OpenBSD at some point in the
+past).  This is an administration point where I go and enter RRs for
+services I want to offer.  It serves both my internal and external
+`west.spy.net.` domains (which are different).
+
+Internally, I want to provide service for `cbfs.west.spy.net.`, but I
+want it to be magical and dynamic.  I also don't want to run cbfs as
+root, so I have DNS bound to a different port.  No problem at all, I
+just forward to a couple of known cbfs servers with the cbfs DNS
+service running using the following config:
+
+    zone "cbfs.west.spy.net." {
+            type forward;
+            forwarders {
+                    192.168.1.38 port 8453;
+                    192.168.1.97 port 8453;
+            };
+    };
+
+This should be obvious, but it basically just causes DNS queries for
+that zone to proxy through and hit my cbfs server.
+
+The rest of the stuff from above is all dynamic and coming out of
+cbfs' internal state.  You'll notice the priorties in the answer
+section are different (these are the sequential, but not ordered
+numbers).  These priorities are the same priorities cbfs would use for
+data distribution internally.  They're approximately (but
+intentionally not exactly) prioritized by heartbeat recency.
+
+Currently, the weight is unused as the priorities order the node usage
+absolutely, but since I just hacked this thing together, I'm likely to
+do something different after I play with it a bit.
+
+One thing to note is that those are not "hostnames" in the
+conventional sense, but just the things I passed to the `-nodeID`
+parameter to cbfs.  cbfs itself creates the hostname glue and does all
+that magic.
+
+### A Records
+
+"But wait!", you say, "I thought you wanted this to work with your
+browser and curl.  They won't do these SRV lookups!"
+
+Correct, so cbfs also responds to `A` or `ANY` queries be returning a
+handful of `A` records to make these other clients happy.  Example:
+
+    ;; QUESTION SECTION:
+    ;cbfs.west.spy.net.		IN	A
+
+    ;; ANSWER SECTION:
+    cbfs.west.spy.net.	5	IN	A	192.168.1.38
+    cbfs.west.spy.net.	5	IN	A	192.168.1.135
+    cbfs.west.spy.net.	5	IN	A	192.168.1.97
+
+In this case, I just asked for "the address" of `cbfs.west.spy.net.`
+and it gave me three, any one of which is expected to be happy to
+answer any query I might throw at it.
+
+The keen-eyed reader notes this is fewer than the four listed above.
+I arbitrarily decided to kill a node while writing one of the
+paragraphs above.  Things kept going fine.
+
+## In Conclusion
+
+I probably could (and will) accomplish much of the same with mDNS and
+I don't think providing name resolution services with DNS is
+particularly novel, but this was a fun hack I did for my birthday and
+I hope it inspires someone to do something better.
+
+[dns]: http://en.wikipedia.org/wiki/Domain_Name_System
+[dnssd]: http://www.dns-sd.org/
+[mdns]: http://www.multicastdns.org/
+[cbfs]: http://dustin.github.com/2012/09/27/cbfs.html
+[bind]: https://www.isc.org/software/bind
