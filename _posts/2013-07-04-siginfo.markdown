@@ -101,12 +101,12 @@ and, *ah ha*!
 
     load: 1.45  cmd: cbfsclient 14765 running 47.14u 145.92s
     In-flight HTTP requests:
-      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m34.003627439s
-      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m31.667435796s
-      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m32.073876238s
-      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m33.671804744s
-      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m34.064807173s
-      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 47.264721651s
+      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m34.00s
+      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m31.67s
+      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m32.08s
+      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m33.67s
+      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 1m34.06s
+      servicing "http://slownode:8484/.cbfs/blob/[oid]" for 47.26s
 
 This program was only allowing 6 concurrent requests and they were all
 stuck doing requests against the same slow node.  It's so obvious when
