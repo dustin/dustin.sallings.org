@@ -1,0 +1,144 @@
+---
+layout: post
+title: Wherefore go-saturate
+---
+
+# About go-saturate
+
+<div>
+  <img src="/images/saturated.png" alt="saturated"
+       title="saturated" class="floatleft"/>
+</div>
+
+In my [previous blog post][siginfo], I wrote about a bottleneck I ran
+into that caused my application to pause when I felt it should've been
+working hard.
+
+My workers were all stuck waiting for data from one source while other
+sources of the same data were available.
+
+This is how I fixed it.
+
+# Problems Illustrated
+
+<div>
+  <img src="https://raw.github.com/dustin/go-talks/master/channels/hot.png"
+  alt="hotness" title="the new hotness" class="floatright"/>
+</div>
+
+First, it's good to see exactly what the problem looked like.
+
+There are four workers and they all need a mix of data of type `a` or
+`b`.  Both `a` and `b` data sets are replicated so any given record
+can come from one of two of these servers.
+
+If there are equal tasks for `a` and `b` and servers are all generally
+available, but one of the servers is slower than the others, then you
+will invariably end up with one of the workers stuck retrieving data
+from `a rep 1` even though `a rep 2` contains the same data.
+
+But why is it it blocked on that node?  Because that node is slow.
+
+When randomly selecting workers and one worker takes considerably
+longer to complete its work, you will inevitably be blocked waiting
+for slower workers to complete their tasks.
+
+If this isn't intuitive to you, think about it this way:
+
+<div>
+  <img src="/images/slowrand.png"
+  alt="random slowness" title="random slowness" class="floatleft"/>
+</div>
+
+Imagine just two servers containing the same information from which
+you randomly choose for any given request.  Let's say one server is 8x
+slower than the other.
+
+Assume a reasonable random number generator such that there's a 50%
+chance that any given request will be issued against the fast one, and
+a 50% chance it will be issued against the slow one.
+
+Now imagine you've got two clients that are wanting to grab a bunch of
+data from the two servers.
+
+The scneario illustrated above will occur frequently:
+
+1. Client 1 hits the fast server.
+2. Client 2 hits the fast server.
+3. Client 1 hits the slow server - is blocked for a while.
+4. Client 2 hits the fast server again.
+5. Client 2 hits the slow server - all workers are blocked while the
+fast server is idle.
+
+Boo.
+
+# What Does go-saturate Do About This?
+
+<div>
+  <img src="https://raw.github.com/dustin/go-talks/master/channels/twotier.png"
+  alt="double fanout" title="double fanout" class="floatright"/>
+</div>
+
+If you can express your work in the form of `task, []resources` pairs,
+you can use [go-saturate][go-saturate] to help resolve this type of
+problem with a double-fanout as illustrated on the right:
+
+1. The producer adds a task that needs to be performed.
+2. The first available worker picks it up and classifies resource
+requirements.
+3. The first available resource is utilized.
+
+In the illustrated case, workers 1 and 3 are concurrently performing
+tasks that need data from `a`.
+
+Internally, the resources are each represented by a channel that has
+one or more goroutines servicing it (user-specified).  A resource is
+"available" when a worker is idle and just waiting for new work on a
+channel.  If the resource is slow, the worker spends more time working
+and less time accepting new work (see the red in the sequence diagram
+above).
+
+By asking for one of either and choosing the most available resource,
+they're able to do their work without blocking on each other.
+
+In a sense, the resources are self-selecting.
+
+<div>
+  <img src="/images/cbfsperf.png"
+  alt="cbfs perf" title="cbfs perf" class="floatright"/>
+</div>
+
+As you can see in the right (a cbfs scenario where one server has
+100Mbps ethernet and the others have gig-e), slow resources are still
+used, but when a slow resource is being slow and a fast resource is
+available, we won't choose the slow one.
+
+In long-running tasks, this is great -- if I can keep all the fast
+nodes *and* the slow nodes busy, then I get a little more out of the
+network as a whole.
+
+# Other Resources
+
+You can read the [go-saturate docs][docs] to get an overview of the API.
+
+Also, I gave a presentation at work earlier this week on this topic
+which goes a lot further into basic go channel semantics interactively
+including a range of information from basics like how to send and
+receive on a channel to how send a message to exactly one of a
+dynamically built set of recipients.
+
+That presentation is captured in the following 20 minute video:
+
+<iframe width="560" height="315"
+        src="//www.youtube.com/embed/QDO5YOrKSiQ"
+        frameborder="0" allowfullscreen="1">
+</iframe>
+
+Both the [slides][slides] and the [long-form][article] contents
+of the material used in that presentation are available.
+
+[siginfo]: ../04/siginfo.html
+[go-saturate]: //github.com/dustin/go-saturate
+[docs]: http://godoc.org/github.com/dustin/go-saturate
+[slides]: http://talks.godoc.org/github.com/dustin/go-talks/channels.slide
+[article]: http://talks.godoc.org/github.com/dustin/go-talks/channels.article
