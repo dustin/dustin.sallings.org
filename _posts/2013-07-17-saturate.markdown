@@ -3,7 +3,7 @@ layout: post
 title: Wherefore go-saturate
 ---
 
-# About go-saturate
+# Wherefore go-saturate
 
 <div>
   <img src="/images/saturated.png" alt="saturated"
