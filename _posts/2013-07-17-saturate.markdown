@@ -34,7 +34,7 @@ can come from one of two of these servers.
 
 If there are equal tasks for `a` and `b` and servers are all generally
 available, but one of the servers is slower than the others, then you
-will invariably end up with one of the workers stuck retrieving data
+will invariably end up with all of the workers stuck retrieving data
 from `a rep 1` even though `a rep 2` contains the same data.
 
 But why is it it blocked on that node?  Because that node is slow.
@@ -108,6 +108,10 @@ In a sense, the resources are self-selecting.
   alt="cbfs perf" title="cbfs perf" class="floatright"/>
 </div>
 
+Here is a concrete example that illustrates go-saturate in the real
+world.  It's being used in the [cbfs][cbfs] client code.  (cbfs is a
+distributed blob store for Couchbase Server).
+
 As you can see in the right (a cbfs scenario where one server has
 100Mbps ethernet and the others have gig-e), slow resources are still
 used, but when a slow resource is being slow and a fast resource is
@@ -142,3 +146,4 @@ of the material used in that presentation are available.
 [docs]: http://godoc.org/github.com/dustin/go-saturate
 [slides]: http://talks.godoc.org/github.com/dustin/go-talks/channels.slide
 [article]: http://talks.godoc.org/github.com/dustin/go-talks/channels.article
+[cbfs]: http://labs.couchbase.com/cbfs/
