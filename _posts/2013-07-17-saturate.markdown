@@ -61,7 +61,7 @@ a 50% chance it will be issued against the slow one.
 Now imagine you've got two clients that are wanting to grab a bunch of
 data from the two servers.
 
-The scneario illustrated above will occur frequently:
+The scenario illustrated above will occur frequently:
 
 1. Client 1 hits the fast server.
 2. Client 2 hits the fast server.
