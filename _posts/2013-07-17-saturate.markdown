@@ -37,7 +37,7 @@ available, but one of the servers is slower than the others, then you
 will invariably end up with all of the workers stuck retrieving data
 from `a rep 1` even though `a rep 2` contains the same data.
 
-But why is it it blocked on that node?  Because that node is slow.
+But why is it blocked on that node?  Because that node is slow.
 
 When randomly selecting workers and one worker takes considerably
 longer to complete its work, you will inevitably be blocked waiting
@@ -74,22 +74,10 @@ Boo.
 
 # What Does go-saturate Do About This?
 
-<div>
-  <img src="https://raw.github.com/dustin/go-talks/master/channels/twotier.png"
-  alt="double fanout" title="double fanout" class="floatright"/>
-</div>
-
-If you can express your work in the form of `task, []resources` pairs,
-you can use [go-saturate][go-saturate] to help resolve this type of
-problem with a double-fanout as illustrated on the right:
-
-1. The producer adds a task that needs to be performed.
-2. The first available worker picks it up and classifies resource
-requirements.
-3. The first available resource is utilized.
-
-In the illustrated case, workers 1 and 3 are concurrently performing
-tasks that need data from `a`.
+If you can express your work in the form of `(task, []resources)`
+pairs, you can use [go-saturate][go-saturate] to help resolve this
+type of problem with a double-fanout as illustrated and discussed
+below.
 
 Internally, the resources are each represented by a channel that has
 one or more goroutines servicing it (user-specified).  A resource is
@@ -98,8 +86,43 @@ channel.  If the resource is slow, the worker spends more time working
 and less time accepting new work (see the red in the sequence diagram
 above).
 
+<div>
+  <img src="https://raw.github.com/dustin/go-talks/master/channels/twotier.png"
+  alt="double fanout" title="double fanout" class="floatright"/>
+</div>
+
+The diagram to the right represents a producer feeding into two tiers
+of workers.  The first tier workers, e.g. `worker 1` are higher level
+(e.g. copy a file from the internet to local disk) while the second
+tier workers, e.g. `a rep 1` are lower-level (e.g. read this file from
+this location).
+
+It's important to understand that the first-tier workers are in the
+same process as the second tier workers, the distinction being that
+the second tier workers are operating on a resource identified by the
+first tier workers and the duration of that work isn't necessarily
+predictable.
+
+In the illustrated case, workers 1 and 3 are concurrently performing
+tasks that need data from `a`.
+
+Let's break down the specific example shown in that diagram.
+
+1. The producer submits two tasks that both need information from `a`
+2. Workers 1 and 3 pick up this work.
+3. They both identify `a rep 1` and `a rep 2` workers as being
+possible sources of `a`.
+4. The `select` from worker 1 chooses `a rep 2`
+5. The `select` from worker 3 chooses `a rep 1`
+
+Note that steps 4 and 5 can occur at approximately the same time, but
+the `a rep 1` worker can *only* pick up one job and the first-tier
+worker (e.g. `worker 1`) can *only* have one worker pick up its task.
+
 By asking for one of either and choosing the most available resource,
-they're able to do their work without blocking on each other.
+they're able to do their work without blocking on each other.  For
+example, if `a rep 1` is slow, tasks requiring `a` will continue to
+get their `a`s from `a rep 2` as fast as that replica can keep up.
 
 In a sense, the resources are self-selecting.
 
