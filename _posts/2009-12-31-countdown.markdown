@@ -10,15 +10,10 @@ Year by watching some kind of ball dropping thing, so I had this sort
 of "last minute" idea for something and searched around the house for
 junk I could build it out of.
 
-<div style="width: 425; height: 344px; margin-left: 10px; float: right">
-<object width="425" height="344"><param name="movie"
-value="http://www.youtube.com/v/Qv_ruj4lhXo&hl=en_US&fs=1&rel=0"></param><param
-name="allowFullScreen" value="true"></param><param
-name="allowscriptaccess" value="always"></param><embed
-src="http://www.youtube.com/v/Qv_ruj4lhXo&hl=en_US&fs=1&rel=0"
-type="application/x-shockwave-flash" allowscriptaccess="always"
-allowfullscreen="true" width="425" height="344"></embed></object>
-</div>
+<iframe width="420" height="315"
+        src="//www.youtube.com/embed/Qv_ruj4lhXo"
+        frameborder="0" allowfullscreen>
+</iframe>
 
 A few LEDs, a servo, an [rbb][rbb] ([arduino][arduino] clone) and,
 um, whatever scrap cardboard I could find and I was good to go.
