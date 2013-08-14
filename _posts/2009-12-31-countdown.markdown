@@ -12,7 +12,7 @@ junk I could build it out of.
 
 <iframe width="420" height="315"
         src="//www.youtube.com/embed/Qv_ruj4lhXo"
-        frameborder="0" allowfullscreen>
+        frameborder="0" allowfullscreen="1">
 </iframe>
 
 A few LEDs, a servo, an [rbb][rbb] ([arduino][arduino] clone) and,

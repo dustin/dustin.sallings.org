@@ -81,7 +81,7 @@ Except, it's as backwards as a guy sitting on a desk facing away from
 his computer.
 
 <div>
-    <img src="http://chart.apis.google.com/chart?cht=p&chs=250x140&chd=s:jSGBB&chl=Trond|Dustin|Sean|Patrick|Steve"
+    <img src="http://chart.apis.google.com/chart?cht=p&amp;chs=250x140&amp;chd=s:jSGBB&amp;chl=Trond|Dustin|Sean|Patrick|Steve"
       class="floatright" alt="contributors" />
 </div>
 
