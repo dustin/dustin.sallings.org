@@ -142,6 +142,10 @@ ul.posts {
     margin-top: 2em;
     overflow: hidden;
   }
+
+    .site .footer #elsewhere {
+        clear: left;
+    }
   
     .site .footer .contact {
       float: left;
