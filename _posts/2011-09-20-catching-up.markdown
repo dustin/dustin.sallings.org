@@ -24,7 +24,7 @@ putting data on disk.
 ## house temperature readers
 
 <div>
-  <img src="http://bleu.west.spy.net/therm/House" alt="house"
+  <img src="http://bleu.west.spy.net/house/" alt="house"
     title="I live here." class="floatright" />
 </div>
 
