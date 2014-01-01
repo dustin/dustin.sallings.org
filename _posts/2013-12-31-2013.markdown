@@ -1,0 +1,577 @@
+---
+layout: post
+title: 2013 Contributions
+---
+
+2013 was a reasonably productive year.  The days I didn't commit any
+open source were, of course, a Tuesday and a Thursday.  Boo.
+
+
+<div>
+  <img src="/images/2013.png" width="587" height="230"
+    alt="2013" title="2013"/>
+</div>
+
+But I'll focus on the positive.  I really learned a lot and hopefully
+made at least a few things that helped people.  Based on bug reports
+and pull requests, at least a couple people got some use out of my
+time.
+
+One thing I definitely did too little was blog.  I find interesting
+things and I write them into code and bring it out when it comes up in
+conversation.  I'll never get good at it if I don't start practicing
+more.
+
+Today, I wrote
+[a little program](https://gist.github.com/dustin/8202528) to dig
+through all the github public events of 2013 (about 82 million)) I
+store in [cbfs][] and figure out which ones were of my doing.  That
+yielded 2,483 push events, which I reviewed in a google spreadsheet to
+find 2,110 of them that were actually my fault.
+
+Notice that github shows 2,229 contributions this year.  This is
+because I managed to open source some of the stuff I was working on.
+yay.  I'll get into more of that later.  In the meantime, let's do a
+quick breakdown of a few interesting things that happened each month.
+
+# January
+
+In January, there were *two* days I didn't do any code.  But a lot I
+did.
+
+<div>
+  <a href="/images/2013-cbugg.png"><img src="/images/2013-cbugg.png" width="250" height="164"
+      alt="cbugg" title="cbugg" class="floatright"/></a>
+</div>
+
+I started writing [cbugg][] as the perfect bug tracker for me.  There
+were a couple of goals here.  One of them was to not have to touch
+Jira since everything I did there just consumed entirely too much
+time.  We wanted to create workflows that streamlined things as much
+as possible.
+
+Perhaps more importantly, we wanted to exercise
+[Couchbase Server][couchbase] (and [go-couchbase][]) and get a better
+understanding of what it was like to throw an app together really
+quick with this.  [Aaron Miller][aaron] saw the initial version and
+made a new UI for it in in [AngularJS][] that was really great.
+
+[Marty Shoch][marty] came along and did some really awesome search
+integration.  Overall, it's been pretty great.
+
+I did some work on [cbfs][] since I keep increasingly more critical
+things there (e.g. [attachments in cbfs][attachments], builds, etc...)
+
+I did lots of work on [gitmirror][].  gitmirror is great for keeping
+local copies of everything you push up to github, updated all the
+time.  It's also a good way to have a single integration point of all
+of your repositories.  It's got a tool, [setuphooks][], that allows
+you to use patterns to configure any type of hook event on a repo, or
+across all repos you own or all repos in an organization to which you
+have appropriate access.  It feeds any change anyone does to any repo
+at Couchbase into cbugg, for example.
+
+I still don't have a complete [APRS][] stack that both receives and
+transmits, but I did get more work done on [go-aprs][] that uses
+[go-nma][] to cause my phone and tablet to go off if anyone mentions
+my callsign on the radio.
+
+I started [sallingshome][] to manage some of the goings on around my
+house.  Primarily, it just has the chore management of the house.
+Kids go there to see what tasks are available, they do the things, the
+things get marked done and unavailable for their respective repeat
+periods and I have a lot of things to pay for.  It was my first
+from-scratch Angular project which *really* helped my understanding,
+but it's also used a lot around my house.  If you think it'll help
+you, let me know and I'll try to document it enough to let someone
+else run it.
+
+# February
+
+February saw a lot more cbugg work.  It was addictive, so we kept
+going.
+
+<div>
+  <img src="/images/2013-cbgb.png" alt="cbgb" title="cbgb" class="floatleft"/>
+</div>
+
+But we also figured out what we were doing with [cbgb][].
+[Steve Yen][steve] and I made a pretty useful working clone of
+Couchbase Server in pure go.  In particular, I did a lot of work to
+scale it up to large numbers of buckets.  That was some fun work that
+led to me extracting [go-broadcast][] and making a heavily
+multiplexing implementation of it I used when I had hundreds of
+thousands of things that could be wanting ticks and what-not.
+
+These projects took most of my time, but I also did a little work on
+[frames][], [go-couchbase][], [seriesly][], [location][],
+and a few other things.
+
+# March
+
+March was tons more [cbgb][].  We had a mission of supporting any
+application that could run against Couchbase, but in a single binary
+download.  We were evaluating this by running [cbfs][], [cbugg][],
+and whatever other apps we could find against it.  Fixing bugs as we
+found them.
+
+I fixed a few bugs in a [sockjs][] library we were using in cbugg.
+Marty had originally written some magical websocket code, but we run a
+lot of our web services through an Apache frontend, which eats
+websockets, so he chose sockjs as a fallback.  It was decent, but had
+a few broken channel idioms and would hang and/or panic if things
+didn't go perfectly.  Those got contributed back upstream.
+
+[go-jsonpointer][] is built on [my fork][gojson] of go's JSON
+package.  In addition to updating the fork, I ended up plaguing Marty
+with a few bugs in edge cases I wasn't handling well.  It's got a
+pretty good test suite, though, so maintaining it isn't too bad.
+
+I have a tool called [pktreplay][] I use for taking memcached packet
+captures and playing them back against a machine.  We've used this to
+reproduce bugs from customer production sitautions that were difficult
+to simulate from descriptions.  I did a little bit of maintenance on
+this for another customer engagement.
+
+# April
+
+I worked on cbgb a lot more in April.  Just more stuff.
+
+<div>
+  <img src="/images/2013-latency.png" width="250" height="188"
+        alt="latency" title="passive latency" class="floatright"/>
+</div>
+
+I also took a trip to visit a customer who was having some
+unpredictable latency in production.  I built a tool I called
+[pktlatency][] that passively measures latency from packet traces and
+then dumps them into data I could process with R.  After juggling it
+around a bit, I created the plot you see to the right showing
+distributions of slow responses by server node.  It seems obvious in
+retrospect, but one machine was consistently the source of all the
+issues.  Got the customers netops involved and just hung around in
+Baltimore with [Trond][trond].
+
+I also had been working on a robot that played some games for me
+online at the time.  This involved automatically moving transactions
+around in bitcoind, so I worked a lot on
+[a go bitcoin interface][gobitcoin].  I eventually released my game
+bot code since all the games went away (boo).  It's no longer useful,
+but there were some interesting bits of code in there that someone
+will find useful someday.
+
+There are a few packages called goquery, but I found
+[this one][goquery] and fixed up and implemented some of the parts
+that I needed and got that back upstream.
+
+I wrote a really neat backup mechanism for cbfs that backs up into
+itself.  I should really do a post on this, but I've made use of it
+several times.  On catastrophic failure of Couchbase, I can restore
+terabytes of data in minutes.  I've made use of this a few times
+(though generally because I just decide to destroy my database).
+
+# May
+
+In May I rewrote one of my photo album incarnations on AngularJS.
+That was exciting.
+
+I also did a tiny bit of work on [sync_gateway][].  My go infection
+spread to co-workers who built some pretty awesome software from idea
+to deployment in go.
+
+cbfs' backup tool was pretty great, but older backups could reference
+objects that no longer existed since GC was only rooted by current
+file references.  I wanted to make sure that everything that existed
+in backups was always available, so I decided to consider objects in
+backups gc roots as well.  I wrote [go-hashset][] as an efficient way
+to maintain and operate on sets of hashes used as object references.
+At the time, I had somewhere around 200k distinct live objects, but I
+was building for billions and it was fun.
+
+# June
+
+I mostly fixed bugs in June.  I worked on [Steve's][steve] slabber
+some, a lot of go-couchbase, finished off my hashset, and a few other
+things.  168 commits across 22 projects as far as the github public
+feed saw.
+
+One thing that was fun in June, though, was the way I capture the
+public feed data.  I wrote a tool that syncs it up with a chunk of
+cbfs so I've always got recent, replicated copies of the data
+locally.  That was very handy when I wanted to research this blog
+post.  :)
+
+# July
+
+<div>
+  <img src="/images/cbfsperf.png"
+        alt="cbfs perf" title="cbfs perf" class="floatleft"/>
+</div>
+
+In July, I actually blogged a little.  I had a post about
+[using SIGINFO][siginfo] to ask for interactive process information
+The Unix Way (unless you're on Linux).
+
+That helped me understand download problems I was running into which
+led to my writing [go-saturate][].
+
+Now my downloads can kill networks again.
+
+This month, I also started working on [Couchbase Cloud][cloud].  It's
+a self-service frontend to a usable sync_gateway you can use as a sync
+point for [Couchbase Mobile][cbmobile].  It's AngularJS, go, and
+cbgb.  It was one of the biggest things I worked on in July, but only
+accounted for about 12% of my commits.
+
+# August
+
+Although I worked on 30 projects in August, most were relatively
+small.  I extracted the logger used in sync_gateway into a project
+called [clog][].  Not because the world needed another logger, but
+because it helped meet Marty's requirements for something more easily
+than the rest of them.
+
+I built [papertrails][] to roll up my logs that get dumped into S3
+from [papertrail][] monthly.  It's small, but really quite useful (and
+I'm about to run it for all of December's logs).  That's slightly
+exciting for me.  These replicate through [btsync][] into cbfs and all
+that fun stuff.
+
+I also did some work on [go-coap][] as I began using it in Couchbase
+Cloud as a cheap and lossy means of reporting some DB events.
+[CoAP][] is like a really lightweight HTTP over UDP.  I POST DB events
+such as opening and closing of DBs with their sizes and stuff to the
+management system.  If it's busy or dropped, it's not an issue.  Most
+importantly it's not polling and the code delivering the events isn't
+burdened with lots of file descriptors, a slow or down server, etc...
+
+# September
+
+September is when I started having actual users on Couchbase Cloud, so
+we got the necessary features in for it to go by itself, logging,
+monitoring, and supervision.
+
+This means I worked on supporting tools such as [logexec][] which
+makes it super easy to send arbitrary programs' output to syslog
+(i.e. papertrail), go-couchbase, cbgb, go-coap.
+
+I also designed a new circuitboard for my [washer project][], though
+when I got around to hardware procurement, I think I found something
+even better.  It's in front of me, not assembled.
+
+# October
+
+
+<div>
+  <a href="http://cbvis.west.spy.net/static/vbuckets.html?cluster=http%3A//mango.hq.couchbase.com%3A8091/"><img src="/images/2013-vbmap.png" width="250" height="150"
+      alt="vbmap" title="vbmap" class="floatright"/></a>
+</div>
+
+My birthday is in October.  But later in the month, I got to go visit
+a customer in Montréal.  They had a decent amount of data and traffic,
+so I got to pull out an old tool I'd built for watching our clusters
+rebalance.
+
+The link to the right will take you to a live visualization of a
+fairly boring cluster I've got.  Just trust me, it's super-exciting
+when it's not stable.  I've got record and playback tools to let me
+see what this looked after the fact and with variable time.
+
+I started using [docker][] a lot more and creating tools like
+[confsed][] to help dynamically rewrite JSON APIs that try to
+magically discover their addresses to proper external addresses that
+aren't known until instance run time.
+
+I wrote [go-manifest][] (last month, really) and [go-set-versions][]
+as an example of how trivial it is to manage go packages if you try.
+I wrote the first one while eating lunch at my desk just to show how
+to easily determine the revisions of all of your dependencies as your
+project is built.  The latter just to reverse it since I had a couple
+people not believing the process could be reversed... somehow.
+
+But I don't use such things myself.  I like progress, so I wish
+everyone to run the latest everything.  The fear, of course, is that
+things will break and you won't know about them for long periods of
+time.  For this, I wrote [gadzooks][].  I have an instance of this
+running on GAE that sees every public change that goes through github,
+as well as acting like a github hook receiver (which I populate with
+[setuphooks][setuphooks]).  You configure sets of dependencies and a
+build to trigger to [drone.io][] or your favorite CI system and any
+time anything that *might* affect your build changes, your build gets
+triggered.
+
+# November
+
+<div>
+  <a href="//github.com/dustin/randbo/raw/master///randbo.png"><img
+    src="//github.com/dustin/randbo/raw/master///randbo.png" width="250" height="200"
+      alt="randbo" title="randbo" class="floatleft"/></a>
+</div>
+
+[Randbo][randbo] was one of those projects that just had to be written
+because of the name.  Someone wanted a way to grab arbitrary random
+`[]byte`s in go, which to me, means you want an `io.Reader`.  I'd
+written something like it before, so I threw it together.  I'm sure I
+spent more time on the image.
+
+I published my first CRAN package:  [humanFormat][].  This is similar
+to my [go-format][] package, but for R.  I was doing some R plots and
+got tired of pasting in the same format functions and changing them
+slightly depending on my data.  I must say, it's a lot more difficult
+to get a package available to people in R than in go.  They really vet
+it.  You have to pass all the tests (of course it failed on Windows
+the first time, because Windows can't spell μs properly), document all
+the things, etc...
+
+I pretty much rewrote [go-couch][] tests from scratch.  I wanted to
+get
+![coverage](https://coveralls.io/repos/dustin/go-couch/badge.png?branch=master)
+and not have to hit an actual CouchDB every time.
+
+[coveralls][] is a great tool which I started using a lot more.  This
+led to major work on [goveralls][] including adding support for go
+1.2's built-in cover tool, offline executions of coverage and several
+fixes for issues I ran into.
+
+I added go template support to [docker][docker] inspect so you can
+more easily script things on your docker hosts.
+
+My [gosh][] server I use for doing builds and deployments
+from webhooks in such a way that doesn't excessively use resources
+seemed like it deserved a proper repo instead of the gist I'd been
+keeping it in.
+
+<div>
+  <img src="http://west-spy.appspot.com/house/" width="272" height="193"
+      alt="house" title="house" class="floatright"/>
+</div>
+
+And look to your right.
+
+[This][This] is actually rendering and serving from GAE in a neat
+batch processing thing that gets data from my house and processes it
+on demand.
+
+That was a fun challenge for which I learned pull queues and generally
+learned how to be really lazy with resources on GAE.
+
+# December
+
+<div>
+  <a href="http://ph.couchbase.net/"><img src="/images/2013-ph.png" width="250" height="200"
+      alt="phone home" title="watch phone home events" class="floatleft"/></a>
+</div>
+
+I finally got to open source the [stat collector][] we use to collect
+anonymous statistics from field units at Couchbase.  It was mostly
+closed because I had some passwords and stuff in it.  Opening it is
+really great because I abstractly talked about it when trying to help
+people out on Google App Engine apps, but couldn't show them real code
+I'd written because I did dumb stuff like store passwords and junk it.
+
+Click the image to see people (who opted in for anonymous stat
+collection) using Couchbase right now.
+
+[Yellow][yellow] is which is a tiny go library that helps you raise
+awareness of bits of your code that are executing more slowly than you
+expect in production.  It's another thing I've pulled out of a few
+applications and wanted to get some reuse out of it.
+
+<div>
+  <a href="http://camlistore.org/"><img src="/images/2013-tardis.png" width="250" height="244"
+      alt="time travel" title="time travel" class="floatright"/></a>
+</div>
+
+In the last half of of December, I started getting involved in
+[camlistore][] which is really quite fun.  I [wrote a little][xattr]
+about my adventures in extended attributes over on google plus, but
+suffice it to say I've been well over my head for a while.  I went
+from not knowing anything about FUSE or camlistore to wanting to
+implement a means of looking at any point in the history of the
+filesystem by timestamp.
+
+And then I thought it'd be a good idea to make a Mac OS X GUI for all
+the things camlistore.
+
+I do plan on working on it a lot more, though.  It's a really great project.
+
+
+[cbfs]: http://dustin.sallings.org/2012/09/27/cbfs.html
+
+[gitmirror]: https://github.com/dustin/gitmirror
+
+[cbugg]: https://github.com/couchbaselabs/cbugg
+
+[couchbase]: http://www.couchbase.com/
+
+[go-couchbase]: https://github.com/couchbaselabs/go-couchbase
+
+[aaron]: http://crate.im/
+
+[AngularJS]: http://angularjs.org/
+
+[marty]: https://github.com/mschoch
+
+[attachments]: https://www.youtube.com/watch?v=V0QpTnKaNE8
+
+[setuphooks]: https://github.com/dustin/gitmirror/tree/master/setuphooks
+
+[APRS]: http://en.wikipedia.org/wiki/Automatic_Packet_Reporting_System
+
+[go-aprs]: https://github.com/dustin/go-aprs
+
+[go-nma]: https://github.com/dustin/go-nma
+
+[sallingshome]: https://github.com/dustin/sallingshome
+
+[cbgb]: http://cbgb.io/
+
+[steve]: https://github.com/steveyen
+
+[go-broadcast]: https://github.com/dustin/go-broadcast
+
+[frames]: https://github.com/dustin/frames
+
+[seriesly]: https://github.com/dustin/seriesly
+
+[location]: https://github.com/dustin/location
+
+[sockjs]: https://github.com/igm/sockjs-go/
+
+[go-jsonpointer]: https://github.com/dustin/go-jsonpointer
+
+[gojson]: https://github.com/dustin/gojson
+
+[pktreplay]: https://github.com/couchbaselabs/pktreplay
+
+[pktlatency]: https://github.com/couchbaselabs/pktlatency
+
+[trond]: http://trondn.blogspot.com/
+
+[gobitcoin]: https://github.com/GeertJohan/go.bitcoin
+
+[goquery]: https://github.com/opesun/goquery
+
+[sync_gateway]: https://github.com/couchbase/sync_gateway
+
+[go-hashset]: https://github.com/dustin/go-hashset
+
+[siginfo]: /2013/07/04/siginfo.html
+
+[go-saturate]: /2013/07/17/saturate.html
+
+[cloud]: http://www.couchbasecloud.com/
+
+[cbmobile]: https://github.com/couchbase/mobile
+
+[clog]: https://github.com/couchbaselabs/clog
+
+[papertrails]: https://github.com/dustin/papertrails
+
+[papertrail]: http://papertrailapp.com/
+
+[btsync]: http://www.bittorrent.com/sync
+
+[go-coap]: https://github.com/dustin/go-coap
+
+[CoAP]: http://tools.ietf.org/html/draft-ietf-core-coap-18
+
+[logexec]: https://github.com/dustin/logexec
+
+[washer project]: /2012/09/16/wash.html
+
+[docker]: http://docker.io/
+
+[confsed]: https://github.com/dustin/confsed
+
+[go-manifest]: https://github.com/dustin/bindir/blob/master/go-manifest
+
+[go-set-versions]: https://github.com/dustin/bindir/blob/master/go-set-versions
+
+[gadzooks]: https://github.com/dustin/gadzooks
+
+[drone.io]: http://drone.io/
+
+[randbo]: https://github.com/dustin/ranbdo
+
+[humanFormat]: http://cran.r-project.org/web/packages/humanFormat/index.html
+
+[go-format]: https://github.com/dustin/go-format
+
+[go-couch]: https://github.com/dustin/go-couch
+
+[coveralls]: http://coveralls.io/
+
+[goveralls]: https://github.com/mattn/goveralls
+
+[gosh]: https://github.com/dustin/gosh
+
+[This]: https://github.com/dustin/westspy
+
+[stat collector]: https://github.com/couchbaselabs/statstore
+
+[yellow]: https://github.com/dustin/yellow
+
+[camlistore]: http://camlistore.org/
+
+[xattr]: https://plus.google.com/105229686595945792364/posts/449d7ohG1aH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
