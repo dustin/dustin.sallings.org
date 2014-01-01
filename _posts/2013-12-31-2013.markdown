@@ -24,7 +24,7 @@ more.
 
 Today, I wrote
 [a little program](https://gist.github.com/dustin/8202528) to dig
-through all the github public events of 2013 (about 82 million)) I
+through all the github public events of 2013 (about 82 million) I
 store in [cbfs][] and figure out which ones were of my doing.  That
 yielded 2,483 push events, which I reviewed in a google spreadsheet to
 find 2,110 of them that were actually my fault.
@@ -56,7 +56,7 @@ understanding of what it was like to throw an app together really
 quick with this.  [Aaron Miller][aaron] saw the initial version and
 made a new UI for it in in [AngularJS][] that was really great.
 
-[Marty Shoch][marty] came along and did some really awesome search
+[Marty Schoch][marty] came along and did some really awesome search
 integration.  Overall, it's been pretty great.
 
 I did some work on [cbfs][] since I keep increasingly more critical
@@ -129,7 +129,7 @@ pretty good test suite, though, so maintaining it isn't too bad.
 
 I have a tool called [pktreplay][] I use for taking memcached packet
 captures and playing them back against a machine.  We've used this to
-reproduce bugs from customer production sitautions that were difficult
+reproduce bugs from customer production situations that were difficult
 to simulate from descriptions.  I did a little bit of maintenance on
 this for another customer engagement.
 
