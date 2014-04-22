@@ -31,7 +31,7 @@ By setting up an alternate using my [git alternate][2] command:
 
 You can then gc and free up gangs of disk:
 
-    dhcp-39:/tmp/photo 601% git gc 
+    dhcp-39:/tmp/photo 601% git gc
     Nothing new to pack.
     Removing duplicate objects: 100% (256/256), done.
     dhcp-39:/tmp/photo 602% du -sh .git
@@ -43,5 +43,4 @@ You don't need my [git alternate][2] command, for that, of course, but
 it makes it a bit easier when you've got a lot of them to do.
 
 [1]:http://www.kernel.org/pub/software/scm/git/docs/gitrepository-layout.html
-[2]:http://gitorious.org/projects/bindir/repos/mainline/blobs/master/git-alternate
-
+[2]:https://github.com/dustin/bindir/blob/master/git-alternate
