@@ -303,8 +303,8 @@ triggered.
 # November
 
 <div>
-  <a href="//github.com/dustin/randbo/raw/master///randbo.png"><img
-    src="//github.com/dustin/randbo/raw/master///randbo.png" width="250" height="200"
+  <a href="//raw.githubusercontent.com/dustin/randbo/master/randbo.png"><img
+    src="//raw.githubusercontent.com/dustin/randbo/master/randbo.png" width="250" height="200"
       alt="randbo" title="randbo" class="floatleft"/></a>
 </div>
 
