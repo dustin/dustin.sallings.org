@@ -27,10 +27,10 @@ empty.
 
 Channels practically do all the work for you.
 
-For example, the core of the first version of the pool I wrote
-for [go-couchbase][go-couchbase] follows.  `cp.connections` is a
-buffered channel of `*memcached.Client` and `cp.mkConn` will build a
-new connection whenever one is needed.
+For example, the core of the first version of the pool I wrote for
+[go-couchbase][go-couchbase] follows.  `cp.connections` is a buffered
+channel of `*memcached.Client`.  `cp.mkConn` will build a new
+connection whenever one is needed.
 
 {% highlight go %}
 func (cp *connectionPool) Get() (*memcached.Client, error) {
@@ -129,12 +129,22 @@ connection, we remove it again.
 
 `Return` is roughly the same, save the overflow semaphore management.
 
-The `Get` method is trickier.  The outer select attempts to wait up to
-a millisecond to get an existing connection.
+The `Get` method is trickier.  There's a `select` block nested within
+another `select` block.  The outer one only attempts to wait for an
+existing connection.  If one becomes available relatively soon (one
+millisecond), we just use it.  It's generally better to use an
+existing connection than open a new one.
 
-If a connection is not available within a millisecond, we go into an
-inner select which still waits for a connection, but also waits for
-room in the connection semaphore.
+If the pool wait times out, we go into the inner `select`.  It should
+be noted that this is similar, but is different in an important way.
+We still wait for an available connection, but we also wait for the
+ability to create a new connection.  Waiting for this connection
+semaphore in the outer `select` block would cause us to open
+connections prematurely.
+
+Rolling them into a single `select` is perfectly valid if the objects
+and their creation are cheap, but when they're not, it's easy enough
+to prefer reuse over creation as I've done here.
 
 ## Final Version
 
