@@ -303,8 +303,8 @@ triggered.
 # November
 
 <div>
-  <a href="//raw.githubusercontent.com/dustin/randbo/master/randbo.png"><img
-    src="//raw.githubusercontent.com/dustin/randbo/master/randbo.png" width="250" height="200"
+  <a href="//raw.github.com/dustin/randbo/master/randbo.png"><img
+    src="//raw.github.com/dustin/randbo/master/randbo.png" width="250" height="200"
       alt="randbo" title="randbo" class="floatleft"/></a>
 </div>
 
@@ -492,7 +492,7 @@ I do plan on working on it a lot more, though.  It's a really great project.
 
 [drone.io]: http://drone.io/
 
-[randbo]: https://github.com/dustin/ranbdo
+[randbo]: https://github.com/dustin/randbo
 
 [humanFormat]: http://cran.r-project.org/web/packages/humanFormat/index.html
 
