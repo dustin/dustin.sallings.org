@@ -224,7 +224,7 @@ Repeat the same for elevator and enjoy the magic.
 # But I'm Lazy!
 
 You can look over the OpenTX [printout](/static/nanoqx-printed.html) of the
-model, or just [download the model](/static/nanoqx.eepe) directly to play with
+model, or just [download the model][model] directly to play with
 it.
 
 [taranis]: http://www.frsky-rc.com/product/pro.php?pro_id=137
@@ -233,3 +233,4 @@ it.
 [orangerx]: http://www.hobbyking.com/hobbyking/store/__51704__OrangeRX_DSMX_DSM2_Compatible_2_4Ghz_Transmitter_Module_JR_Turnigy_compatible_US_Warehouse_.html?strSearch=orangerx
 [dsm2]: https://www.spektrumrc.com/Technology/DSM2.aspx
 [dsmx]: https://www.spektrumrc.com/Technology/DSMX.aspx
+[model]: https://raw.githubusercontent.com/dustin/taranis/master/nanoqx.eepe
