@@ -1,0 +1,153 @@
+---
+layout: post
+title: Opensky
+---
+
+# Opensky
+
+<div>
+    <img src="/images/openskyrx.jpg" alt="opensky"
+        title="an opensky rx"
+        class="floatright" width="300" height="300" />
+</div>
+
+I've been doing a lot hardware stuff recently.  I didn't know much
+about hardware when I started and I like learning, so this is a lot of
+fun for me.  Let me introduce you to a project I've been doing some
+work on lately called Opensky.
+
+Opensky is an open source hardware and software RC receiver that
+speaks the Frsky D8 protocol, so it interoperates with
+[Frsky Taranis][taranis].  To the right is an Opensky receiver I
+built and use on one of my smaller flying things.
+
+My contributions to Opensky so far have been small.  I documented the
+[hardware requirements (BOM)][openskyhw] in case someone else wanted
+to build one and added a few firmware features.  I made it easier to
+bind to a transmitter after flashing the firmware and added RSSI PPM
+injection since I like the way that works in [OpenLRSng][openlrs].
+
+Failsafe is critical for a remote control system, and Opensky's
+failsafe works reasonably well, but can be a bit tricky to set up
+correctly.  The existing failsafe detects a loss of radio link and
+sets all channels to 1000μS and continues these pulses.  The problem
+is that I'm getting about 995μS pulses at minimum, so the failsafe
+value is actually higher than my lowest transmitted value.  The flight
+controller can't know that the connection is down without some odd
+tweaking, so the failsafe ends up not being very safe in this case.
+
+Last week's project was writing a couple [Saleae Logic][saleae]
+analyzer plugins for helping me analyze this sort of thing.  I didn't
+actually have an application at the time, but I figured it'd be fun.
+As it turns out, my [CPPM][logiccppm] analyzer was helpful in figuring
+out how to make a better failsafe last night.
+
+First, I took at look at what the [d4r-ii][d4r] "no pulses" failsafe
+looked like on the wire.  It's not exactly what I expected, but
+shortly after turning off my transmitter, the signal line went high
+and stayed there:
+
+<div>
+  <img src="/images/d4r-failsafe.png" width="100%"
+    class="centered" alt="d4r failsafe" title="D4R Failsafe"/>
+</div>
+
+Getting the Opensky to do that was a [small bit of code][openskyfs],
+but I'd kind of screwed myself over on the programming aspect.
+
+The Opensky RX is based on Arduino in the sense that it uses at
+atmega328p microcontroller and uses the arduino toolkit for building
+the firmware images.  The receiver itself has a UART exposed and can
+be programmed directly from the Arduino software if you include the
+boot loader.
+
+<div>
+    <img src="/images/programming-opensky.jpg" alt="programming-opensky"
+        title="my awesome ICSP setup"
+        class="floatleft" width="300" height="222" />
+</div>
+
+But of course, I didn't do that when I made mine.  So I had to rig up
+an ICSP setup with the soldering of a bunch of tiny bits of wire and
+metal, some chip clips, and a bunch of other crap that ended up
+looking like the thing to the left.
+
+You can't really see all the detail in the mess, but the one wire mast
+that has to be dropped approximately into the center of the board is
+non-trivial.  But it worked.  As a favor to my future self, I went
+ahead and added the arduino bootloader.
+
+Adding the arduino bootloader provides a couple major advantages.
+First, I can program the thing without all that wiring difficulty.
+But also, I can actually interact with the thing's serial port for
+debugging and stuff.  I figured I'd give this a go.
+
+<div>
+    <img src="/images/opensky-devkit.jpg" alt="programming-opensky v2"
+        title="Opensky Dev Kit V2"
+        class="floatright" width="300" height="222" />
+</div>
+
+To the right, you can see the current version of my opensky dev kit.
+I installed a single right angle pin to get to DTR off the Opensky RX
+itself, and then just used a six pin female connector to plug it in.
+I added male connectors to access all the individual pins, but ran a
+common ground across the board.
+
+The board also has a 3v3 regulator to run the RX off a battery as well
+as another six pin female connector (and breakout male pins) that
+allow me to plug a CP2102 (USB/UART adaptor) breakout board in.  Of
+course, the serial port and DTR are already wired up.  You just need
+one jumper wire to specify the desired power source (battery or the
+CP2102's 3v3 output).
+
+Hopefully this allows me to do some more dev on this thing since there
+are more things I'd like to do.
+
+In the meantime, here are a couple of pictures of how I'm using one of
+these in real life:
+
+I attached the Opensky RX directly to an [afromini][afromini].  The RX
+itself requires 3V3 (any more and you kill the radio), so I removed
+the input voltage pin I had an ran a bit of 30AWG silicone wire to the
+output of the LDO that provides power to the main processor on the
+flight controller.  This worked out pretty well:
+
+<div>
+  <img src="/images/opensky-afromini.png" width="100%"
+    class="centered" alt="opensky on afromini"
+    title="Opensky on Afromini"/>
+</div>
+
+The above is the control system for my 190mm quad which has been quite
+fun to fly.  The RSSI over PPM lets me verify I'm not getting a
+weakened control signal (on OSD) as I fly around.
+
+<div>
+  <img src="/images/sparrow.png" width="100%"
+    class="centered" alt="my sparrow"
+    title="Completed Sparrow (with opensky)"/>
+</div>
+
+If you want to make an Opensky RX yourself, check out the
+[hardware][openskyrx] page for the list of parts to get started along
+with a couple boards from [oshpark][openskyosh].  There's more
+documentation to write, but I found enough to get stuff working quite
+well.
+
+This stuff keeps me busy.  I feel like have no idea what I'm doing,
+but in the end, the things I make fly (and help others make things
+fly).  That's very rewarding.
+
+
+[frsky]: http://frsky-rc.com/
+[taranis]: http://www.frsky-rc.com/product/pro.php?pro_id=137
+[openskysw]: https://github.com/readerror67/OpenSkyRX
+[openskyhw]: https://github.com/Brotronics/OpenSky
+[openlrs]: http://openlrsng.org/
+[logiccppm]: https://github.com/dustin/logic-cppm
+[d4r]: http://www.frsky-rc.com/product/pro.php?pro_id=24
+[openskyfs]: https://github.com/dustin/OpenSkyRX/commit/7715d6eb60944557a1661f55530ae8639f6b8ae0
+[afromini]: http://www.multirotorsuperstore.com/flight-controllers/afromini-32.html
+[openskyosh]: https://oshpark.com/shared_projects/p9XDsm1u
+[saleae]: https://www.saleae.com/
