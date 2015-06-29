@@ -1,0 +1,115 @@
+---
+layout: post
+title: Playing with LEDs
+---
+
+# Playing with WS2812 LEDs
+
+<div>
+    <img src="/images/led.jpg" alt="led"
+        title="a WS2812 multicolor LED"
+        class="floatright" width="300" height="307" />
+</div>
+
+I've been playing with WS2812 addressable LEDs for a few days now.
+They're kind of neat.  You can read a lot about these in
+[Adafruit's Neopixel Überguide][uber], but there are a wide variety of
+these things available and lots of interesting applications.
+
+I ordered a handful from Adafruit last time I needed some stuff from
+there and finally got around to playing with them.
+
+Of course, the first thing I did was wire them up and try to play with
+existing sketches.  That was neat, but I wanted to figure out how hard
+it would be to deploy them into something else.  I came across this
+really great [PicoC project for Tau Labs][tlled] that embedded an
+attiny85 into a servo wire and used it to provider a higher level
+abstraction to interacting with the LEDs.
+
+## Friday's Projects
+
+<img src="https://github.com/dustin/logic-ws2812/raw/master/docs/ws2812.png"
+    alt="logic screenshot" title="Logic Plugin for WS2812" width="640"
+    class="centered"/>
+
+Friday's first project of the evening was to write a
+[WS2812 Saleae Logic plugin][logic].  Josh.com had a
+[nice informative post][josh] explaining a lot of details about other
+ways to play with them, which inspired me to play around with sniffing
+stuff out and see what's going on should I try out a few of these
+alternative libraries.
+
+The nice side-effect is that I was able to see what a particular
+program would look like on a longer strand of LEDs without having a
+long strand.  The simulator is more of a replay tool of recorded data
+that was sent over the wire, regardless of how many actual LEDs were
+there.
+
+e.g., I only have 5, but my simulator let me see what 13
+would look like on strandtest by running the actual program on my
+actual arduino.  The result looks like this:
+
+<div id="wssim"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"
+    charset="utf-8"></script>
+<script src="/static/ws2812.js" charset="utf-8"></script>
+
+Initially, I was running the default configured for 60 LEDs.  I
+certainly don't have that many, but it makes a [nicer demo][60block].
+
+## Saturday
+
+Saturday, I had dance recitals and other stuff, so I didn't get much
+done.  My biggest accomplishment was building a bit of code I could
+run on my attiny85 to allow PWM-based light mode selection.  I coded
+up a couple of modes and had a simple table to select which mode
+based on the minimum PWM level (in μS) like this:
+
+```c
+struct {
+    unsigned long minVal;
+    void (*mode)();
+} modes[] = {
+    {1500, flash},
+    {900, pulse},
+    {0, emergency},
+};
+```
+
+This is a dumber version of the Tau Labs thing above, but it means it
+can work with dumber things, which is nice.
+
+## Sunday
+
+<img src="/images/livermore.jpg" alt="livermore" title="Livermore" class="centered"/>
+
+Sunday, I ended up out driving most of the day.  It was nice out.  Not
+a lot of time again, but I did get to miniaturize the bits from
+yesterday.
+
+I had to hack together a 500Ω resistor out of two 1kΩ 0603 resistors I
+soldered together to attach the output signal wire.  All fits snugly
+inline like this, though:
+
+<img src="/images/ws2812-wire.jpg" alt="ws2812 wire" title="WS2812 Wire"
+    class="centered"/>
+
+In the end, I have my mode selection.  Note "emergency" mode is when
+there's no PWM signal at all, as in the beginning of this video.
+Power with no valid signal == flash red.  Otherwise, pick the "pulse"
+mode on the lower end and "flash" at the upper end.
+
+See my quick demo here with a servo tester to emit the PWM signal:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FuRvBpahmBI"
+    frameborder="0" allowfullscreen="1"></iframe>
+
+I haven't fully figured out what I want to do with the lights yet, but
+they're pretty fun.
+
+[uber]: https://learn.adafruit.com/adafruit-neopixel-uberguide/overview
+[tlled]: https://github.com/TauLabs/TauLabs/wiki/PicoC-Project:-RGB-LEDs
+[60block]: http://bl.ocks.org/dustin/e7207542c69ecbb53ca9
+[logic]: https://github.com/dustin/logic-ws2812
+[josh]: http://wp.josh.com/2014/05/13/ws2812-neopixels-are-not-so-finicky-once-you-get-to-know-them/

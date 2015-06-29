@@ -262,3 +262,12 @@ dl {
 abbr {
     border-bottom: 1px dotted;
   }
+
+circle.node {
+    stroke: black;
+    stroke-width: 1px;
+}
+
+line.link {
+    stroke: black;
+}
