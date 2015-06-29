@@ -32,18 +32,23 @@ abstraction to interacting with the LEDs.
     alt="logic screenshot" title="Logic Plugin for WS2812" width="640"
     class="centered"/>
 
-Friday's first project of the evening was to write a
-[WS2812 Saleae Logic plugin][logic].  Josh.com had a
-[nice informative post][josh] explaining a lot of details about other
-ways to play with them, which inspired me to play around with sniffing
-stuff out and see what's going on should I try out a few of these
-alternative libraries.
+Josh.com had a [nice informative post][josh] explaining a lot of
+details about other ways to play with them, which got me very
+interested in sniffing stuff out and see what's going on should I try
+out a few of these alternative libraries.
 
-The nice side-effect is that I was able to see what a particular
-program would look like on a longer strand of LEDs without having a
-long strand.  The simulator is more of a replay tool of recorded data
-that was sent over the wire, regardless of how many actual LEDs were
-there.
+This inspired me to write friday's first project of the evening -- a
+[WS2812 Saleae Logic plugin][logic].  As seen in the screenshot above,
+this detects which lights should be which color at exactly what time
+offset as things go across the wire, both interactively above, and in
+an export allowing further processing.
+
+So the obvious second project for Friday night was to write a playback
+tool for these recordings.  The nice side-effect is that I was able to
+see what a particular program would look like on a longer strand of
+LEDs without having a long strand.  I could just tell an arduino I had
+N LEDs and record the signal it sent out to the phantom LEDs (without
+even having to plug a single one in).
 
 e.g., I only have 5, but my simulator let me see what 13
 would look like on strandtest by running the actual program on my
