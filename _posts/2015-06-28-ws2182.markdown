@@ -21,10 +21,13 @@ there and finally got around to playing with them.
 
 Of course, the first thing I did was wire them up and try to play with
 existing sketches.  That was neat, but I wanted to figure out how hard
-it would be to deploy them into something else.  I came across this
-really great [PicoC project for Tau Labs][tlled] that embedded an
-attiny85 into a servo wire and used it to provider a higher level
-abstraction to interacting with the LEDs.
+it would be to deploy them into something else.
+
+I came across this really great [PicoC project for Tau Labs][tlled]
+that embedded an attiny85 into a servo wire and used it to provider a
+higher level abstraction to interacting with the LEDs.  I built one of
+these real quick (though changed the wire protocol slightly to allow
+me to address one pixel at a time).
 
 ## Friday's Projects
 
@@ -94,24 +97,26 @@ a lot of time again, but I did get to miniaturize the bits from
 yesterday.
 
 I had to hack together a 500Ω resistor out of two 1kΩ 0603 resistors I
-soldered together to attach the output signal wire.  All fits snugly
-inline like this, though:
+soldered together to attach the output signal wire.  You can see the
+progress of this as it went from prototype on a breadboard, through
+the tiny soldering to the ready-for-consumer product (almost):
 
 <img src="/images/ws2812-wire.jpg" alt="ws2812 wire" title="WS2812 Wire"
     class="centered"/>
 
-In the end, I have my mode selection.  Note "emergency" mode is when
-there's no PWM signal at all, as in the beginning of this video.
-Power with no valid signal == flash red.  Otherwise, pick the "pulse"
-mode on the lower end and "flash" at the upper end.
-
-See my quick demo here with a servo tester to emit the PWM signal:
+In the end, I have my mode selection on a wire, demoed below.  Note
+"emergency" mode is when there's no PWM signal at all, as in the
+beginning of this video (flash red).  Then I switched to the servo
+tester to try varying the PWM level to see it hit different modes.  As
+shown in the snippet above, "pulse" is on the lower end and "flash" is
+on the upper end.  The names might not be useful, but you can see the
+difference in the demo.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FuRvBpahmBI"
     frameborder="0" allowfullscreen="1"></iframe>
 
 I haven't fully figured out what I want to do with the lights yet, but
-they're pretty fun.
+I'm having fun.
 
 [uber]: https://learn.adafruit.com/adafruit-neopixel-uberguide/overview
 [tlled]: https://github.com/TauLabs/TauLabs/wiki/PicoC-Project:-RGB-LEDs
