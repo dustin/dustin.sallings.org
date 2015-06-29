@@ -66,7 +66,7 @@ run on my attiny85 to allow PWM-based light mode selection.  I coded
 up a couple of modes and had a simple table to select which mode
 based on the minimum PWM level (in μS) like this:
 
-```c
+{% highlight c %}
 struct {
     unsigned long minVal;
     void (*mode)();
@@ -75,7 +75,7 @@ struct {
     {900, pulse},
     {0, emergency},
 };
-```
+{% endhighlight %}
 
 This is a dumber version of the Tau Labs thing above, but it means it
 can work with dumber things, which is nice.
