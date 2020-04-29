@@ -5,9 +5,9 @@ title: GoPro Plus
 
 This is the story of a project I started (almost exactly) two months
 ago.  Not much of it is about the code itself (links at the bottom),
-but you can read what I did and why I and stuff.  I got to write a
-bunch of stuff in my favorite language and learn a new language along
-the way.  I also got a little bit of control over my media.
+but you can read what I did and why and stuff.  I got to write a bunch
+of stuff in my favorite language and learn a new language along the
+way.  I also got a little bit of control over my media.
 
 # GoPro Plus
 
