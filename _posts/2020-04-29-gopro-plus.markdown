@@ -265,7 +265,8 @@ less code.
 My logger looks like this:
 
 ```haskell
-notificationLogger :: TChan Notification -> (Loc -> LogSource -> LogLevel -> LogStr -> IO ())
+notificationLogger :: TChan Notification
+                   -> (Loc -> LogSource -> LogLevel -> LogStr -> IO ())
 notificationLogger ch _ _ lvl str = case lvl of
                                       LevelDebug -> pure ()
                                       LevelInfo  -> note NotificationInfo
@@ -410,7 +411,7 @@ column names returned from the SQL query (e.g., `camera_model` above)
 and row values/types.  I fixed up something like 800 bad items with a
 single, simple command.
 
-    fixup "select m.media_id, g.camera_model ..."
+    gopro fixup "select m.media_id, g.camera_model ..."
 
 I also used this for individual edits since I could craft literal rows
 for edits easily enough and didn't otherwise need to make a special
