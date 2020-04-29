@@ -188,7 +188,7 @@ ul.posts {
     border: 1px solid #ddd;
     background-color: #eef;
     font-size: 95%;
-    padding: 0 .2em;
+    padding: 0 0;
   }
   
     #post pre code {
