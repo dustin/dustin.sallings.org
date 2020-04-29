@@ -145,7 +145,7 @@ That was a little unfortunate.  I want access to all of the metadata,
 but after playing with their C code for a bit, I finally realized
 that's quite an uphill battle.
 
-So I finlly just read their spec and wrote a [gpmf
+So I finally just read their spec and wrote a [gpmf
 parser](https://github.com/dustin/gpmf) from scratch.  My core GPMF
 parser is under 100 lines of code and gave me complete data from every
 sample I ran into.  The low-level data is a bit too low-level, so I
