@@ -92,7 +92,7 @@ exploring the API endpoint in ghci with
 [aeson](http://hackage.haskell.org/package/aeson).  As it turns out,
 their web app is just a javascript interface to the same API the
 mobile devices use, so it was relatively easy to just watch what it
-does and do all the same thing.
+does and do the same thing.
 
 I spent a bit of time over the weekend just making essential bits.
 The first thing I figured I should do was capture all metadata from
@@ -112,7 +112,7 @@ Initially, I built an interface using
 [crossfilter](http://crossfilter.github.io/crossfilter/) to let me do
 multi-dimensional filtering of my data quickly and easily, but I don't
 much like working in JavaScript, so I decided to learn
-[elm](https://elm-lang.org/) as part o this project.  My new UI in elm
+[elm](https://elm-lang.org/) as part of this project.  My new UI in elm
 was much more pleasant to work with, but there's no crossfilter and
 javascript FFI is awkward even when you're not trying to do something
 that fancy.  But all I really needed was a collection of filter
