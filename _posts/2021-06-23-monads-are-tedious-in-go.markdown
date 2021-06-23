@@ -184,8 +184,9 @@ instance Monad (Either e) where
     Right r >>= k = k r
 ```
 
-i.e., if we get a `Left l`, we return it.  If we get a `Right r` and a
-function, we pass `r` to that function.
+i.e., if we get a `Left l`, we ignore our second param (the function)
+and return the `Left l`.  If we get a `Right r`, we pass `r` to that
+function (named `k` here).
 
 Of course, I wouldn't write it that way either, since monads are also
 applicative functors.  My brain automatically rewrites that using
