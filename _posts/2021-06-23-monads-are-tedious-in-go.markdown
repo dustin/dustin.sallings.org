@@ -63,7 +63,7 @@ There are two downsides, though:
 
 1. You have to add the dreaded `if err != nil { return err }` code
    everywhere.
-2. You're have to check errors and ignore values on error by
+2. You have to check errors and ignore values on error by
    *convention*.
 
 The first point is mildly annoying.  It seems unnecessary and there's
