@@ -175,7 +175,17 @@ addM' a b = do
 Note that this isn't a Haskell language feature that knows how to do
 fancy stuff with `Either a` -- that's just how the library is
 defined.  You can make your own monad that works differently (as long
-as it's [lawful](https://wiki.haskell.org/Monad_laws)).
+as it's [lawful](https://wiki.haskell.org/Monad_laws)).  The
+definition for Either is just this:
+
+```haskell
+instance Monad (Either e) where
+    Left  l >>= _ = Left l
+    Right r >>= k = k r
+```
+
+i.e., if we get a `Left l`, we return it.  If we get a `Right r` and a
+function, we pass `r` to that function.
 
 Of course, I wouldn't write it that way either, since monads are also
 applicative functors.  My brain automatically rewrites that using
