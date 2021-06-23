@@ -54,8 +54,8 @@ care about, but generally can't do anything about at a particular site
 (e.g., java checked exceptions which is always an incomplete list).
 
 In go, a function that might fail will return an error.  This is
-really nice.  You can see what might fail and do decide what to do
-about it.  In most cases, you just pass it up, but you don't have the
+really nice.  You can see what might fail and decide what to do about
+it.  In most cases, you just pass it up, but you don't have the
 situation where you've forgotten to handle a particular exception type
 and your program crashes instead of just failing gently.
 
