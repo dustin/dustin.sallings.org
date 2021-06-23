@@ -31,7 +31,7 @@ someone who doesn't write any Haskell, but they're so fundamental to
 what most code is doing that you just absorb them quickly.
 
 This post isn't meant to be a tutorial on Haskell operators, but `<$>`
-is also spelled `fmap` and basically means "do this function inside
+is also spelled `fmap` and basically means "apply this function inside
 that thing."  e.g., you might apply a function to each element of a
 list, or to the value inside an optional (think nullable pointer).
 `>>=` is the monadic "bind" operator and basically is used to combine
