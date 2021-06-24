@@ -37,7 +37,7 @@ list, or to the value inside an optional (think nullable pointer).
 `>>=` is the monadic "bind" operator and basically is used to combine
 monadic actions.
 
-At this point, you're either confused by jargon or angry for my how
+At this point, you're either confused by jargon or angry for how
 inaccurate my descriptions are.  I intend to make things clearer as I
 write.  I'm actually intending to write more about go, so let's get
 going.
@@ -148,12 +148,12 @@ addM a b =
   pure . show $ ai + bi
 ```
 
-This does the same thing -- we'll either get ai as an int, or it'll
+This does the same thing -- we'll either get `ai` as an int, or it'll
 short-circuit the rest of the function and return the error we got
 from trying to parse the value.  i.e., it does all the `if err != nil
 { return err }` bits for you.
 
-Much like in the iniital version, `ai` is the `Int` form of of the
+Much like in the initial version, `ai` is the `Int` form of of the
 `String` `a` as `bi` is for `b`.  `ai` and `bi` are arguments to
 lambda functions that do stuff with those `Int` values.  It should be
 clear here that there's no possible way to get `ai` if `readInt`
@@ -228,9 +228,10 @@ that will compile if they just embraced the monads they were
 reinventing and got to work at a higher level.
 
 The terminology is probably confusing to folks from strange lands, but
-much like the olde Gang of Four patterns, we see the same stuff a lot
-and name the patterns.  Except we also make libraries that just *do*
-the patterns, so we don't have to reinvent things so frequently.
+much like the olde Gang of Four patterns, you see the same stuff a lot
+and name the patterns.  Except folks also make libraries that just
+*do* the patterns, so we don't all have to reinvent things so
+frequently.
 
 [try]: https://github.com/golang/go/issues/32437
 [liftA2]: https://hackage.haskell.org/package/base-4.15.0.0/docs/Control-Applicative.html#v:liftA2
