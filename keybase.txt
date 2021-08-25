@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/dlsspy
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://dustin.sallings.org
+  * I am dlsspy (https://keybase.io/dlsspy) on keybase.
+  * I have a public key ASCN4UrxoanSj-y8kuLCpPIfxkOc19hknDTCwzAnG2ltPQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "010103ad31061e93d7b6a42ae24a0bf164cf37d33c0ab7990064d3049ac930fd286c0a",
+      "host": "keybase.io",
+      "kid": "01208de14af1a1a9d28fecbc92e2c2a4f21fc6439cd7d8649c34c2c330271b696d3d0a",
+      "uid": "e98fe72a6ea4feef29a7599df55a4500",
+      "username": "dlsspy"
+    },
+    "merkle_root": {
+      "ctime": 1629918178,
+      "hash": "4b27afc13bf63a787a43197d2eee0eeee29183ed3bc83777c3d093d0d9f335e02754ef650cfcef8400f69e1502d103ef68e018b294e81a2c031e2ee6de295330",
+      "hash_meta": "67cb2430abad5498cef936a48b574ad27781b8fd24b22b61d7e18684f465abb8",
+      "seqno": 20637063
+    },
+    "service": {
+      "entropy": "B3QgioKUjdWF3eaNXaVecHJ0",
+      "hostname": "dustin.sallings.org",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.7.0"
+  },
+  "ctime": 1629918188,
+  "expire_in": 504576000,
+  "prev": "921feef708876fd092db1cc01af37c28daec5d15c861b4a81ae3fce07d1a5745",
+  "seqno": 44,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgjeFK8aGp0o/svJLiwqTyH8ZDnNfYZJw0wsMwJxtpbT0Kp3BheWxvYWTESpcCLMQgkh/u9wiHb9CS2xzAGvN8KNrsXRXIYbSoGuP84H0aV0XEIKOaiRAkj7izu+oRw6OUinasKVXuZp4UYKBKMLIyliM0AgHCo3NpZ8RA5Q+zPphEOBgjwFGc3u7gF0rSVyw6zpCHP/Vn4p1e3EV6Qaxbpp53IlKU4CVoHI2j4GF6YCo+YxupHeN2TTWzDKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIO8NSLKOdxiBTS6wJZBfkZn2BE3YL6APXNnbxvsQ3JWLo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/dlsspy
+
+==================================================================
