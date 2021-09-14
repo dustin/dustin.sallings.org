@@ -192,7 +192,7 @@ along with all the nicely grouped thumbnails in my web UI.
 </div>
 
 Syncing is relatively straightforward.  I run my commandline tool
-periodically.  It asks for paginated media ordered by upload data
+periodically.  It asks for paginated media ordered by upload date
 (descending) and keeps asking for pages until it sees a media ID it
 already has.  Subtract the existing data and I can pull down
 whatever's leftover.
@@ -207,7 +207,7 @@ list of downloadable artifacts.  The URLs themselves are signed s3
 URLs that expire after a bit, so they're only really interesting when
 you're actualy downloading an artifact.  There are a few different
 types of artifacts, some of which have one URL and some have
-multiple.  THe resulting JSON includes `url` as a key for when there's
+multiple.  The resulting JSON includes `url` as a key for when there's
 one URL, and `urls` when there's more than one.  This sort of makes
 sense, but it causes a lack of uniformity.  Each one *also* has a
 `head`/`heads` variation of the URL for issuing a `HEAD` request
@@ -459,7 +459,7 @@ Relevant github repos:
 * [GPMF Parser](https://github.com/dustin/gpmf)
 * [GoPro Plus CLI/Web UI](https://github.com/dustin/gopro)
 
-The GoPro Plus client UI is fairly complete.  There are parts I
+The GoPro Plus client API is fairly complete.  There are parts I
 understand, but haven't really used because I haven't figured out what
 I want to do with them.  e.g., I couldn't figure out how to retrieve
 the contents of a GoPro Plus collection (for sharing), so they're not
