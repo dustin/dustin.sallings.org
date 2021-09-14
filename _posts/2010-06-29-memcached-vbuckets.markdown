@@ -342,12 +342,12 @@ it and working through a lot of use cases.
 [vbucketintrocommit]: http://github.com/memcached/memcached/commit/7a308025661a49a5e19f98d2c5b8df04d96b4642
 [vbucketrmcommit]: http://github.com/memcached/memcached/commit/04319dddabaa06d15407ab6f793b160d3b1c5edb
 [last.fm]: http://www.last.fm/
-[ketama]: http://www.audioscrobbler.net/development/ketama/
+[ketama]: https://web.archive.org/web/20120404050051/http://www.audioscrobbler.net/development/ketama/
 [libvbucket]: http://github.com/northscale/libvbucket
 [membase]: http://www.membase.org/
-[tap]: http://blog.northscale.com/northscale-blog/2010/03/want-to-know-what-your-memcached-servers-are-doing-tap-them.html
+[tap]: https://web.archive.org/web/20100803004713/http://blog.northscale.com/northscale-blog/2010/03/want-to-know-what-your-memcached-servers-are-doing-tap-them.html
 [rj]: http://www.metabrew.com/
-[dormando]: http://consoleninja.net/
+[dormando]: https://dormando.me
 [jayesh]: http://github.com/jayesh
 [binprot]: http://code.google.com/p/memcached/wiki/MemcacheBinaryProtocol
-[moxi]: http://labs.northscale.com/moxi/
+[moxi]: https://github.com/couchbase/moxi
