@@ -1,0 +1,168 @@
+---
+layout: post
+title: GoProFS - All My Video
+---
+
+# GoProFS
+
+So, I end up shooting a lot of video.  As I mentioned way back in my
+[GoPro Plus][gpplus] post, I mostly shoot with a GoPro and use the
+GoPro+ service.
+
+I'd been backing up all of my cloud stuff to a USB hard drive on a
+Raspberry pi.  That allows me to keep all of my Davinci Resolve
+projects around and reference media without having to do anything
+weird.
+
+However, I ran into a problem.
+
+<div>
+    <img src="/images/goprostor.png" alt="storage dashboard"
+        title="GoPro Storage Dashboard"
+        width="100%"  />
+</div>
+
+Looks like I just crossed 18.5TB raw media.  The 20TB hard drive I've
+got seems to provide a bit over 17TB of raw storage.
+
+## Obvious Solution(s)
+
+Now, there are a few obvious things one might do in this situation.
+I'll briefly describe why I didn't do any of these things.
+
+### Create a Raid0 Thing
+
+I _could_, but if any disk fails, I lose all the things.  Also, my
+Raspberry Pi doesn't have enough USB (or memory for that matter).
+
+### Create a Proper RAIDZ Pool
+
+In addition to the USB/Memory issues, this is now getting rather
+expensive.  I'm already paying GoPro to store my media, creating an
+expensive local solution isn't desirable.
+
+I do _have_ a TrueNAS box with raidz2 (and am using it for some
+overflow), but that's expensive storage.  This is _mostly_ a backup.
+
+### Use Davinci Resolve Media Management
+
+I could ask Davinci Resolve to pull out only the parts of media that I
+actually use and give me a much smaller set of media to work with.
+That works for some projects, but I sometimes go back and find things
+that I missed when I was first reviewing footage.
+
+But in general, I want everything easily available in source form.
+
+## OK, So What is GoProFS?
+
+My initial thought was to build a FUSE-based filesystem that provides
+access to data stored in the GoPro cloud as a single magic mechanism.
+I built that and it's pretty great.  I wrote the bulk of it in `go`
+because I didn't have a Haskell FUSE library that worked on OS X and
+wanted to get a prototype up and running instead of solving this
+library deficiency, while still being able to use the bulk of my
+Haskell code via the web interface.
+
+It does more than just provide cloud access, but let's just start with
+that.
+
+### Cloud File Access
+
+`goprofs` will create a local directory that will give you a tree like
+this:
+
+```
+ls -l $GOPROFS/2014/07
+total 0
+dr-xr-xr-x 1 root wheel 0 Jul  1  2014 m0ao4NWMQBWvn
+dr-xr-xr-x 1 root wheel 0 Jul  1  2014 pJ0WlypDKXJX1
+```
+
+where each directory contains the source media you uploaded to the
+service.
+
+The contents are fetched dynamically in chunks.  For example, if you
+open an mp4 file with QuickTime Player, you'll find that it reads a
+bit of the beginning of the file and then a bit from the end of the
+file, then a few other parts near the end, then the beginning again,
+then more near the end for a while, etc...
+
+If you're opening a 10GB file, it'd be rather unfortunate to have to
+wait to pull the entire content down just to see the first frame, so
+the underlying mechanism slices the file into 8MB (arbitrary number)
+chunks and maps each byte range requested to a series of chunks,
+blocking reads until all of those chunks are satisfied.  The chunks
+themselves are stored in a sparse file for the duration of the
+reader's session, pulling any new blocks the user may request.
+
+When the application using the file is done with it, we check to see
+if we've found all the blocks.  If we have, then we rename the file to
+a permanent "this is all the parts" name.  Otherwise, we write down
+which blocks we had and reload them for the next file read.
+
+This means you only need the parts of the video you are actually
+using.
+
+### But I Already Downloaded Everything
+
+Since I've been using my `backuplocal` command, I already had a bunch
+of the footage locall (until I ran out of disk), so if I've already
+got a file, I should be able to just use that instead of bothering the
+GoPro Plus service for a signed URL to download it again.  `goprofs`
+has a `-source` flag allowing it to check for a local file (in the
+same file layout as the backups) before going to the internet.  Better
+yet, you can supply `source` multiple times to have it look in
+multiple places.
+
+### Why Is My Data in Multiple Places?
+
+It turns out, it was quite easy to get the `backuplocal` command to,
+itself, look in multiple places to see what it has, and then write to
+one of those.  So I can just add another storage location and do
+something kind of like striping where the backup itself can be over
+multiple distinct filesystems.
+
+This is similar to the raid0 solution discussed above, but without any
+direct filesystem support or even needing the sources to be on the
+same host.  In my case, I've got my old big USB disk on my Raspberry
+Pi and a bit of overflow on my raidz2 volume until I can get another
+cheap disk.
+
+### tl;dr: Where Does it Look?
+
+For a given artifact, it checks:
+
+1. Each `-source` location
+2. Its download cache location
+3. Uses the cloud and grabs individual chunks as they're read.
+
+### Sounds Like it Does a Lot!
+
+It does!  But there's one more feature:  Proxies
+
+Davinci Resolve will automatically link a proxy for `F.MP4` if it
+finds a file named `Proxy/F.MP4` (or `Proxy/F.mov` or whatever).
+While most of the filesystem is read-only (since it's showing you your
+own prerecorded content with no ability to break stuff), we do want to
+be able to create these `Proxy` directories.  So we do that with a
+read/write loopback for the `Proxy` directory of any medium overlaying
+a different disk location.  This is pretty important when you are
+trying to pull the sizes of stuff we're talking about.
+
+## Sounds Awesome.  How's it Work?
+
+So far, it works as I'd expect, _but_ Blackmagic Proxy Generator seems
+to hang sometimes while generating proxies.  As far as I can tell,
+it's not my bug, but I can't tell what it's doing because OS X is
+pretty hostile to system introspection these days.  I may just try
+different software for this.
+
+It's in the goprofs tree of my [gopro project][gopro] on github.
+Note that it does require my Haskell GoPro web services to be running
+as an endpoint.  I could make it talk directly to the GoPro Plus
+service if I wanted to, but that's a lot of work to reproduce what
+I've already been running for years and doing so in a language that's
+harder to work in.
+
+[gpplus]: /2020/04/29/gopro-plus.html
+[gopro]: https://github.com/dustin/gopro
